@@ -1,5 +1,16 @@
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+  
+    <h:head>  
+  
+    </h:head>  
+      
+    <h:body>  
+      
+        <p:inputText />
+  
+          
+    </h:body>  
 </html>
