@@ -29,8 +29,12 @@
 	    <groupId>org.primefaces.themes</groupId>  
 	    <artifactId>start</artifactId>  
 	    <version>1.0.10</version>  
-	</dependency>	
-	
+	</dependency>
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-entitymanager</artifactId>
+	    <version>5.0.1.Final</version>
+	</dependency>
   </dependencies>
   <repositories>
     <repository>
@@ -39,8 +43,7 @@
         <url>http://repository.primefaces.org</url>
         <layout>default</layout>
     </repository>
-</repositories>
-  
+  </repositories>
   <build>
     <finalName>Projeto</finalName>
   </build>
