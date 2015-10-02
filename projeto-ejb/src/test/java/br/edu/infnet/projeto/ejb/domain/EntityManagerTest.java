@@ -3,10 +3,12 @@ package br.edu.infnet.projeto.ejb.domain;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import br.edu.infnet.projeto.ejb.domain.turma.Turma;
+
+import br.edu.infnet.projeto.ejb.turma.Turma;
 
 
 public class EntityManagerTest {

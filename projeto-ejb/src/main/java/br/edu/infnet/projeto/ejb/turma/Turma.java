@@ -1,4 +1,4 @@
-package br.edu.infnet.projeto.ejb.domain.turma;
+package br.edu.infnet.projeto.ejb.turma;
 
 import java.io.Serializable;
 
