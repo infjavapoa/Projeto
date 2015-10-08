@@ -50,7 +50,7 @@
 		</dependency>
 		<dependency>  
 		    <groupId>org.primefaces.themes</groupId>  
-		    <artifactId>start</artifactId>  
+		    <artifactId>dot-luv</artifactId>  
 		    <version>1.0.10</version>  
 		</dependency>
   	</dependencies>
