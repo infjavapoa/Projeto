@@ -104,7 +104,7 @@ public class LoginControle {
 			session.invalidate();
 			return "/publico/kyron.xhtml?faces-redirect=true";
 		}*/
-		return "";
+		return "/templateAdmin.xhtml";
 	}
 	
 	public String montaSkeleton(Integer pJan){

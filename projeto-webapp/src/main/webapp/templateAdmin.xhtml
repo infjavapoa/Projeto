@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+ <h:head>
+ 	 <h:outputStylesheet library="css" name="styles.css" />
+ 	 <title>Aqui pode ser um titulo padrao que retorne como o nome do usuario logado<ui:insert name="nomePagina" /> </title>
+ </h:head>
+ 
+ <h:body>
+ 	<h:form id="form" enctype="multipart/form-data">
+ 		
+ 		
+ 		<!--
+ 		** Área para CABEÇALHO 
+ 		** Posso consultar esses templates na página http://www.primefaces.org/showcase/ui/home.jsf
+ 		** Consultar os Icones para colocar nos mesnu: http://jquery-ui.googlecode.com/svn/tags/1.6rc5/tests/static/icons.html
+ 		-->
+ 		 		
+ 		<div class="menu">
+ 			<p:panel id="menu" >
+	 			<p:toolbar>  
+				    <p:toolbarGroup align="left">
+				    	<p:commandButton type="" value="Usuário" />
+				        <p:separator />
+				        <p:commandButton type="" value="'#'{loginControle.login.nome}" />      
+				    </p:toolbarGroup>  
+				    <p:toolbarGroup align="center">
+					<p:dock position="top">
+						<p:menuitem ajax="false" value="Tópicos" icon="/resources/imagens/topicos.png" url="/index.xhtml"/>				 	 				  
+			 			<p:menuitem ajax="false" value="Questões" icon="/resources/imagens/questoes.png" url="/protegido/adm/fonoaudiologo.xhtml"/>
+			 			<p:menuitem ajax="false" value="Questionários" icon="/resources/imagens/questionario.png" url="/protegido/paciente.xhtml"/>
+			 			<p:menuitem ajax="false" value="Avaliações" icon="/resources/imagens/avaliacoes.png" url="/protegido/listarPaciente.xhtml"/>
+			 			<p:menuitem ajax="false" value="Template E-mail" icon="/resources/imagens/email.png" url="/protegido/listarPafi.xhtml"/>
+			 			<p:menuitem ajax="false" value="Configurações" icon="/resources/imagens/config.png" url="/protegido/listarPafi.xhtml"/>
+			 			<p:menuitem ajax="false" value="Sair" icon="/resources/imagens/sair.png" action="#{loginControle.logOut}"/>	 			
+		 			</p:dock>    
+				  	</p:toolbarGroup>			  	  
+				</p:toolbar>			
+				<br /><br />
+				
+			</p:panel> 			 
+ 		</div> 		
+ 		<div class="corpo">
+ 			<!-- 
+	 		** Área para CONTEÚDO
+	 		-->
+	 		<ui:insert name="conteudo" />
+ 		</div>
+  </h:form>
+ </h:body>
+</html>

@@ -1,19 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
- xmlns:ui="http://java.sun.com/jsf/facelets" 
- xmlns:f="http://java.sun.com/jsf/core" 
- xmlns:h="http://java.sun.com/jsf/html" 
- xmlns:p="http://primefaces.org/ui"> 
-<h:head>
-	<title>Hello!</title> 
-</h:head> 
-<h:body> #{hello.message} 
-	<h:form>
-		<p:panel header="Teste" > 
-			<p:outputLabel value="Turma: "/>
-	    	<p:inputText value="#{turmaMB.turma.nome}"/>
-			<p:commandButton ajax="false" value="Incluir" action="#{turmaMB.adicionarTurma}"/>
-		</p:panel>
-	</h:form>
-</h:body> 
-</html>
+<ui:composition template="#{loginControle.menuPadrao}"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	
+   		<p:panel id="conteudo" >		
+						
+			<p:panel header="Teste" > 
+				<p:outputLabel value="Turma: "/>
+		    	<p:inputText value="#{turmaMB.turma.nome}"/>
+				<p:commandButton ajax="false" value="Incluir" action="#{turmaMB.adicionarTurma}"/>
+			</p:panel>
+			
+		</p:panel>	  
+	</ui:define>
+</ui:composition>  
