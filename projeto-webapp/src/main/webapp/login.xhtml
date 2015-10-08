@@ -31,10 +31,12 @@
  				<br />
  				<center>
 	 				<h:outputLabel for="codigo" value="Usuário:" />
-			    	<p:inputMask id="codigo" value="#{loginControle.login.codigo}" />
+			    	<p:inputMask id="codigo"  /> 
+			    	
 			   	    <br /><br />
 			      	<h:outputLabel for="senha" value="Senha:" />
-			    	<p:password id="senha" value="#{loginControle.login.senha}" />
+			    	<p:password id="senha"  />
+			    	
 			   	    <br />
 			   	    <br />
 			   	    <p:commandButton value="Entrar" action="#{loginControle.validaAcesso}" process="@form" onclick="JavaScript:fjs_validaDigitacao()" />
