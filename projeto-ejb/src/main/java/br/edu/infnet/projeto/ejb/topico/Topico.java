@@ -1,4 +1,4 @@
-package br.edu.infnet.projeto.ejb.turma;
+package br.edu.infnet.projeto.ejb.topico;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -9,17 +9,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="turma")
-public class Turma implements Serializable {
-	private static final long serialVersionUID = -6627422794826175064L;
+@Table
+public class Topico implements Serializable {
+	private static final long serialVersionUID = 8578462006534289569L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_turma")
+	@Column(name="id_topico")
 	private Long id;
-	private String nome;
+	private String texto;
 	
-	public Turma() {
+	public Topico() {
 		super();
 	}
 	
@@ -29,10 +29,10 @@ public class Turma implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNome() {
-		return nome;
+	public String getTexto() {
+		return texto;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
 }

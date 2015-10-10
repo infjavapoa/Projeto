@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class TurmaBean{
 	
-	@PersistenceContext(unitName="infbloco")
+	@PersistenceContext
     private EntityManager em;
 	
     public void create(Turma turma) throws Exception {
