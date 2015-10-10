@@ -8,14 +8,40 @@
 
 	<ui:define name="conteudo">
 	
-   		<p:panel id="conteudo" >		
-						
+   		<h:form id="form">	
+			<p:growl id="msgs" showDetail="true"/>
+			
 			<p:panel header="Cadastro de Tópicos" > 
 				<p:outputLabel value="Tópico: "/>
 		    	<p:inputText value="#{topicoMB.topico.texto}"/>
-				<p:commandButton ajax="false" value="Incluir" action="#{topicoMB.adicionarTopico}"/>
+				<p:commandButton ajax="false" value="Incluir" action="#{topicoMB.adicionar}"/>
+				
+				<br />
+				<br />
+				
+				<p:dataTable var="t" value="#{topicoMB.topicos}" editable="true">
+					<f:facet name="header">
+           				Tópicos Cadastrados
+       				</f:facet>
+					<p:ajax event="rowEdit" listener="#{topicoMB.onRowEdit}"  />
+      				<p:ajax event="rowEditCancel" listener="#{topicoMB.onRowCancel}"  />
+				    <p:column headerText="Id">
+				        <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{t.id}" /></f:facet>
+			               <f:facet name="input"><p:inputText value="#{t.id}" label="Id"/></f:facet>
+			           </p:cellEditor>
+				    </p:column>
+				    <p:column headerText="Texto">
+				        <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{t.texto}" /></f:facet>
+			               <f:facet name="input"><p:inputText value="#{t.texto}" label="Texto"/></f:facet>
+			        	</p:cellEditor>				        
+				    </p:column>
+				    <p:column style="width:32px">
+			        	<p:rowEditor />
+			        </p:column>
+				</p:dataTable>
 			</p:panel>
-			
-		</p:panel>	  
+		</h:form>	  
 	</ui:define>
 </ui:composition>  
