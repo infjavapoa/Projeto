@@ -21,6 +21,12 @@ public class TopicoBean {
         em.remove(topico);
     }
     
+    public void atualizar(Long idTopico, Topico novoTopico) {
+    	Topico topico = obter(idTopico);
+    	topico.setTexto(novoTopico.getTexto());
+        em.merge(topico);
+    }
+    
     public Topico obter(Long idTopico) {
     	return em.find(Topico.class, idTopico);
     }

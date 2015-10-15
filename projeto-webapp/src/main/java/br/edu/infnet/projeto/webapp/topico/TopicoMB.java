@@ -1,6 +1,7 @@
 package br.edu.infnet.projeto.webapp.topico;
 
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -8,6 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import br.edu.infnet.projeto.ejb.topico.Topico;
 import br.edu.infnet.projeto.ejb.topico.TopicoBean;
 
@@ -17,44 +20,54 @@ public class TopicoMB {
     @EJB
     private TopicoBean topicoBean;
     
-    private Topico topico;
-    private List<Topico> topicos;
+    private Topico novoTopico;
+    private Topico topicoSelecionado;
+    private List<Topico> listaTopicos;
     
     @PostConstruct
     public void init() {
     	atualizaView();
     }
     
-    public Topico getTopico() {
-		return topico;
+    public Topico getNovoTopico() {
+		return novoTopico;
 	}
     
-	public void setTopico(Topico topico) {
-		this.topico = topico;
+	public void setNovoTopico(Topico novoTopico) {
+		this.novoTopico = novoTopico;
 	}
 	
-    public List<Topico> getTopicos() {
-		return topicos;
+    public Topico getTopicoSelecionado() {
+		return topicoSelecionado;
 	}
-
-	public String adicionar() {
-		topicoBean.adicionar(topico);
-		atualizaView();
-		return "";
-    }
+    
+	public void setTopicoSelecionado(Topico topicoSelecionado) {
+		this.topicoSelecionado = topicoSelecionado;
+	}
 	
 	private void atualizaView(){
-		topico = new Topico();
-		topicos = topicoBean.listar();
+		novoTopico = new Topico();
+		listaTopicos = topicoBean.listar();
 	}
 	
 	public void onRowEdit(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Car Edited", ((Topico) event.getObject()).getId().toString());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        Topico novoTopico = ((Topico) event.getObject());
+        //topicoBean.remover(novoTopico.getId());
+        topicoBean.atualizar(novoTopico.getId(), novoTopico);
     }
      
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Topico) event.getObject()).getId().toString());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+    
+    public List<Topico> getListaTopicos() {
+		return listaTopicos;
+	}
+
+	public void adicionar() {
+		topicoBean.adicionar(novoTopico);
+		atualizaView();
+    }
+	
+	public void remover() {
+		topicoBean.remover(topicoSelecionado.getId());
+		atualizaView();
     }
 }

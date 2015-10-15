@@ -12,34 +12,29 @@
 			<p:growl id="msgs" showDetail="true"/>
 			
 			<p:panel header="Cadastro de Tópicos" > 
-				<p:outputLabel value="Tópico: "/>
-		    	<p:inputText value="#{topicoMB.topico.texto}"/>
-				<p:commandButton ajax="false" value="Incluir" action="#{topicoMB.adicionar}"/>
+				<p:outputLabel value="Novo Tópico: "/>
+		    	<p:inputText value="#{topicoMB.novoTopico.texto}" style="width:700px"/>
+		    	<br />
+		    	<br />
+				<p:commandButton update="dtTopicos" value="Adicionar" icon="ui-icon-plus" action="#{topicoMB.adicionar}"/>
 				
 				<br />
 				<br />
 				
-				<p:dataTable var="t" value="#{topicoMB.topicos}" editable="true">
-					<f:facet name="header">
-           				Tópicos Cadastrados
-       				</f:facet>
+				<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}" editable="true" selectionMode="single" selection="#{topicoMB.topicoSelecionado}" rowKey="#{t.id}">
 					<p:ajax event="rowEdit" listener="#{topicoMB.onRowEdit}"  />
-      				<p:ajax event="rowEditCancel" listener="#{topicoMB.onRowCancel}"  />
-				    <p:column headerText="Id">
-				        <p:cellEditor>
-			               <f:facet name="output"><h:outputText value="#{t.id}" /></f:facet>
-			               <f:facet name="input"><p:inputText value="#{t.id}" label="Id"/></f:facet>
-			           </p:cellEditor>
-				    </p:column>
-				    <p:column headerText="Texto">
+				    <p:column headerText="Tópicos Cadastrados">
 				        <p:cellEditor>
 			               <f:facet name="output"><h:outputText value="#{t.texto}" /></f:facet>
-			               <f:facet name="input"><p:inputText value="#{t.texto}" label="Texto"/></f:facet>
+			               <f:facet name="input"><p:inputText value="#{t.texto}" label="Texto" style="width:100%"/></f:facet>
 			        	</p:cellEditor>				        
 				    </p:column>
 				    <p:column style="width:32px">
-			        	<p:rowEditor />
-			        </p:column>
+			        	<p:rowEditor />        	
+			        </p:column>		
+			        <f:facet name="footer">
+            			<p:commandButton update="dtTopicos" icon="ui-icon-close" action="#{topicoMB.remover}" value="Excluir"></p:commandButton>
+       				 </f:facet>	        
 				</p:dataTable>
 			</p:panel>
 		</h:form>	  
