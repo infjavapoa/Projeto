@@ -1,11 +1,10 @@
 package br.edu.infnet.projeto.ejb.topico;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class TopicoBean {
@@ -32,7 +31,7 @@ public class TopicoBean {
     }
     
     public List<Topico> listar() {
-        Query query = em.createQuery("SELECT t FROM Topico t");
-        return (List<Topico>) query.getResultList();
+    	TypedQuery<Topico> query = em.createQuery("SELECT t FROM Topico t", Topico.class);
+        return query.getResultList();
     }
 }

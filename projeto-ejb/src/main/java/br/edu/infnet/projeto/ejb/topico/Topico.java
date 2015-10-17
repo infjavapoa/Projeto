@@ -35,4 +35,9 @@ public class Topico implements Serializable {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+
+	@Override
+	public String toString() {
+		return texto;
+	}
 }

@@ -4,6 +4,9 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.edu.infnet.projeto.ejb.turma.Turma</class>
 		<class>br.edu.infnet.projeto.ejb.topico.Topico</class>
+		<class>br.edu.infnet.projeto.ejb.questao.Questao</class>
+		<class>br.edu.infnet.projeto.ejb.questao.QuestaoObjetiva</class>
+		<class>br.edu.infnet.projeto.ejb.questao.QuestaoDissertativa</class>
 		<properties> 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<!--<property name="hibernate.hbm2ddl.auto" value="update" />--> 

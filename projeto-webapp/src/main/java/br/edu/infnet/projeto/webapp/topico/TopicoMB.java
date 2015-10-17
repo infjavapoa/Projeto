@@ -1,6 +1,5 @@
 package br.edu.infnet.projeto.webapp.topico;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -11,9 +10,7 @@ import br.edu.infnet.projeto.ejb.topico.TopicoBean;
 
 @ManagedBean
 @ViewScoped
-public class TopicoMB implements Serializable {
-	private static final long serialVersionUID = -9067586255261313657L;
-
+public class TopicoMB {
 	@EJB
     private TopicoBean topicoBean;
     

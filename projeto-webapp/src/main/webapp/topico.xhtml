@@ -11,8 +11,8 @@
 		<p:panel header="Cadastro de Tópicos" > 
 		
 			<p:panel id="pCampos">
-				<p:outputLabel value="Texto do Tópico: "/>
-		    	<p:inputText value="#{topicoMB.topico.texto}" style="width:700px"/>
+				<p:outputLabel value="Texto do Tópico: " for="txtTexto" />
+		    	<p:inputText id="txtTexto" value="#{topicoMB.topico.texto}" style="width:700px"/>
 		    	<br />
 		    	<br />
 				<p:commandButton update="form:pCampos, dtTopicos" value="Salvar" icon="ui-icon-disk" action="#{topicoMB.salvar}"/>
@@ -21,12 +21,8 @@
 			</p:panel>
 			<br />
 			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}">
-				<p:ajax event="rowEdit" listener="#{topicoMB.onRowEdit}"  />
 			    <p:column headerText="Tópicos Cadastrados">
-			        <p:cellEditor>
-		               <f:facet name="output"><h:outputText value="#{t.texto}" /></f:facet>
-		               <f:facet name="input"><p:inputText value="#{t.texto}" label="Texto" style="width:100%"/></f:facet>
-		        	</p:cellEditor>				        
+		        	<h:outputText value="#{t.texto}" />			        
 			    </p:column>
 			    <p:column style="width:32px">
 		        	<p:commandLink update="form:pCampos" value="Editar">
