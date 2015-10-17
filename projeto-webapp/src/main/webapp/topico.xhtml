@@ -5,38 +5,40 @@
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-
 	<ui:define name="conteudo">
-	
-   		<h:form id="form">	
-			<p:growl id="msgs" showDetail="true"/>
-			
-			<p:panel header="Cadastro de Tópicos" > 
-				<p:outputLabel value="Novo Tópico: "/>
-		    	<p:inputText value="#{topicoMB.novoTopico.texto}" style="width:700px"/>
+		<p:growl id="msgs" showDetail="true"/>
+		
+		<p:panel header="Cadastro de Tópicos" > 
+		
+			<p:panel id="pCampos">
+				<p:outputLabel value="Texto do Tópico: "/>
+		    	<p:inputText value="#{topicoMB.topico.texto}" style="width:700px"/>
 		    	<br />
 		    	<br />
-				<p:commandButton update="dtTopicos" value="Adicionar" icon="ui-icon-plus" action="#{topicoMB.adicionar}"/>
-				
+				<p:commandButton update="form:pCampos, dtTopicos" value="Salvar" icon="ui-icon-disk" action="#{topicoMB.salvar}"/>
 				<br />
 				<br />
-				
-				<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}" editable="true" selectionMode="single" selection="#{topicoMB.topicoSelecionado}" rowKey="#{t.id}">
-					<p:ajax event="rowEdit" listener="#{topicoMB.onRowEdit}"  />
-				    <p:column headerText="Tópicos Cadastrados">
-				        <p:cellEditor>
-			               <f:facet name="output"><h:outputText value="#{t.texto}" /></f:facet>
-			               <f:facet name="input"><p:inputText value="#{t.texto}" label="Texto" style="width:100%"/></f:facet>
-			        	</p:cellEditor>				        
-				    </p:column>
-				    <p:column style="width:32px">
-			        	<p:rowEditor />        	
-			        </p:column>		
-			        <f:facet name="footer">
-            			<p:commandButton update="dtTopicos" icon="ui-icon-close" action="#{topicoMB.remover}" value="Excluir"></p:commandButton>
-       				 </f:facet>	        
-				</p:dataTable>
 			</p:panel>
-		</h:form>	  
+			<br />
+			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}">
+				<p:ajax event="rowEdit" listener="#{topicoMB.onRowEdit}"  />
+			    <p:column headerText="Tópicos Cadastrados">
+			        <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{t.texto}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{t.texto}" label="Texto" style="width:100%"/></f:facet>
+		        	</p:cellEditor>				        
+			    </p:column>
+			    <p:column style="width:32px">
+		        	<p:commandLink update="form:pCampos" value="Editar">
+		        		<f:setPropertyActionListener value="#{t}" target="#{topicoMB.topico}" />	
+		        	</p:commandLink>
+		        </p:column>		
+		        <p:column style="width:32px">
+		        	<p:commandLink update="form:pCampos, dtTopicos" action="#{topicoMB.remover}" value="Excluir">
+		        		<f:setPropertyActionListener value="#{t}" target="#{topicoMB.topico}" />	
+		        	</p:commandLink>    	
+		        </p:column>		        
+			</p:dataTable>
+		</p:panel>  
 	</ui:define>
 </ui:composition>  
