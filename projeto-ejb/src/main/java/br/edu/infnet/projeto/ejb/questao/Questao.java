@@ -12,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 import br.edu.infnet.projeto.ejb.topico.Topico;
 
@@ -28,7 +29,7 @@ public abstract class Questao extends BaseEntity<Long> {
 	private Long id;
 	private String texto;
 	@Column(name = "tipo_questao", insertable = false, updatable = false)
-    private String tipoQuestao;
+    private String tipoQuestao="O";
 	@ManyToOne(optional=false)
     @JoinColumn(name="id_topico",referencedColumnName="id_topico")
 	private Topico topico;
@@ -37,7 +38,7 @@ public abstract class Questao extends BaseEntity<Long> {
 		super();
 		topico = new Topico();
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -46,6 +47,9 @@ public abstract class Questao extends BaseEntity<Long> {
 	}
 	public String getTipoQuestao() {
 		return tipoQuestao;
+	}
+	public void setTipoQuestao(String tipoQuestao) {
+		this.tipoQuestao = tipoQuestao;
 	}
 	public String getTexto() {
 		return texto;

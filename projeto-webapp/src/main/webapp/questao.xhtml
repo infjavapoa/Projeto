@@ -13,16 +13,18 @@
 			<p:panel id="pCampos">
 				<p:outputLabel value="Tópico:" for="selTopico" />
 				<p:selectOneMenu id="selTopico" value="#{questaoMB.questao.topico}" converter="#{baseEntityConverter}" style="width:700px">
+					<f:selectItem itemLabel="Selecione um Tópico..."  noSelectionOption="false" /> 
                 	<f:selectItems value="#{topicoMB.listaTopicos}" var="t" itemValue="#{t}" itemLabel="#{t.texto}" />
             	</p:selectOneMenu>			
 				<p:outputLabel value="Texto da Questão: " for="txtTexto"/>
 		    	<p:inputText id="txtTexto" value="#{questaoMB.questao.texto}" style="width:700px"/>
-<!-- 		    	<p:selectOneRadio id="rdTipo" value="#{questaoMB.questao.tipoQuestao}"> -->
-<!--             		<f:selectItem itemLabel="Objetiva" itemValue="O" /> -->
-<!--             		<f:selectItem itemLabel="Dissertativa" itemValue="D" /> -->
-<!--        			</p:selectOneRadio> -->
+ 		    	<p:selectOneRadio id="selTipo" value="#{questaoMB.questao.tipoQuestao}" disabled="#{questaoMB.questao.id != null}"> 
+            		<f:selectItem itemLabel="Objetiva" itemValue="O" /> 
+             		<f:selectItem itemLabel="Dissertativa" itemValue="D" /> 
+        	 	</p:selectOneRadio> 
 		    	<br />
 				<p:commandButton update="form:pCampos, dtQuestoes" value="Salvar" icon="ui-icon-disk" action="#{questaoMB.salvar}"/>
+				<p:commandButton update="form:pCampos" value="Cancelar" disabled="#{questaoMB.questao.id == null}" icon="ui-icon-close" action="#{questaoMB.atualizaView}"/>
 				<br />
 			</p:panel>
 			<br />

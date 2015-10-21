@@ -7,11 +7,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 import br.edu.infnet.projeto.ejb.core.Repositorio;
 import br.edu.infnet.projeto.ejb.questao.Questao;
+import br.edu.infnet.projeto.ejb.questao.QuestaoDissertativa;
 import br.edu.infnet.projeto.ejb.questao.QuestaoObjetiva;
-import br.edu.infnet.projeto.ejb.topico.Topico;
 
 @ManagedBean
 @ViewScoped
@@ -39,14 +38,20 @@ public class QuestaoMB {
 		return listaQuestoes;
 	}
 	
-	private void atualizaView(){
+	public void atualizaView(){
 		questao = new QuestaoObjetiva();
 		listaQuestoes = new ArrayList<Questao>();
 		listaQuestoes.addAll(repositorio.listar(new QuestaoObjetiva()));
 	}
 
 	public void salvar() {
-		if (questao.getId() == null)
+		//Atualiza o tipo da questão
+		if (questao.getTipoQuestao().equals("O"))
+			this.questao = new QuestaoObjetiva(questao.getId(), questao.getTexto(), questao.getTopico());
+		else
+			this.questao = new QuestaoDissertativa(questao.getId(), questao.getTexto(), questao.getTopico());
+		
+		if (questao.getId() == null) 
 			repositorio.adicionar(questao);
 		else
 			repositorio.atualizar(questao);

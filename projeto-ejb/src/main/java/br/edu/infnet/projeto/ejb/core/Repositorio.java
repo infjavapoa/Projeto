@@ -1,14 +1,10 @@
 package br.edu.infnet.projeto.ejb.core;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
-import br.edu.infnet.projeto.ejb.topico.Topico;
 
 @Stateless
 public class Repositorio {

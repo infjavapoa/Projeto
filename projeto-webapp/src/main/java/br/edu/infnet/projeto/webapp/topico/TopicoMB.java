@@ -1,7 +1,6 @@
 package br.edu.infnet.projeto.webapp.topico;
 
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -31,7 +30,7 @@ public class TopicoMB {
 		this.topico = topico;
 	}
 	
-	private void atualizaView(){
+	public void atualizaView(){
 		topico = new Topico();
 		listaTopicos = repositorio.listar(new Topico());
 	}

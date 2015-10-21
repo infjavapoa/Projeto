@@ -17,7 +17,7 @@ import br.edu.infnet.projeto.ejb.core.BaseEntity;
 public class BaseEntityConverter implements Converter {
 
     @EJB
-    private Repositorio baseBean;
+    private Repositorio repositorio;
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
@@ -41,7 +41,7 @@ public class BaseEntityConverter implements Converter {
 
         try {
             Class<?> type = component.getValueExpression("value").getType(context.getELContext());
-            return baseBean.obter((Class<BaseEntity<? extends Number>>) type, Long.valueOf(value));
+            return repositorio.obter((Class<BaseEntity<? extends Number>>) type, Long.valueOf(value));
         } catch (NumberFormatException e) {
             throw new ConverterException(new FacesMessage(String.format("%s is not a valid ID of BaseEntity", value)), e);
         }
