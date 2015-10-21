@@ -1,7 +1,5 @@
 package br.edu.infnet.projeto.ejb.questao;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -14,15 +12,15 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import br.edu.infnet.projeto.ejb.core.BaseEntity;
 import br.edu.infnet.projeto.ejb.topico.Topico;
 
 @Entity
 @Table
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo_questao", discriminatorType=DiscriminatorType.STRING)
-public abstract class Questao implements Serializable {
-	private static final long serialVersionUID = -956748118567401811L;
+public abstract class Questao extends BaseEntity<Long> {
+	private static final long serialVersionUID = 8291323679754678858L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

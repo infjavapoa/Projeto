@@ -1,18 +1,19 @@
 package br.edu.infnet.projeto.webapp.topico;
 
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import br.edu.infnet.projeto.ejb.core.Repositorio;
 import br.edu.infnet.projeto.ejb.topico.Topico;
-import br.edu.infnet.projeto.ejb.topico.TopicoBean;
 
 @ManagedBean
 @ViewScoped
 public class TopicoMB {
 	@EJB
-    private TopicoBean topicoBean;
+    private Repositorio repositorio;
     
     private Topico topico;
     private List<Topico> listaTopicos;
@@ -32,7 +33,7 @@ public class TopicoMB {
 	
 	private void atualizaView(){
 		topico = new Topico();
-		listaTopicos = topicoBean.listar();
+		listaTopicos = repositorio.listar(new Topico());
 	}
     
     public List<Topico> getListaTopicos() {
@@ -41,14 +42,14 @@ public class TopicoMB {
 
 	public void salvar() {
 		if (topico.getId() == null)
-			topicoBean.adicionar(topico);
+			repositorio.adicionar(topico);
 		else
-			topicoBean.atualizar(topico.getId(), topico);
+			repositorio.atualizar(topico);
 		atualizaView();
     }
 	
 	public void remover() {
-		topicoBean.remover(topico.getId());
+		repositorio.remover(topico);
 		atualizaView();
     }
 }
