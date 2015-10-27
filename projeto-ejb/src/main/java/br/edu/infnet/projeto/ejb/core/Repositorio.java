@@ -33,8 +33,8 @@ public class Repositorio {
         return em.find(type, id);
     }
     
-    public  <T> List<T> listar(T t){
-    	Query query = em.createQuery("SELECT t FROM "+t.getClass().getName()+" t", t.getClass());
+    public <T> List<T> listar(Class<T> c){
+    	Query query = em.createQuery("SELECT t FROM "+c.getName()+" t", c);
         return query.getResultList();
     }
  

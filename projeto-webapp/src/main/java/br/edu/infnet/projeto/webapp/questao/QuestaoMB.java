@@ -41,7 +41,7 @@ public class QuestaoMB {
 	public void atualizaView(){
 		questao = new QuestaoObjetiva();
 		listaQuestoes = new ArrayList<Questao>();
-		listaQuestoes.addAll(repositorio.listar(new QuestaoObjetiva()));
+		listaQuestoes.addAll(repositorio.listar(Questao.class));
 	}
 
 	public void salvar() {

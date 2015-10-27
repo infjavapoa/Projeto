@@ -35,8 +35,9 @@
 			    <p:column headerText="Texto da Questão">
 		        	<h:outputText value="#{q.texto}" />
 			    </p:column>
-			    <p:column headerText="Tipo">
-		        	<h:outputText value="#{q.tipoQuestao}" />
+			    <p:column headerText="Tipo" style="width:90px">
+		        	<h:outputText rendered="#{q.tipoQuestao=='O'}" value="Objetiva" />
+		        	<h:outputText rendered="#{q.tipoQuestao=='D'}" value="Dissertativa" />
 			    </p:column>			    
 			    <p:column style="width:32px">
 		        	<p:commandLink update="form:pCampos" value="Editar">

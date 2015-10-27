@@ -32,7 +32,7 @@ public class TopicoMB {
 	
 	public void atualizaView(){
 		topico = new Topico();
-		listaTopicos = repositorio.listar(new Topico());
+		listaTopicos = repositorio.listar(Topico.class);
 	}
     
     public List<Topico> getListaTopicos() {
