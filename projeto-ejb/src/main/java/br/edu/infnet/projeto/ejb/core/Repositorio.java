@@ -4,7 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class Repositorio {
@@ -34,7 +34,7 @@ public class Repositorio {
     }
     
     public <T> List<T> listar(Class<T> c){
-    	Query query = em.createQuery("SELECT t FROM "+c.getName()+" t", c);
+    	TypedQuery<T> query = em.createQuery("SELECT t FROM "+c.getName()+" t", c);
         return query.getResultList();
     }
  
