@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition template="#{loginControle.menuPadrao}"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+	<ui:define name="conteudo">
+		<p:growl id="msgs" showDetail="true"/>
+		
+		<p:panel header="Cadastro de Questionários" > 
+		
+			<p:panel id="pCampos">		
+				<p:outputLabel value="Nome do Questionário: " for="txtNome"/>
+		    	<p:inputText id="txtNome" value="#{questionarioMB.questionario.nome}" style="width:700px"/>
+		    	<br />
+		    	<br />
+				<p:commandButton update="form:pCampos, dtQuestionario" value="Salvar" icon="ui-icon-disk" action="#{questionarioMB.salvar}"/>
+				<p:commandButton update="form:pCampos" value="Cancelar" disabled="#{questionarioMB.questionario.id == null}" icon="ui-icon-close" action="#{questionarioMB.atualizaView}"/>
+				<br />
+			</p:panel>
+			<br />
+			<p:dataTable var="q" id="dtQuestionario" value="#{questionarioMB.listaQuestionarios}">
+			    <p:column headerText="Questionários Cadastrados">
+		        	<h:outputText value="#{q.nome}" />			        
+			    </p:column>
+			    <p:column style="width:32px">
+		        	<p:commandLink update="form:pCampos" value="Editar">
+		        		<f:setPropertyActionListener value="#{q}" target="#{questionarioMB.questionario}" />	
+		        	</p:commandLink>
+		        </p:column>		
+		        <p:column style="width:32px">
+		        	<p:commandLink update="form:pCampos, dtQuestionario" action="#{questionarioMB.remover}" value="Excluir">
+		        		<f:setPropertyActionListener value="#{q}" target="#{questionarioMB.questionario}" />	
+		        	</p:commandLink>    	
+		        </p:column>		        
+			</p:dataTable>
+		</p:panel>  
+	</ui:define>
+</ui:composition>  
