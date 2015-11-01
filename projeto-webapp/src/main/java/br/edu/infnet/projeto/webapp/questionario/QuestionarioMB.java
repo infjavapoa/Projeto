@@ -1,13 +1,17 @@
 package br.edu.infnet.projeto.webapp.questionario;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import br.edu.infnet.projeto.ejb.core.Repositorio;
+import br.edu.infnet.projeto.ejb.questao.Questao;
+import br.edu.infnet.projeto.ejb.questao.QuestaoObjetiva;
 import br.edu.infnet.projeto.ejb.questionario.Questionario;
+import br.edu.infnet.projeto.ejb.questionario.QuestionarioQuestao;
 
 @ManagedBean
 @ViewScoped
@@ -16,13 +20,22 @@ public class QuestionarioMB {
     private Repositorio repositorio;
     private Questionario questionario;
     private List<Questionario> listaQuestionarios;
+    private Questao questao;    
     
     @PostConstruct
     public void init() {
     	atualizaView();
     }
     
-    public Questionario getQuestionario() {
+    public Questao getQuestao() {
+		return questao;
+	}
+
+	public void setQuestao(Questao questao) {
+		this.questao = questao;
+	}
+
+	public Questionario getQuestionario() {
 		return questionario;
 	}
     
@@ -31,6 +44,7 @@ public class QuestionarioMB {
 	}
 	
 	public void atualizaView(){
+		questao = new QuestaoObjetiva();
 		questionario = new Questionario();
 		listaQuestionarios = repositorio.listar(Questionario.class);
 	}
@@ -51,4 +65,19 @@ public class QuestionarioMB {
 		repositorio.remover(questionario);
 		atualizaView();
     }
+	
+	public List<Questao> listarQuestoes(String texto){
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("texto","%"+texto+"%");
+		return repositorio.listarWithNamedQuery(Questao.class, "pesquisarPorTexto", parametros);
+	}
+	
+	public void adicionarQuestionarioQuestao(){
+		QuestionarioQuestao qq = new QuestionarioQuestao();
+		qq.setQuestao(questao);
+		qq.setQuestionario(questionario);
+		qq.setOrdem(questionario.getQuestionarioQuestoes().size()+1);
+		questionario.adicionaQuestionarioQuestao(qq);
+	}
+	
 }

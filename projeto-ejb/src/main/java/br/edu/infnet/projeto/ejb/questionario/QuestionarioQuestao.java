@@ -7,10 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 import br.edu.infnet.projeto.ejb.questao.Questao;
 
 @Entity
+@Table(name="questionario_questao")
 public class QuestionarioQuestao extends BaseEntity<Long> {
 	private static final long serialVersionUID = 6365086666794727846L;
 
@@ -18,13 +20,13 @@ public class QuestionarioQuestao extends BaseEntity<Long> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_questionario_questao")
 	private Long id;
-
     @ManyToOne
     @JoinColumn(name = "id_questao", referencedColumnName = "id_questao")
 	private Questao questao;
     @ManyToOne
     @JoinColumn(name = "id_questionario", referencedColumnName = "id_questionario")    
 	private Questionario questionario;
+    private Integer ordem;
 	
 	public Long getId() {
 		return id;
@@ -43,5 +45,11 @@ public class QuestionarioQuestao extends BaseEntity<Long> {
 	}
 	public void setQuestionario(Questionario questionario) {
 		this.questionario = questionario;
+	}
+	public Integer getOrdem() {
+		return ordem;
+	}
+	public void setOrdem(Integer ordem) {
+		this.ordem = ordem;
 	}
 }

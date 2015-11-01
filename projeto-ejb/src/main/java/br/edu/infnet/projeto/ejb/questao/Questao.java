@@ -1,7 +1,6 @@
 package br.edu.infnet.projeto.ejb.questao;
 
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -13,9 +12,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 import br.edu.infnet.projeto.ejb.questionario.QuestionarioQuestao;
 import br.edu.infnet.projeto.ejb.topico.Topico;
@@ -24,6 +23,7 @@ import br.edu.infnet.projeto.ejb.topico.Topico;
 @Table
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo_questao", discriminatorType=DiscriminatorType.STRING)
+@NamedQuery(name="pesquisarPorTexto" , query="SELECT q FROM Questao q WHERE q.texto LIKE :texto ORDER BY q.topico.texto")
 public abstract class Questao extends BaseEntity<Long> {
 	private static final long serialVersionUID = 8291323679754678858L;
 	

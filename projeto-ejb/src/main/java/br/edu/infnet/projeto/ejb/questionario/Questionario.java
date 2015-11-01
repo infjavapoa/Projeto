@@ -1,9 +1,11 @@
 package br.edu.infnet.projeto.ejb.questionario;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,9 +21,9 @@ public class Questionario extends BaseEntity<Long> {
 	@Column(name="id_questionario")
 	private Long id;
 	private String nome;
-	@OneToMany(mappedBy="questionario")
-	private List<QuestionarioQuestao> questoes;
-	
+	@OneToMany(mappedBy="questionario", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<QuestionarioQuestao> questionarioQuestoes = new ArrayList<QuestionarioQuestao>();
+
 	public Questionario() {
 		super();
 	}
@@ -37,5 +39,14 @@ public class Questionario extends BaseEntity<Long> {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public List<QuestionarioQuestao> getQuestionarioQuestoes() {
+		return questionarioQuestoes;
+	}
+	public void setgetQuestionarioQuestoes(List<QuestionarioQuestao> questionarioQuestoes) {
+		this.questionarioQuestoes = questionarioQuestoes;
+	}
+	public void adicionaQuestionarioQuestao(QuestionarioQuestao questionarioQuestao){
+		this.questionarioQuestoes.add(questionarioQuestao);
 	}
 }

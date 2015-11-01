@@ -13,8 +13,23 @@
 			<p:panel id="pCampos">		
 				<p:outputLabel value="Nome do Questionário: " for="txtNome"/>
 		    	<p:inputText id="txtNome" value="#{questionarioMB.questionario.nome}" style="width:700px"/>
-		    	<br />
-		    	<br />
+		    	<br /><br />
+		    	<p:outputLabel value="Adicionar Questão:" for="txtQuestao" />
+        		<p:autoComplete id="txtQuestao" value="#{questionarioMB.questao}" completeMethod="#{questionarioMB.listarQuestoes}"
+                	var="q" itemLabel="#{q.texto}" itemValue="#{q}" converter="#{baseEntityConverter}"
+                	groupBy="#{q.topico.texto}" scrollHeight="300" style="width:700px"/>
+               	<p:commandButton update="form:dtQuestoes" value="Adicionar" icon="ui-icon-disk" action="#{questionarioMB.adicionarQuestionarioQuestao}"/>
+				<p:dataTable id="dtQuestoes" var="qq" value="#{questionarioMB.questionario.questionarioQuestoes}" sortBy="#{qq.questao.topico.texto}">
+			        <p:summaryRow>
+			            <p:column>
+			                <h:outputText value="#{qq.questao.topico.texto}" />
+			            </p:column>
+			        </p:summaryRow>			        
+			        <p:column headerText="Questões Cadastradas" >
+			            <h:outputText value="#{qq.questao.texto}" />
+			        </p:column>
+				</p:dataTable>	                	
+			    <br />
 				<p:commandButton update="form:pCampos, dtQuestionario" value="Salvar" icon="ui-icon-disk" action="#{questionarioMB.salvar}"/>
 				<p:commandButton update="form:pCampos" value="Cancelar" disabled="#{questionarioMB.questionario.id == null}" icon="ui-icon-close" action="#{questionarioMB.atualizaView}"/>
 				<br />
