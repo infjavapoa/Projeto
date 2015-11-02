@@ -32,7 +32,7 @@ FOREIGN KEY (id_questionario) REFERENCES questionario(id_questionario),
 CONSTRAINT uniq_id_questao_questionario UNIQUE (id_questao,id_questionario) 
 ) ENGINE=InnoDB;
 
-/*Criar essa tabela? Se colocamos como chace estrangeira na tabela avaliação essa tabela deve existir no banco */
+/*Criar essa tabela? Se colocamos como chace estrangeira na tabela avaliaï¿½ï¿½o essa tabela deve existir no banco */
 CREATE TABLE turma (
 id_turma int NOT NULL auto_increment,
 nome varchar(100) NOT NULL,
@@ -58,7 +58,7 @@ FOREIGN KEY (id_questionario) REFERENCES questionario(id_questionario)
 CREATE TABLE avaliacao_aluno (
 id_avaliacao_aluno int NOT NULL auto_increment,
 id_avaliacao int NOT NULL,
-id_aluno int NOT NULL, /*vamos criar uma tabela aluno? ou inserir no braço?*/
+id_aluno int NOT NULL, /*vamos criar uma tabela aluno? ou inserir no braï¿½o?*/
 data_preenchimento datetime NULL,
 PRIMARY KEY (id_avaliacao_aluno),
 FOREIGN KEY (id_avaliacao) REFERENCES avaliacao(id_avaliacao),
@@ -83,4 +83,12 @@ FOREIGN KEY (id_avaliacao,id_aluno) REFERENCES avaliacao_aluno(id_avaliacao,id_a
 FOREIGN KEY (id_questao) REFERENCES questao(id_questao),
 FOREIGN KEY (id_alternativa) REFERENCES alternativa(id_alternativa),
 CONSTRAINT uniq_id_avaliacao_aluno_questao UNIQUE (id_avaliacao,id_aluno,id_questao)
+) ENGINE=InnoDB ;
+
+CREATE TABLE usuario (
+email varchar(100) NOT NULL,
+senha varchar(50) NOT NULL,
+nome varchar(100) NOT NULL,
+papel varchar(100) NOT NULL,
+PRIMARY KEY (email)
 ) ENGINE=InnoDB ;

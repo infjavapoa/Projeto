@@ -6,8 +6,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-//import br.com.licker.kyron.entidade.Login;
-//import br.com.licker.kyron.entidade.Usuario;
+import br.edu.infnet.projeto.ejb.login.Login;
+import br.edu.infnet.projeto.ejb.usuario.Usuario;
 //import br.com.licker.kyron.negocio.LoginNegocio;
 
 @ManagedBean(name="loginControle")
