@@ -10,26 +10,35 @@ CREATE TABLE questao (
 id_questao int NOT NULL auto_increment,
 texto text NOT NULL,
 tipo_questao char(1) NOT NULL,
-id_topico int not NULL,
-PRIMARY KEY (id_questao),
-FOREIGN KEY (id_topico) REFERENCES topico(id_topico)
+PRIMARY KEY (id_questao)
 ) ENGINE=InnoDB ;
 
 CREATE TABLE questionario (
 id_questionario int NOT NULL auto_increment,
 nome varchar(30) NOT NULL,
 PRIMARY KEY (id_questionario)
-) ENGINE=InnoDB ;
+) ENGINE=InnoDB;
 
-CREATE TABLE questionario_questao (
-id_questionario_questao int NOT NULL auto_increment,
-id_questao int NOT NULL ,
-id_questionario int NOT NULL,
+CREATE TABLE questionario_topico (
+id_questionario_topico int NOT NULL auto_increment,
+id_questionario int NOT NULL ,
+id_topico int NOT NULL,
 ordem int not null,
-PRIMARY KEY (id_questionario_questao),
-FOREIGN KEY (id_questao) REFERENCES questao(id_questao),
+PRIMARY KEY (id_questionario_topico),
 FOREIGN KEY (id_questionario) REFERENCES questionario(id_questionario),
-CONSTRAINT uniq_id_questao_questionario UNIQUE (id_questao,id_questionario) 
+FOREIGN KEY (id_topico) REFERENCES topico(id_topico),
+CONSTRAINT uniq_id_questionario_topico UNIQUE (id_questionario,id_topico) 
+) ENGINE=InnoDB;
+
+CREATE TABLE questionario_topico_questao (
+id_questionario_topico_questao int NOT NULL auto_increment,
+id_questionario_topico int NOT NULL ,
+id_questao int NOT NULL,
+ordem int not null,
+PRIMARY KEY (id_questionario_topico_questao),
+FOREIGN KEY (id_questionario_topico) REFERENCES questionario_topico(id_questionario_topico),
+FOREIGN KEY (id_questao) REFERENCES questao(id_questao),
+CONSTRAINT uniq_id_questionario_topico_questao UNIQUE (id_questionario_topico, id_questao) 
 ) ENGINE=InnoDB;
 
 /*Criar essa tabela? Se colocamos como chace estrangeira na tabela avalia��o essa tabela deve existir no banco */

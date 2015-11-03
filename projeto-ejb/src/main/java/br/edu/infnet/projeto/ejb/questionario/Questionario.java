@@ -22,7 +22,7 @@ public class Questionario extends BaseEntity<Long> {
 	private Long id;
 	private String nome;
 	@OneToMany(mappedBy="questionario", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<QuestionarioQuestao> questionarioQuestoes = new ArrayList<QuestionarioQuestao>();
+	private List<QuestionarioTopico> questionarioTopicos = new ArrayList<QuestionarioTopico>();
 
 	public Questionario() {
 		super();
@@ -40,13 +40,13 @@ public class Questionario extends BaseEntity<Long> {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public List<QuestionarioQuestao> getQuestionarioQuestoes() {
-		return questionarioQuestoes;
+	public List<QuestionarioTopico> getQuestionarioTopicos() {
+		return questionarioTopicos;
 	}
-	public void setgetQuestionarioQuestoes(List<QuestionarioQuestao> questionarioQuestoes) {
-		this.questionarioQuestoes = questionarioQuestoes;
+	public void setgetQuestionarioTopicos(List<QuestionarioTopico> questionarioTopicos) {
+		this.questionarioTopicos = questionarioTopicos;
 	}
-	public void adicionaQuestionarioQuestao(QuestionarioQuestao questionarioQuestao){
-		this.questionarioQuestoes.add(questionarioQuestao);
+	public void adicionaQuestionarioTopico(QuestionarioTopico questionarioTopico){
+		this.questionarioTopicos.add(questionarioTopico);
 	}
 }

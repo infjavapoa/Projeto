@@ -12,20 +12,20 @@ import br.edu.infnet.projeto.ejb.core.BaseEntity;
 import br.edu.infnet.projeto.ejb.questao.Questao;
 
 @Entity
-@Table(name="questionario_questao")
-public class QuestionarioQuestao extends BaseEntity<Long> {
+@Table(name="questionario_topico_questao")
+public class QuestionarioTopicoQuestao extends BaseEntity<Long> {
 	private static final long serialVersionUID = 6365086666794727846L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_questionario_questao")
+	@Column(name="id_questionario_topico_questao")
 	private Long id;
     @ManyToOne
     @JoinColumn(name = "id_questao", referencedColumnName = "id_questao")
 	private Questao questao;
     @ManyToOne
-    @JoinColumn(name = "id_questionario", referencedColumnName = "id_questionario")    
-	private Questionario questionario;
+    @JoinColumn(name = "id_questionario_topico", referencedColumnName = "id_questionario_topico")    
+	private QuestionarioTopico questionarioTopico;
     private Integer ordem;
 	
 	public Long getId() {
@@ -40,11 +40,11 @@ public class QuestionarioQuestao extends BaseEntity<Long> {
 	public void setQuestao(Questao questao) {
 		this.questao = questao;
 	}
-	public Questionario getQuestionario() {
-		return questionario;
+	public QuestionarioTopico getQuestionarioTopico() {
+		return questionarioTopico;
 	}
-	public void setQuestionario(Questionario questionario) {
-		this.questionario = questionario;
+	public void setQuestionarioTopico(QuestionarioTopico questionarioTopico) {
+		this.questionarioTopico = questionarioTopico;
 	}
 	public Integer getOrdem() {
 		return ordem;

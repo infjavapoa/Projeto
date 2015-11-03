@@ -3,8 +3,6 @@ package br.edu.infnet.projeto.ejb.questao;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import br.edu.infnet.projeto.ejb.topico.Topico;
-
 @Entity
 @DiscriminatorValue("D")
 public class QuestaoDissertativa extends Questao {
@@ -14,11 +12,10 @@ public class QuestaoDissertativa extends Questao {
 		super();
 	}
 	
-	public QuestaoDissertativa(Long id, String texto, Topico topico) {
+	public QuestaoDissertativa(Long id, String texto) {
 		super();
 		super.setId(id);
 		super.setTexto(texto);
-		super.setTopico(topico);
 		super.setTipoQuestao("D");
 	}
 }

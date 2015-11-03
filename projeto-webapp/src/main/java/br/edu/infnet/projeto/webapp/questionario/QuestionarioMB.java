@@ -11,7 +11,6 @@ import br.edu.infnet.projeto.ejb.core.Repositorio;
 import br.edu.infnet.projeto.ejb.questao.Questao;
 import br.edu.infnet.projeto.ejb.questao.QuestaoObjetiva;
 import br.edu.infnet.projeto.ejb.questionario.Questionario;
-import br.edu.infnet.projeto.ejb.questionario.QuestionarioQuestao;
 
 @ManagedBean
 @ViewScoped
@@ -70,14 +69,5 @@ public class QuestionarioMB {
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		parametros.put("texto","%"+texto+"%");
 		return repositorio.listarWithNamedQuery(Questao.class, "pesquisarPorTexto", parametros);
-	}
-	
-	public void adicionarQuestionarioQuestao(){
-		QuestionarioQuestao qq = new QuestionarioQuestao();
-		qq.setQuestao(questao);
-		qq.setQuestionario(questionario);
-		qq.setOrdem(questionario.getQuestionarioQuestoes().size()+1);
-		questionario.adicionaQuestionarioQuestao(qq);
-	}
-	
+	}	
 }
