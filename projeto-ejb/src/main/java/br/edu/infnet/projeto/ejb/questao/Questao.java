@@ -17,7 +17,7 @@ import br.edu.infnet.projeto.ejb.core.BaseEntity;
 @Table
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo_questao", discriminatorType=DiscriminatorType.STRING)
-@NamedQuery(name="pesquisarPorTexto" , query="SELECT q FROM Questao q WHERE q.texto LIKE :texto")
+@NamedQuery(name="Questao.pesquisarPorTexto" , query="SELECT q FROM Questao q WHERE q.texto LIKE :texto")
 public abstract class Questao extends BaseEntity<Long> {
 	private static final long serialVersionUID = 8291323679754678858L;
 	

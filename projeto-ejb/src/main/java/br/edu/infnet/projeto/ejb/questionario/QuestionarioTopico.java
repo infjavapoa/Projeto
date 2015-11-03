@@ -2,6 +2,7 @@ package br.edu.infnet.projeto.ejb.questionario;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
+import br.edu.infnet.projeto.ejb.questao.Questao;
 import br.edu.infnet.projeto.ejb.topico.Topico;
 
 @Entity
@@ -65,7 +68,11 @@ public class QuestionarioTopico extends BaseEntity<Long> {
 	public void setgetQuestionarioTopicoQuestoes(List<QuestionarioTopicoQuestao> questionarioTopicoQuestoes) {
 		this.questionarioTopicoQuestoes = questionarioTopicoQuestoes;
 	}
-	public void adicionaQuestionarioTopico(QuestionarioTopicoQuestao questionarioTopicoQuestao){
-		this.questionarioTopicoQuestoes.add(questionarioTopicoQuestao);
+	public void adicionaQuestionarioTopicoQuestao(Questao questao){
+		QuestionarioTopicoQuestao qtq = new QuestionarioTopicoQuestao();
+		qtq.setQuestao(questao);
+		qtq.setQuestionarioTopico(this);
+		qtq.setOrdem(questionarioTopicoQuestoes.size()+1);
+		this.questionarioTopicoQuestoes.add(qtq);
 	}
 }

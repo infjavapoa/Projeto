@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
 @Entity
 @Table
+@NamedQuery(name="Topico.pesquisarPorTexto" , query="SELECT t FROM Topico t WHERE t.texto LIKE :texto")
 public class Topico extends BaseEntity<Long> {
 	private static final long serialVersionUID = 8578462006534289569L;
 	

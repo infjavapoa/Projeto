@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
+import br.edu.infnet.projeto.ejb.topico.Topico;
 
 @Entity
 public class Questionario extends BaseEntity<Long> {
@@ -46,7 +47,11 @@ public class Questionario extends BaseEntity<Long> {
 	public void setgetQuestionarioTopicos(List<QuestionarioTopico> questionarioTopicos) {
 		this.questionarioTopicos = questionarioTopicos;
 	}
-	public void adicionaQuestionarioTopico(QuestionarioTopico questionarioTopico){
-		this.questionarioTopicos.add(questionarioTopico);
+	public void adicionaQuestionarioTopico(Topico topico){
+		QuestionarioTopico qt = new QuestionarioTopico();
+		qt.setTopico(topico);
+		qt.setQuestionario(this);
+		qt.setOrdem(questionarioTopicos.size()+1);
+		this.questionarioTopicos.add(qt);
 	}
 }

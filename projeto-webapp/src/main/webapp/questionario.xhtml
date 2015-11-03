@@ -13,7 +13,39 @@
 			<p:panel id="pCampos">		
 				<p:outputLabel value="Nome do Questionário: " for="txtNome"/>
 		    	<p:inputText id="txtNome" value="#{questionarioMB.questionario.nome}" style="width:700px"/>
-		    	<br />
+		    	<br /><br />
+				<p:dataTable id="dtQuestoes" draggableRows="true" var="qt" value="#{questionarioMB.questionario.questionarioTopicos}" sortBy="#{qt.ordem}">			        
+					<f:facet name="header">
+						<p:autoComplete id="txtTopico" value="#{questionarioMB.topico}" completeMethod="#{questionarioMB.listarTopicos}"
+		                	var="t" itemLabel="#{t.texto}" itemValue="#{t}" converter="#{baseEntityConverter}" scrollHeight="300"/>
+		               	<p:commandButton update="form:dtQuestoes" value="Adicionar" icon="ui-icon-disk" action="#{questionarioMB.adicionarQuestionarioTopico}"/>					
+        			</f:facet>
+        			<p:column>
+						<p:dataTable var="qtq" draggableRows="true" value="#{qt.questionarioTopicoQuestoes}">
+				            <f:facet name="header">	            
+				            	<p:column style="width:232px">
+				                	<h:outputText value="#{qt.topico.texto}" />
+				                </p:column>	
+				        		<p:autoComplete id="txtQuestao" value="#{questionarioMB.questao}" completeMethod="#{questionarioMB.listarQuestoes}"
+		                			var="q" itemLabel="#{q.texto}" itemValue="#{q}" converter="#{baseEntityConverter}" scrollHeight="300"/>				                
+				                <p:column style="width:32px">
+					        		<p:commandLink update="form:dtQuestoes" actionListener="#{questionarioMB.removerQuestao(qtq)}" value="Excluir" />
+					        	</p:column>	
+			               		<p:commandButton update="form:dtQuestoes" value="Adicionar" icon="ui-icon-disk" action="#{questionarioMB.adicionarQuestionarioTopicoQuestao(qt)}"/>
+				            </f:facet>
+				            <p:column style="width:20px">
+				                <h:outputText value="#{qtq.ordem}" />
+				            </p:column>			            
+				            <p:column>
+				                <h:outputText value="#{qtq.questao.texto}" />
+				            </p:column>
+					        <p:column style="width:32px">
+					        	<p:commandLink update="form:dtQuestoes" actionListener="#{questionarioMB.removerQuestao(qtq)}" value="Excluir" />
+					        </p:column>
+			        	</p:dataTable>
+		        	</p:column>	        
+				</p:dataTable>	                	
+			    <br />		    	
 				<p:commandButton update="form:pCampos, dtQuestionario" value="Salvar" icon="ui-icon-disk" action="#{questionarioMB.salvar}"/>
 				<p:commandButton update="form:pCampos" value="Cancelar" disabled="#{questionarioMB.questionario.id == null}" icon="ui-icon-close" action="#{questionarioMB.atualizaView}"/>
 				<br />
