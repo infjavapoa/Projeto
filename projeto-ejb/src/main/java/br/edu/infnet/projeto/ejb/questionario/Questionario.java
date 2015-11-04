@@ -2,6 +2,7 @@ package br.edu.infnet.projeto.ejb.questionario;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
-import br.edu.infnet.projeto.ejb.topico.Topico;
 
 @Entity
 public class Questionario extends BaseEntity<Long> {

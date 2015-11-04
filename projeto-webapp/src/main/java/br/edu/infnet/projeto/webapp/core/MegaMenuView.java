@@ -1,4 +1,4 @@
-package br.edu.infnet.projeto.webapp.turma;
+package br.edu.infnet.projeto.webapp.core;
 
 import javax.faces.bean.ManagedBean;
 

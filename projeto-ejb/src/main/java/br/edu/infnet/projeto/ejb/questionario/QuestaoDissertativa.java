@@ -1,4 +1,4 @@
-package br.edu.infnet.projeto.ejb.questao;
+package br.edu.infnet.projeto.ejb.questionario;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

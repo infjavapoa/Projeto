@@ -10,12 +10,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.edu.infnet.projeto.ejb.core.Repositorio;
-import br.edu.infnet.projeto.ejb.topico.Topico;
-import br.edu.infnet.projeto.ejb.questao.Questao;
-import br.edu.infnet.projeto.ejb.questao.QuestaoObjetiva;
+import br.edu.infnet.projeto.ejb.questionario.Questao;
+import br.edu.infnet.projeto.ejb.questionario.QuestaoObjetiva;
 import br.edu.infnet.projeto.ejb.questionario.Questionario;
 import br.edu.infnet.projeto.ejb.questionario.QuestionarioTopico;
 import br.edu.infnet.projeto.ejb.questionario.QuestionarioTopicoQuestao;
+import br.edu.infnet.projeto.ejb.questionario.Topico;
 
 @ManagedBean
 @ViewScoped

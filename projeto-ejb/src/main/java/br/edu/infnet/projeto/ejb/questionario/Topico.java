@@ -1,4 +1,4 @@
-package br.edu.infnet.projeto.ejb.topico;
+package br.edu.infnet.projeto.ejb.questionario;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

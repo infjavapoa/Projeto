@@ -16,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
-import br.edu.infnet.projeto.ejb.questao.Questao;
-import br.edu.infnet.projeto.ejb.topico.Topico;
 
 @Entity
 @Table(name="questionario_topico")
