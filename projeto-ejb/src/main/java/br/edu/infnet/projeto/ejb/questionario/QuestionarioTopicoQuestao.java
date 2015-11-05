@@ -14,8 +14,8 @@ import br.edu.infnet.projeto.ejb.core.BaseEntity;
 @Entity
 @Table(name="questionario_topico_questao")
 public class QuestionarioTopicoQuestao extends BaseEntity<Long> {
-	private static final long serialVersionUID = 6365086666794727846L;
-
+	private static final long serialVersionUID = -3321074017432167992L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_questionario_topico_questao")

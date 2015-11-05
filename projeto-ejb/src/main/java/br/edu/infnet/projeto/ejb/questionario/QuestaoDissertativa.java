@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("D")
 public class QuestaoDissertativa extends Questao {
-	private static final long serialVersionUID = 5266938109177610203L;
-	
+	private static final long serialVersionUID = 6945408147022083372L;
+
 	public QuestaoDissertativa() {
 		super();
 	}
