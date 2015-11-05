@@ -1,6 +1,12 @@
 body{font-size:11px;}
 label{display:block;}
 input[type=text] {margin-botton: 5px}
-.datatable-no-header thead {
+.datatable-questionario thead {
     display: none;
+}
+.datatable-questionario > .ui-datatable-header {
+    text-align: left;
+}
+.ui-autocomplete input {
+    width:250px;
 }

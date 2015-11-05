@@ -23,7 +23,7 @@ public class Questionario extends BaseEntity<Long> {
 	@Column(name="id_questionario")
 	private Long id;
 	private String nome;
-	@OneToMany(mappedBy="questionario", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="questionario", orphanRemoval=true, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<QuestionarioTopico> questionarioTopicos = new ArrayList<QuestionarioTopico>();
 
 	public Questionario() {
@@ -54,5 +54,8 @@ public class Questionario extends BaseEntity<Long> {
 		qt.setQuestionario(this);
 		qt.setOrdem(questionarioTopicos.size()+1);
 		this.questionarioTopicos.add(qt);
+	}
+	public void removeQuestionarioTopico(QuestionarioTopico qt){
+		this.questionarioTopicos.remove(qt);
 	}
 }

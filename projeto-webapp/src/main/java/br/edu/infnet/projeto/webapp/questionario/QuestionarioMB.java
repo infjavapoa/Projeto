@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.ReorderEvent;
+
 import br.edu.infnet.projeto.ejb.core.Repositorio;
 import br.edu.infnet.projeto.ejb.questionario.Questao;
 import br.edu.infnet.projeto.ejb.questionario.QuestaoObjetiva;
@@ -102,7 +104,15 @@ public class QuestionarioMB {
 		questao = new QuestaoObjetiva();
 	}
 	
-	public void removerQuestao(QuestionarioTopicoQuestao qtq) {
-		repositorio.remover(qtq);
+	public void removerTopico(QuestionarioTopico qt) {
+		questionario.removeQuestionarioTopico(qt);
+    }
+	
+	public void removerQuestao(QuestionarioTopico qt, QuestionarioTopicoQuestao qtq) {
+		qt.removeQuestionarioTopicoQuestao(qtq);
+    }
+	
+    public void onRowTopicoReorder(ReorderEvent event) {
+    	
     }
 }

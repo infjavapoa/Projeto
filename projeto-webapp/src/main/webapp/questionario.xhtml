@@ -15,21 +15,27 @@
 		    	<p:inputText id="txtNome" value="#{questionarioMB.questionario.nome}" style="width:700px"/>
 		    	<br /><br />
 		    	<p:outputLabel value="Questionário: " />			                
-				<p:dataTable id="dtQuestoes" styleClass="datatable-no-header" draggableRows="true" var="qt" value="#{questionarioMB.questionario.questionarioTopicos}" sortBy="#{qt.ordem}">
+				<p:dataTable id="dtQuestoes" styleClass="datatable-questionario" draggableRows="true" var="qt" value="#{questionarioMB.questionario.questionarioTopicos}" sortBy="#{qt.ordem}">
+					
 					<f:facet name="header">	 
 						<p:autoComplete id="txtTopico" value="#{questionarioMB.topico}" completeMethod="#{questionarioMB.listarTopicos}"
 		                	var="t" itemLabel="#{t.texto}" itemValue="#{t}" converter="#{baseEntityConverter}" scrollHeight="300"/>
 		                <p:watermark for="txtTopico" value="Adicionar Tópico..." />
-		               	<p:commandButton update="form:dtQuestoes" value="Adicionar" icon="ui-icon-disk" action="#{questionarioMB.adicionarQuestionarioTopico}"/>			        
+		               	<p:commandButton update="form:dtQuestoes" icon="ui-icon-plus" action="#{questionarioMB.adicionarQuestionarioTopico}"/>			        
         			</f:facet>
         			<p:column>
-						<p:dataTable id="dtQuestoesItens" styleClass="datatable-no-header" var="qtq" draggableRows="true" value="#{qt.questionarioTopicoQuestoes}">
-				            <f:facet name="header">	            
-				            	<h:outputText value="#{qt.topico.texto}" />
-				        		<p:autoComplete id="txtQuestao" value="#{questionarioMB.questao}" completeMethod="#{questionarioMB.listarQuestoes}"
+						<p:dataTable id="dtQuestoesItens" styleClass="datatable-questionario" var="qtq" draggableRows="true" value="#{qt.questionarioTopicoQuestoes}">
+				            <f:facet name="header">	 
+				           		<p:row>          
+				            		<h:outputText value="#{qt.topico.texto}" />
+				            		<p:commandButton update="form:dtQuestoes" style="margin-left:calc(100% - 80px)" icon="ui-icon-close" action="#{questionarioMB.removerTopico(qt)}"/>
+				            	</p:row>
+				            	<p:row>
+				        			<p:autoComplete id="txtQuestao" value="#{questionarioMB.questao}" completeMethod="#{questionarioMB.listarQuestoes}"
 				              			var="q" itemLabel="#{q.texto}" itemValue="#{q}" converter="#{baseEntityConverter}" scrollHeight="300"/>
-				              	<p:watermark for="txtQuestao" value="Adicionar Questão..." />				            	
-			               		<p:commandButton update="form:dtQuestoes" value="Adicionar" icon="ui-icon-disk" action="#{questionarioMB.adicionarQuestionarioTopicoQuestao(qt)}"/>
+				              		<p:watermark for="txtQuestao" value="Adicionar Questão..." />				            	
+			               			<p:commandButton update="form:dtQuestoes" icon="ui-icon-plus" action="#{questionarioMB.adicionarQuestionarioTopicoQuestao(qt)}"/>
+			               		</p:row>	
 				            </f:facet>
 				            <p:column style="width:20px" >
 				                <h:outputText value="#{qtq.ordem}" />
@@ -38,7 +44,7 @@
 				                <h:outputText value="#{qtq.questao.texto}" />
 				            </p:column>
 					        <p:column style="width:32px">
-					        	<p:commandLink update="form:dtQuestoes" actionListener="#{questionarioMB.removerQuestao(qtq)}" value="Excluir" />
+					        	<p:commandLink update="form:dtQuestoes" actionListener="#{questionarioMB.removerQuestao(qt, qtq)}" value="Excluir" />
 					        </p:column>						        
 			        	</p:dataTable>
 		        	</p:column>	        

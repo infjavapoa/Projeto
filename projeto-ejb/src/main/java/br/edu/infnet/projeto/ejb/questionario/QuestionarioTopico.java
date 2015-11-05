@@ -33,7 +33,7 @@ public class QuestionarioTopico extends BaseEntity<Long> {
     @JoinColumn(name = "id_questionario", referencedColumnName = "id_questionario")    
 	private Questionario questionario;
     private Integer ordem;
-	@OneToMany(mappedBy="questionarioTopico", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="questionarioTopico", orphanRemoval=true, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<QuestionarioTopicoQuestao> questionarioTopicoQuestoes = new ArrayList<QuestionarioTopicoQuestao>();
 	
 	public Long getId() {
@@ -72,5 +72,8 @@ public class QuestionarioTopico extends BaseEntity<Long> {
 		qtq.setQuestionarioTopico(this);
 		qtq.setOrdem(questionarioTopicoQuestoes.size()+1);
 		this.questionarioTopicoQuestoes.add(qtq);
+	}
+	public void removeQuestionarioTopicoQuestao(QuestionarioTopicoQuestao qtq){
+		this.questionarioTopicoQuestoes.remove(qtq);
 	}
 }
