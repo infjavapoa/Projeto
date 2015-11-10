@@ -1,11 +1,16 @@
 package br.edu.infnet.projeto.webapp.login;
 
+import java.util.Iterator;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import br.edu.infnet.projeto.ejb.core.Repositorio;
 import br.edu.infnet.projeto.ejb.login.Login;
 import br.edu.infnet.projeto.ejb.usuario.Usuario;
 //import br.com.licker.kyron.negocio.LoginNegocio;
@@ -14,51 +19,68 @@ import br.edu.infnet.projeto.ejb.usuario.Usuario;
 @ViewScoped
 public class LoginControle {
 	
-	//private Login login;
-	private boolean login;
+	private Login login;
 	//private LoginNegocio negocio;
-	
+	@EJB
+	private Repositorio repositorio;
+	private List<Usuario> listaUsuario;
+			
 	public LoginControle() {
-		//super();
-		//login = new Login();
-		//usuarioLogado();
+		super();
+		login = new Login();
+		usuarioLogado();
 		//negocio = new LoginNegocio();
 	}
 	
-	public boolean getLogin() {
+	public Login getLogin() {
 		return login;
 	}
 
-	public void setLogin(boolean login) {
+	public void setLogin(Login login) {
 		this.login = login;
 	}
 	
+	public boolean validaUsuario(Login login){
+		
+		listaUsuario = repositorio.listar(Usuario.class); 
+		
+		Iterator<Usuario> uIt = listaUsuario.iterator(); 
+		while (uIt.hasNext()){ 
+			Usuario usu = uIt.next();
+			System.out.println("Dai..: " + usu.getEmail() + "-" + usu.getSenha()+ "-" + login.getSenha() );
+			if (login.getCodigo().equals(usu.getEmail()) && login.getSenha().equals(usu.getSenha())){
+				System.out.println("Usuário Autenticado...");
+	    		HttpSession session = ( HttpSession ) FacesContext.getCurrentInstance().getExternalContext().getSession( true );
+				session.setAttribute( "usuarLog", usu ); 
+				return true;
+			}
+		} 
+
+		return false;
+		
+	}
+	
 	public String validaAcesso(){
-		/*if (negocio.validarAcesso(login)){
+		
+		if (validaUsuario(login)){
 	        HttpSession session = ( HttpSession ) FacesContext.getCurrentInstance().getExternalContext().getSession( true );
 			Usuario usuario = (Usuario) session.getAttribute("usuarLog");
 			if (usuario != null){
-								if (usuario.getAdmin() == true || usuario.getDesenv() == true ){
-					return "/protegido/adm/kyronadm.xhtml?faces-redirect=true";
-				} else {
-					return "/protegido/kyronfono.xhtml?faces-redirect=true";
-				}
-				
-				return "/protegido/kyronAbout.xhtml?faces-redirect=true";
+				return "/index.xhtml?faces-redirect=true";
 								
 				//return "/publico/skeleton.xhtml?faces-redirect=true";
 			}
 			else{
-				FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Usu�rio ou Senha Inv�lido"));
+				FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Usuário ou Senha Inválidos"));
 				return "";
 			}
 			
 		}
 		else{
-			FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Usu�rio ou Senha Inv�lido"));
+			FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Usuário ou Senha Inválidos"));
 			return "";
-		}*/
-		return "";
+		}
+		
 	}
 	
 	public String pesquisa(){
@@ -75,17 +97,17 @@ public class LoginControle {
 	}
 	
 	public void usuarioLogado(){
-		/*
+		
 		try {
 			HttpSession session = ( HttpSession ) FacesContext.getCurrentInstance().getExternalContext().getSession( true );
 			Usuario usuario = (Usuario) session.getAttribute("usuarLog");
 			if (usuario != null){
-				this.login = new Login(usuario.getCodigo(), usuario.getSenha(), usuario.getNome());
+				this.login = new Login(usuario.getEmail(), usuario.getSenha(), usuario.getNome());
 			}
 		}
 		catch (Exception e) {
 				e.printStackTrace();
-		}*/
+		}
 	}
 	
 	@SuppressWarnings("unused")
@@ -136,13 +158,13 @@ public class LoginControle {
 	}
 	
 	public String logOut(){
-		/*
+		
 		HttpSession session = ( HttpSession ) FacesContext.getCurrentInstance().getExternalContext().getSession( true );
 		if (session != null) {
 			session.invalidate();  
 		} 
-		return "/publico/kyron.xhtml?faces-redirect=true";*/
-		return "";
+		return "/login.xhtml?faces-redirect=true";
+		
 	}
 
 }

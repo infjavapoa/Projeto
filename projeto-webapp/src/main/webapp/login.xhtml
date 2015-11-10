@@ -22,7 +22,7 @@
  			<p:panel id="login" style="width:400px;height:400px" >
  				
  				<f:facet name="header">
- 					Bem vindo ao TabAval
+ 					Bem vindo ao Tabval
  				</f:facet>
  				<br />
  				<br />
@@ -31,12 +31,10 @@
  				<br />
  				<center>
 	 				<h:outputLabel for="codigo" value="Usuário:" />
-			    	<p:inputMask id="codigo"  /> 
-			    	
-			   	    <br /><br />
+			    	<p:inputMask id="codigo" value="#{loginControle.login.codigo}" />
+			   	    <br />
 			      	<h:outputLabel for="senha" value="Senha:" />
-			    	<p:password id="senha"  />
-			    	
+			    	<p:password id="senha" value="#{loginControle.login.senha}" />
 			   	    <br />
 			   	    <br />
 			   	    <p:commandButton value="Entrar" action="#{loginControle.validaAcesso}" process="@form" onclick="JavaScript:fjs_validaDigitacao()" />
@@ -48,6 +46,7 @@
  				<br />
 				
  			</p:panel>
+
  			
  		</p:outputPanel>
  		</center>
