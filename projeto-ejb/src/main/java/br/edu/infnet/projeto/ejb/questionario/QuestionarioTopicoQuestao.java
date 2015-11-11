@@ -13,7 +13,7 @@ import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
 @Entity
 @Table(name="questionario_topico_questao")
-public class QuestionarioTopicoQuestao extends BaseEntity<Long> {
+public class QuestionarioTopicoQuestao extends BaseEntity<Long> implements Comparable<QuestionarioTopicoQuestao> {
 	private static final long serialVersionUID = -3321074017432167992L;
 	
 	@Id
@@ -51,5 +51,20 @@ public class QuestionarioTopicoQuestao extends BaseEntity<Long> {
 	}
 	public void setOrdem(Integer ordem) {
 		this.ordem = ordem;
+	}
+	
+	@Override
+	public int compareTo(QuestionarioTopicoQuestao that) {
+		Integer o1 = this.getOrdem();
+		Integer o2 = that.getOrdem();
+		
+		if (o1 > o2 ){
+		   return 1;
+		}
+		else if (o1 < o2){
+		   return -1;
+		}
+		else
+		   return 0;
 	}
 }

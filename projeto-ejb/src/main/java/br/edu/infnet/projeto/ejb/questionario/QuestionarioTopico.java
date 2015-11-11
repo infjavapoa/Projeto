@@ -19,7 +19,7 @@ import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
 @Entity
 @Table(name="questionario_topico")
-public class QuestionarioTopico extends BaseEntity<Long> {
+public class QuestionarioTopico extends BaseEntity<Long> implements Comparable<QuestionarioTopico> {
 	private static final long serialVersionUID = 6365086666794727846L;
 
 	@Id
@@ -75,5 +75,20 @@ public class QuestionarioTopico extends BaseEntity<Long> {
 	}
 	public void removeQuestionarioTopicoQuestao(QuestionarioTopicoQuestao qtq){
 		this.questionarioTopicoQuestoes.remove(qtq);
+	}
+	
+	@Override
+	public int compareTo(QuestionarioTopico that) {
+		Integer o1 = this.getOrdem();
+		Integer o2 = that.getOrdem();
+		
+		if (o1 > o2 ){
+		   return 1;
+		}
+		else if (o1 < o2){
+		   return -1;
+		}
+		else
+		   return 0;
 	}
 }

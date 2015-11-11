@@ -3,14 +3,11 @@ package br.edu.infnet.projeto.webapp.questionario;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 import org.primefaces.event.ReorderEvent;
-
 import br.edu.infnet.projeto.ejb.core.Repositorio;
 import br.edu.infnet.projeto.ejb.questionario.Questao;
 import br.edu.infnet.projeto.ejb.questionario.QuestaoObjetiva;
@@ -69,7 +66,7 @@ public class QuestionarioMB {
 		return listaQuestionarios;
 	}
 
-	public void salvar() {
+	public void salvar() {		
 		if (questionario.getId() == null)
 			repositorio.adicionar(questionario);
 		else
@@ -106,14 +103,34 @@ public class QuestionarioMB {
 	
 	public void removerTopico(QuestionarioTopico qt) {
 		questionario.removeQuestionarioTopico(qt);
+		atualizaOrdem();
     }
 	
 	public void removerQuestao(QuestionarioTopico qt, QuestionarioTopicoQuestao qtq) {
 		qt.removeQuestionarioTopicoQuestao(qtq);
+		atualizaOrdem();
     }
 	
     public void onTopicoRowReorder(ReorderEvent event) {
-    	System.out.println(event.getSource());
+    	atualizaOrdem();
     }
     
+    public void onQuestaoRowReorder(ReorderEvent event) {
+    	atualizaOrdem();
+    }
+    
+    private void atualizaOrdem(){
+		//atualiza ordem dos tópicos e questões
+		Integer i = 1;
+		Integer j = 1;
+		for (QuestionarioTopico qt : questionario.getQuestionarioTopicos()) {
+			qt.setOrdem(i);
+			for (QuestionarioTopicoQuestao qtq : qt.getQuestionarioTopicoQuestoes()) {
+				qtq.setOrdem(j);
+				j++;
+			}
+			i++;
+			j=1;
+		}
+    }
 }
