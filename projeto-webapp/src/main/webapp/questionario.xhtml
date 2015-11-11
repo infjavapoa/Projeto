@@ -16,7 +16,7 @@
 		    	<br /><br />
 		    	<p:outputLabel value="Questionário: " />			                
 				<p:dataTable id="dtQuestoes" styleClass="datatable-questionario" draggableRows="true" var="qt" value="#{questionarioMB.questionario.questionarioTopicos}" sortBy="#{qt.ordem}">
-					
+					<p:ajax event="rowReorder" listener="#{questionarioMB.onTopicoRowReorder}" update=":form" />
 					<f:facet name="header">	 
 						<p:autoComplete id="txtTopico" value="#{questionarioMB.topico}" completeMethod="#{questionarioMB.listarTopicos}"
 		                	var="t" itemLabel="#{t.texto}" itemValue="#{t}" converter="#{baseEntityConverter}" scrollHeight="300"/>

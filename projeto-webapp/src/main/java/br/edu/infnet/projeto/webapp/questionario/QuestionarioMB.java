@@ -112,7 +112,8 @@ public class QuestionarioMB {
 		qt.removeQuestionarioTopicoQuestao(qtq);
     }
 	
-    public void onRowTopicoReorder(ReorderEvent event) {
-    	
+    public void onTopicoRowReorder(ReorderEvent event) {
+    	System.out.println(event.getSource());
     }
+    
 }
