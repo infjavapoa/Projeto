@@ -28,7 +28,7 @@
 							<p:ajax event="rowReorder" listener="#{questionarioMB.onQuestaoRowReorder}" update="form:dtQuestoes" />
 				            <f:facet name="header">	 
 				           		<p:row>          
-				            		<h:outputText value="#{qt.ordem}" /><h:outputText value="#{qt.topico.texto}" /> 
+				            		<h:outputText value="#{qt.topico.texto}" /> 
 				            		<p:commandButton update="form:dtQuestoes" style="margin-left:calc(100% - 80px)" icon="ui-icon-close" action="#{questionarioMB.removerTopico(qt)}"/>
 				            	</p:row>
 				            	<p:row>
