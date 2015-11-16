@@ -1,11 +1,18 @@
 package br.edu.infnet.projeto.ejb.avaliacao;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
+import br.edu.infnet.projeto.ejb.infnet.Turma;
 
 @Entity
 public class Avaliacao extends BaseEntity<Long> {
@@ -15,6 +22,22 @@ public class Avaliacao extends BaseEntity<Long> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_avaliacao")
 	private Long id;
+	@Column(name="cod_avaliacao")
+	private String codigo;
+	private String objetivo;
+	private String situacao;
+	@Column(name="dt_inicio")
+	private Date dataInicio;
+	@Column(name="dt_termino")
+	private Date dataTermino;
+    @ManyToOne
+    @JoinColumn(name = "id_turma", referencedColumnName = "id_turma")
+	private Turma turma;
+    @ManyToOne
+    @JoinColumn(name = "id_questionario", referencedColumnName = "id_questionario")
+	private Turma questionario;
+	@OneToMany(mappedBy="avaliacao", targetEntity=AvaliacaoAluno.class)
+	private List<AvaliacaoAluno> avaliacaoAlunos = new ArrayList<AvaliacaoAluno>();
 	
 	public Avaliacao() {
 		super();
@@ -25,5 +48,53 @@ public class Avaliacao extends BaseEntity<Long> {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public String getObjetivo() {
+		return objetivo;
+	}
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
+	}
+	public String getSituacao() {
+		return situacao;
+	}
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+	public Date getDataTermino() {
+		return dataTermino;
+	}
+	public void setDataTermino(Date dataTermino) {
+		this.dataTermino = dataTermino;
+	}
+	public Turma getTurma() {
+		return turma;
+	}
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+	public Turma getQuestionario() {
+		return questionario;
+	}
+	public void setQuestionario(Turma questionario) {
+		this.questionario = questionario;
+	}
+	public List<AvaliacaoAluno> getAvaliacaoAlunos() {
+		return avaliacaoAlunos;
+	}
+	public void setAvaliacaoAlunos(List<AvaliacaoAluno> avaliacaoAlunos) {
+		this.avaliacaoAlunos = avaliacaoAlunos;
 	}
 }

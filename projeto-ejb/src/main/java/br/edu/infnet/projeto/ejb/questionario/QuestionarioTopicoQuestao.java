@@ -1,5 +1,7 @@
 package br.edu.infnet.projeto.ejb.questionario;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,8 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import br.edu.infnet.projeto.ejb.avaliacao.Resposta;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
 @Entity
@@ -27,6 +30,8 @@ public class QuestionarioTopicoQuestao extends BaseEntity<Long> implements Compa
     @JoinColumn(name = "id_questionario_topico", referencedColumnName = "id_questionario_topico")    
 	private QuestionarioTopico questionarioTopico;
     private Integer ordem;
+	@OneToMany(mappedBy="questionarioTopicoQuestao", targetEntity=Resposta.class)
+	private List<Resposta> respostas = new ArrayList<Resposta>();
 	
 	public Long getId() {
 		return id;
@@ -52,7 +57,12 @@ public class QuestionarioTopicoQuestao extends BaseEntity<Long> implements Compa
 	public void setOrdem(Integer ordem) {
 		this.ordem = ordem;
 	}
-	
+	public List<Resposta> getRespostas() {
+		return respostas;
+	}
+	public void setRespostas(List<Resposta> respostas) {
+		this.respostas = respostas;
+	}
 	@Override
 	public int compareTo(QuestionarioTopicoQuestao that) {
 		Integer o1 = this.getOrdem();

@@ -1,7 +1,8 @@
 package br.edu.infnet.projeto.ejb.infnet;
 
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
+import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
 @Entity
@@ -35,7 +37,9 @@ public class Turma extends BaseEntity<Long> {
 	private Aluno aluno;
     @ManyToOne
     @JoinColumn(name = "id_modulo", referencedColumnName = "id_modulo")
-	private Modulo modulo;    
+	private Modulo modulo;
+	@OneToMany(mappedBy="turma", targetEntity=Avaliacao.class)
+	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
     
 	public Turma() {
 		super();
@@ -88,5 +92,11 @@ public class Turma extends BaseEntity<Long> {
 	}
 	public void setModulo(Modulo modulo) {
 		this.modulo = modulo;
+	}
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
+	}
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
 	}
 }

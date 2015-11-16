@@ -2,7 +2,6 @@ package br.edu.infnet.projeto.ejb.questionario;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
 @Entity
@@ -25,7 +24,9 @@ public class Questionario extends BaseEntity<Long> {
 	private String nome;
 	@OneToMany(mappedBy="questionario", orphanRemoval=true, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<QuestionarioTopico> questionarioTopicos = new ArrayList<QuestionarioTopico>();
-
+	@OneToMany(mappedBy="questionario", targetEntity=Avaliacao.class)
+	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
+	
 	public Questionario() {
 		super();
 	}
@@ -57,5 +58,11 @@ public class Questionario extends BaseEntity<Long> {
 	}
 	public void removeQuestionarioTopico(QuestionarioTopico qt){
 		this.questionarioTopicos.remove(qt);
+	}
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
+	}
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
 	}
 }
