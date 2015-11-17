@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 import br.edu.infnet.projeto.ejb.infnet.Turma;
+import br.edu.infnet.projeto.ejb.questionario.Questionario;
 
 @Entity
 public class Avaliacao extends BaseEntity<Long> {
@@ -35,7 +36,7 @@ public class Avaliacao extends BaseEntity<Long> {
 	private Turma turma;
     @ManyToOne
     @JoinColumn(name = "id_questionario", referencedColumnName = "id_questionario")
-	private Turma questionario;
+	private Questionario questionario;
 	@OneToMany(mappedBy="avaliacao", targetEntity=AvaliacaoAluno.class)
 	private List<AvaliacaoAluno> avaliacaoAlunos = new ArrayList<AvaliacaoAluno>();
 	
@@ -85,10 +86,10 @@ public class Avaliacao extends BaseEntity<Long> {
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
-	public Turma getQuestionario() {
+	public Questionario getQuestionario() {
 		return questionario;
 	}
-	public void setQuestionario(Turma questionario) {
+	public void setQuestionario(Questionario questionario) {
 		this.questionario = questionario;
 	}
 	public List<AvaliacaoAluno> getAvaliacaoAlunos() {
