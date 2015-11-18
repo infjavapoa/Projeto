@@ -4,3 +4,4 @@ ADD cpf varchar(11)  NOT null;
 
 ALTER TABLE professor
 ADD cpf varchar(11) not null;
+
