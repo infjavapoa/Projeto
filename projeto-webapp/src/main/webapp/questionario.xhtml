@@ -27,16 +27,13 @@
 						<p:dataTable rowIndexVar="qtqOrdem" id="dtQuestoesItens" styleClass="datatable-questionario" var="qtq" draggableRows="true" value="#{qt.questionarioTopicoQuestoes}" sortBy="#{qtq.ordem}" >
 							<p:ajax event="rowReorder" listener="#{questionarioMB.onQuestaoRowReorder}" update="form:dtQuestoes" />
 				            <f:facet name="header">	 
-				           		<p:row>          
-				            		<h:outputText value="#{qt.topico.texto}" /> 
-				            		<p:commandButton update="form:dtQuestoes" style="margin-left:calc(100% - 80px)" icon="ui-icon-close" action="#{questionarioMB.removerTopico(qt)}"/>
-				            	</p:row>
-				            	<p:row>
-				        			<p:autoComplete id="txtQuestao" value="#{questionarioMB.questao}" completeMethod="#{questionarioMB.listarQuestoes}"
-				              			var="q" itemLabel="#{q.texto}" itemValue="#{q}" converter="#{baseEntityConverter}" scrollHeight="300"/>
-				              		<p:watermark for="txtQuestao" value="Adicionar Questão..." />				            	
-			               			<p:commandButton update="form:dtQuestoes" icon="ui-icon-plus" action="#{questionarioMB.adicionarQuestionarioTopicoQuestao(qt)}"/>
-			               		</p:row>
+				           		<h:outputText value="#{qt.topico.texto}" /> 
+				            	<p:commandButton update="form:dtQuestoes" style="margin-right:80px" icon="ui-icon-close" action="#{questionarioMB.removerTopico(qt)}" />
+								<br />
+			        			<p:autoComplete id="txtQuestao" value="#{questionarioMB.questao}" completeMethod="#{questionarioMB.listarQuestoes}"
+			              			var="q" itemLabel="#{q.texto}" itemValue="#{q}" converter="#{baseEntityConverter}" scrollHeight="300"/>
+			              		<p:watermark for="txtQuestao" value="Adicionar Questão..." />				            	
+		               			<p:commandButton update="form:dtQuestoes" icon="ui-icon-plus" action="#{questionarioMB.adicionarQuestionarioTopicoQuestao(qt)}"/>
 				            </f:facet>
 				            <p:column style="width:20px" >
 				                <h:outputText value="#{qtq.ordem}" />
