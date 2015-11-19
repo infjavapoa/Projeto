@@ -14,7 +14,7 @@ CREATE TEMPORARY TABLE IF NOT EXISTS turma_temp
 AS (SELECT DISTINCT nr_turma, nome, id_modulo,id_professor,dt_inicio, dt_fim  
       FROM turma );
       
-ALTER TABLE avaliacao DROP FOREIGN KEY avaliacao_ibfk_3;
+/*ALTER TABLE avaliacao DROP FOREIGN KEY avaliacao_ibfk_3;
 DROP TABLE turma;
 
 CREATE TABLE turma (
@@ -30,7 +30,12 @@ FOREIGN KEY (id_professor) REFERENCES professor(id_professor)
 ) ENGINE=InnoDB ;
 
 
-ALTER TABLE avaliacao ADD FOREIGN KEY (id_turma) REFERENCES turma (id_turma);
+ALTER TABLE avaliacao ADD FOREIGN KEY (id_turma) REFERENCES turma (id_turma);*/
+      
+ALTER TABLE turma DROP nr_turma;
+ALTER TABLE turma DROP FOREIGN KEY turma_ibfk_2;/*verificar o nome se é o 2 mesmo*/
+ALTER TABLE turma DROP id_aluno;
+      
 
 
 INSERT INTO turma (id_turma, nome, id_modulo, id_professor, dt_inicio, dt_fim)
