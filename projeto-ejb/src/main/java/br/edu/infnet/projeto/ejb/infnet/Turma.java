@@ -3,14 +3,18 @@ package br.edu.infnet.projeto.ejb.infnet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
@@ -32,9 +36,9 @@ public class Turma extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "id_professor", referencedColumnName = "id_professor")
 	private Professor professor;
-    @ManyToOne
-    @JoinColumn(name = "id_aluno", referencedColumnName = "id_aluno")
-	private Aluno aluno;
+    @ManyToMany
+    @JoinTable(name = "turma_aluno", joinColumns = @JoinColumn(name = "id_turma"), inverseJoinColumns = @JoinColumn(name = "id_aluno"))
+    private List<Aluno> alunos;
     @ManyToOne
     @JoinColumn(name = "id_modulo", referencedColumnName = "id_modulo")
 	private Modulo modulo;
@@ -81,11 +85,11 @@ public class Turma extends BaseEntity<Long> {
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
-	public Aluno getAluno() {
-		return aluno;
+	public List<Aluno> getAlunos() {
+		return alunos;
 	}
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
 	}
 	public Modulo getModulo() {
 		return modulo;

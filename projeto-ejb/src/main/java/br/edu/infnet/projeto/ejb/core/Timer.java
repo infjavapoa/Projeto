@@ -11,13 +11,13 @@ public class Timer {
 	AvaliacaoEJB avaliacaoEJB;
 	
 	//A cada 10 segundos
-	@Schedule(second="*/10", minute="*",hour="*", persistent=false)
+	//@Schedule(second="*/10", minute="*",hour="*", persistent=false)
 	public void abrirAvaliacoes(){
 	    avaliacaoEJB.abrirAvaliacoes();
 	}
 	
 	//A cada 10 segundos
-	@Schedule(second="*/10", minute="*",hour="*", persistent=false)
+	//@Schedule(second="*/10", minute="*",hour="*", persistent=false)
 	public void processarAvaliacoes(){
 		avaliacaoEJB.processarAvaliacoes();
 	}

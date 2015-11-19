@@ -10,12 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 import br.edu.infnet.projeto.ejb.infnet.Turma;
 import br.edu.infnet.projeto.ejb.questionario.Questionario;
 
 @Entity
+@NamedQuery(name="Avaliacao.pesquisarNaoAbertas" , query="SELECT a FROM Avaliacao a WHERE a.situacao = 'F' and a.dataInicio <= :dataAtual")
 public class Avaliacao extends BaseEntity<Long> {
 	private static final long serialVersionUID = -6220351357437865318L;
 	

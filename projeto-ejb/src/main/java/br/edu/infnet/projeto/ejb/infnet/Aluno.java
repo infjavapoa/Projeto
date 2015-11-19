@@ -2,12 +2,15 @@ package br.edu.infnet.projeto.ejb.infnet;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
 import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoAluno;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
@@ -23,7 +26,7 @@ public class Aluno extends BaseEntity<Long> {
 	private String nome;
 	private String email;
 	private String genero;
-	@OneToMany(mappedBy="aluno", targetEntity=Turma.class)
+	@ManyToMany(mappedBy="alunos")
 	private List<Turma> turmas = new ArrayList<Turma>();
 	@OneToMany(mappedBy="aluno", targetEntity=AvaliacaoAluno.class)
 	private List<AvaliacaoAluno> avaliacaoAlunos = new ArrayList<AvaliacaoAluno>();
