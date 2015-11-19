@@ -1,6 +1,6 @@
 package br.edu.infnet.projeto.ejb.login;
 
-import br.edu.infnet.projeto.ejb.seguranca.CriptografiaSenha;
+import br.edu.infnet.projeto.ejb.core.Seguranca;
 
 public class Login {
 	
@@ -31,7 +31,7 @@ public class Login {
 		return senha;
 	}
 	public void setSenha(String senha) {
-		this.senha = CriptografiaSenha.Criptografar(senha);
+		this.senha = Seguranca.gerarHash(senha);
 		System.out.println("...fazendo a mão pelo setSenha...");
 	}
 	
@@ -39,7 +39,7 @@ public class Login {
 		return nome;
 	}
 	public void setNome(String nome) {
-		this.senha = CriptografiaSenha.Criptografar(nome);
+		this.senha = Seguranca.gerarHash(nome);
 		System.out.println("...fazendo a mão pelo setNome...");
 	}
 	
