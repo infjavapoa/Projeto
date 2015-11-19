@@ -18,7 +18,7 @@ public class Repositorio {
         em.persist(t);
     }
     
-    public void remover(Class<BaseEntity<? extends Number>> type, Number id) {
+    public <T> void remover(Class<T> type, Number id) {
         Object ref = em.getReference(type, id);
         em.remove(ref);
     }
@@ -32,7 +32,7 @@ public class Repositorio {
         em.merge(t);
     }
     
-    public BaseEntity<? extends Number> obter(Class<BaseEntity<? extends Number>> type, Number id) {
+    public <T> T obter(Class<T> type, Number id) {
         return em.find(type, id);
     }
     
