@@ -13,13 +13,56 @@
  
  <h:body>
 	<h:outputStylesheet library="css" name="styles.css" />
- 	<h:form id="form" enctype="multipart/form-data">	
+ 	<h:form id="formAvaliacao" enctype="multipart/form-data">	
  		<div class="corpo">
 			<p:growl id="msgs" showDetail="true"/>
+			<p:panel id="top"  class="grid">
+				<h:panelGrid columns="3">
+					<p:graphicImage url="/resources/imagens/logo_infnet.png" width="113px" height="71px" />
+					<p:outputLabel value="|" style="margin-right:20px;margin-left:20px;font-size:20px;font-weight:bold"/>
+		        	<p:outputLabel value="Avaliação - Alunos da Pós-Graduação" style="font-size:20px;font-weight:bold"/>
+		 		</h:panelGrid>     
+		 		<h:panelGrid columns="4">
+		 			<p:outputLabel id="aaa" value="Aluno:" style="font-weight:bold"/> 
+		        	<p:outputLabel  id="txtNomeAluno" value="#{responderAvaliacaoMB.avaliacaoAluno.aluno.nome}" label="aaa" />
+		        	<p:outputLabel value="CPF:" style="margin-left:50px;font-weight:bold"/>  
+		        	<p:outputLabel value="#{responderAvaliacaoMB.avaliacaoAluno.aluno.cpf}" /> 
+		       	</h:panelGrid>  
+		        <h:panelGrid columns="2">		        
+		        	<p:outputLabel value="Módulo:" style="font-weight:bold"/>   
+		        	<p:outputLabel value="#{responderAvaliacaoMB.avaliacaoAluno.avaliacao.turma.modulo.nome}" />
+		        </h:panelGrid>
+		        <h:panelGrid columns="2">
+		        	<p:outputLabel value="Objetivo da Avaliação:" style="font-weight:bold"/>   
+		        	<p:outputLabel value="#{responderAvaliacaoMB.avaliacaoAluno.avaliacao.objetivo}" /> 
+		   		</h:panelGrid>
+			    	<h:outputText value="Por favor, preencha essa avaliação com toda atenção. Ela é muito importante para a melhoria contínua de seu curso. É através das avaliações
+					que poderemos construir um curso cada vez melhor, o que é importante para você agora e para o valor de seu diploma no futuro." />
+			</p:panel>
+			<p:sticky target="top" />
+			<br />
+		    <p:dataGrid class="grid" var="qt" value="#{responderAvaliacaoMB.avaliacaoAluno.avaliacao.questionario.questionarioTopicos}" columns="1">
+		 		<p:outputLabel value="#{qt.topico.texto}:" style="font-size:16px;font-weight:bold"/>
+				<p:dataGrid class="grid" var="qtq" value="#{qt.questionarioTopicoQuestoes}" columns="1">
+					<p:layout style="height:30px">
+					    <p:layoutUnit position="center">
+										<h:panelGrid columns="2">
+											<p:outputLabel value="#{qtq.ordem}." />
+							 				<p:outputLabel value="#{qtq.questao.texto}" />
+							 			</h:panelGrid>
+					    </p:layoutUnit>
+					 
+					    <p:layoutUnit position="east">
+							<p:selectManyCheckbox id="ckReposta" value="1" layout="grid" columns="6">
+							    <f:selectItems value="#{responderAvaliacaoMB.alternativas}" var="alternativa" itemLabel="#{alternativa.texto}" itemValue="#{alternativa}" />
+							</p:selectManyCheckbox>						    
+					    </p:layoutUnit>
+					</p:layout>				
+
+		 			<hr style="border:1px dashed;width:100%" />
+		    	</p:dataGrid>   
+		    </p:dataGrid>
 			
-			<p:panel header="Responder Avaliação" > 
-				<p:inputText id="txtTeste" value="#{responderAvaliacaoMB.teste}" style="width:700px"/>
-			</p:panel>  
  		</div>
   </h:form>
  </h:body>

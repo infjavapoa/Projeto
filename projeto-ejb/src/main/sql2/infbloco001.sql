@@ -126,7 +126,8 @@ CONSTRAINT uniq_id_avaliacao_aluno UNIQUE (id_avaliacao,id_aluno)
 
 CREATE TABLE alternativa (
 id_alternativa int NOT NULL auto_increment,
-texto char(15) NULL,
+texto char(25) NULL,
+ordem int NOT NULL,
 PRIMARY KEY (id_alternativa)
 ) ENGINE=InnoDB ;
 
@@ -170,8 +171,8 @@ INSERT INTO `turma` VALUES (1,'Turma 1',2,2,NULL,NULL),(2,'Turma 2',8,6,NULL,NUL
 INSERT INTO `turma_aluno` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,26),(1,27),(1,28),(1,29),(1,30),(2,31),(2,32),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,39),(2,40),(2,41),(2,42),(2,43),(2,44),(2,45),(2,46),(2,47),(2,48),(2,49),(2,50),(2,51),(2,52),(2,53),(2,54),(2,55),(2,56),(2,57),(2,58),(2,59),(2,60),(3,61),(3,62),(3,63),(3,64),(3,65),(3,66),(3,67),(3,68),(3,69),(3,70),(3,71),(3,72),(3,73),(3,74),(3,75),(3,76),(3,77),(3,78),(3,79),(3,80),(3,81),(3,82),(3,83),(3,84),(3,85),(3,86),(3,87),(3,88),(3,89),(3,90);
 
 INSERT INTO `infbloco`.`topico`(`id_topico`,`texto`) VALUES (1,'Avaliação geral da Pós-Graduação');
-INSERT INTO `infbloco`.`topico`(`id_topico`,`texto`) VALUES (2,'Avaliação geral da Pós-Graduação');
-INSERT INTO `infbloco`.`topico`(`id_topico`,`texto`) VALUES (3,'Avaliação geral da Pós-Graduação');
+INSERT INTO `infbloco`.`topico`(`id_topico`,`texto`) VALUES (2,'Avaliação do professor no módulo');
+INSERT INTO `infbloco`.`topico`(`id_topico`,`texto`) VALUES (3,'Avaliação de conteúdo e infra-estrutura no módulo');
 
 INSERT INTO `infbloco`.`questao`(`id_questao`,`texto`,`tipo_questao`) VALUES (1,'Até agora, o curso está atingindo as minhas expectativas.','O');
 INSERT INTO `infbloco`.`questao`(`id_questao`,`texto`,`tipo_questao`) VALUES (2,'Até agora, eu indicaria o curso para um amigo.','O');
@@ -204,7 +205,7 @@ INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_que
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (4,1,4,4);
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (5,1,5,5);
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (6,1,6,6);
-INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (7,1,7,1);
+INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (7,2,7,1);
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (8,2,8,2);
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (9,2,9,3);
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (10,2,10,4);
@@ -216,3 +217,10 @@ INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_que
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (16,3,16,4);
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (17,3,17,5);
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (18,3,18,6);
+
+INSERT INTO alternativa(id_alternativa, texto, ordem) VALUES (1, 'Concordo Totalmente', 1);
+INSERT INTO alternativa(id_alternativa, texto, ordem) VALUES (2, 'Concordo', 2);
+INSERT INTO alternativa(id_alternativa, texto, ordem) VALUES (3, 'Não concordo nem Discordo',3);
+INSERT INTO alternativa(id_alternativa, texto, ordem) VALUES (4, 'Discordo',4);
+INSERT INTO alternativa(id_alternativa, texto, ordem) VALUES (5, 'Discordo Totalmente',5);
+INSERT INTO alternativa(id_alternativa, texto, ordem) VALUES (6, 'Não Sei Avaliar',6);

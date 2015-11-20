@@ -2,6 +2,7 @@ package br.edu.infnet.projeto.ejb.questionario;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+
 import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
@@ -23,6 +26,7 @@ public class Questionario extends BaseEntity<Long> {
 	private Long id;
 	private String nome;
 	@OneToMany(mappedBy="questionario", orphanRemoval=true, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OrderBy("ordem")  
 	private List<QuestionarioTopico> questionarioTopicos = new ArrayList<QuestionarioTopico>();
 	@OneToMany(mappedBy="questionario", targetEntity=Avaliacao.class)
 	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();

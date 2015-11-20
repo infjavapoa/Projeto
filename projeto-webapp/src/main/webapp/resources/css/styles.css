@@ -10,3 +10,8 @@ input[type=text] {margin-botton: 5px}
 .ui-autocomplete input {
     width:250px;
 }
+
+.grid .ui-widget-content
+{
+    border: none !important;
+}

@@ -20,6 +20,7 @@ public class Alternativa extends BaseEntity<Long> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_alternativa")
 	private Long id;
+	private Integer ordem;
 	private String texto;
 	@OneToMany(mappedBy="alternativa", targetEntity=RespostaObjetiva.class)
 	private List<RespostaObjetiva> respostaObjetivas = new ArrayList<RespostaObjetiva>();
@@ -33,6 +34,12 @@ public class Alternativa extends BaseEntity<Long> {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Integer getOrdem() {
+		return ordem;
+	}
+	public void setOrdem(Integer ordem) {
+		this.ordem = ordem;
 	}
 	public String getTexto() {
 		return texto;

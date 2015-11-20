@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
@@ -34,6 +35,7 @@ public class QuestionarioTopico extends BaseEntity<Long> implements Comparable<Q
 	private Questionario questionario;
     private Integer ordem;
 	@OneToMany(mappedBy="questionarioTopico", orphanRemoval=true, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OrderBy("ordem") 
 	private List<QuestionarioTopicoQuestao> questionarioTopicoQuestoes = new ArrayList<QuestionarioTopicoQuestao>();
 	
 	public Long getId() {
