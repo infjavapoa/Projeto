@@ -26,8 +26,6 @@ public class Turma extends BaseEntity<Long> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_turma")
 	private Long id;
-	@Column(name="nr_turma")
-	private Integer nro;
 	private String nome;
 	@Column(name="dt_inicio")
 	private Date dtInicio;
@@ -54,12 +52,6 @@ public class Turma extends BaseEntity<Long> {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Integer getNro() {
-		return nro;
-	}
-	public void setNro(Integer nro) {
-		this.nro = nro;
 	}
 	public String getNome() {
 		return nome;
