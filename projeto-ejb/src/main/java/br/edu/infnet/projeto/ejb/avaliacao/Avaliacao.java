@@ -29,9 +29,9 @@ public class Avaliacao extends BaseEntity<Long> {
 	private String codigo;
 	private String objetivo;
 	private String situacao;
-	@Column(name="dt_inicio")
+	@Column(name="data_inicio")
 	private Date dataInicio;
-	@Column(name="dt_termino")
+	@Column(name="data_termino")
 	private Date dataTermino;
     @ManyToOne
     @JoinColumn(name = "id_turma", referencedColumnName = "id_turma")
