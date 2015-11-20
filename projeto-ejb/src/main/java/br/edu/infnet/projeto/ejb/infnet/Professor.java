@@ -22,6 +22,7 @@ public class Professor extends BaseEntity<Long> {
 	private String nome;
 	private String email;
 	private String genero;
+	private String cpf;
 	@OneToMany(mappedBy="professor", targetEntity=Turma.class)
 	private List<Turma> turmas = new ArrayList<Turma>();
 	
@@ -52,6 +53,12 @@ public class Professor extends BaseEntity<Long> {
 	}
 	public void setGenero(String genero) {
 		this.genero = genero;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	public List<Turma> getTurmas() {
 		return turmas;

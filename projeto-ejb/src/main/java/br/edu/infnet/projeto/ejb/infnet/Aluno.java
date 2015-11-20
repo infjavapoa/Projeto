@@ -26,6 +26,9 @@ public class Aluno extends BaseEntity<Long> {
 	private String nome;
 	private String email;
 	private String genero;
+	@Column(name="nr_matricula")
+	private Integer matricula;
+	private String cpf;
 	@ManyToMany(mappedBy="alunos")
 	private List<Turma> turmas = new ArrayList<Turma>();
 	@OneToMany(mappedBy="aluno", targetEntity=AvaliacaoAluno.class)
@@ -59,6 +62,20 @@ public class Aluno extends BaseEntity<Long> {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+	public Integer getMatricula() {
+		return matricula;
+	}
+	public void setMatricula(Integer matricula) {
+		this.matricula = matricula;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public List<Turma> getTurmas() {
 		return turmas;
 	}
