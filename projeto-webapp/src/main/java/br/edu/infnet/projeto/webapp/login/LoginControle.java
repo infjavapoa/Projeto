@@ -48,7 +48,7 @@ public class LoginControle {
 		while (uIt.hasNext()){ 
 			Usuario usu = uIt.next();
 			System.out.println("Dai..: " + usu.getEmail() + "-" + usu.getSenha()+ "-" + login.getSenha() );
-			if (login.getCodigo().equals(usu.getEmail()) && login.getSenha().equals(usu.getSenha())){
+			if (login.getCodigo().equals(usu.getEmail()) && login.getSenha().equalsIgnoreCase(usu.getSenha())){
 				System.out.println("Usuário Autenticado...");
 	    		HttpSession session = ( HttpSession ) FacesContext.getCurrentInstance().getExternalContext().getSession( true );
 				session.setAttribute( "usuarLog", usu ); 
