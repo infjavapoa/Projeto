@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition template="#{loginControle.menuPadrao}"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+	<ui:define name="conteudo">
+		<p:growl id="msgs" showDetail="true"/>
+		
+		<p:panel header="Cadastro de Avaliações" >		
+			<p:panel id="pCampos">
+				<p:outputLabel value="Turma: " for="txtIdTurma" />
+				<p:commandButton id="turmaBtn" icon="ui-icon-search" type="button" />
+		    	<p:inputText id="txtIdTurma" value="#{avaliacaoMB.selTurma.id}" style="width:50px">
+		    		<p:ajax event="change" listener="#{avaliacaoMB.onChange}" update="txtTurma"  />
+		    	</p:inputText>	
+		    	<p:inputText id="txtTurma" value="#{avaliacaoMB.selTurma.nome}" style="width:500px"/>
+		    	<h:outputText value="Turma: " />
+		        
+		        <h:outputText id="nomeTurma" value="#{avaliacaoMB.selTurma.nome}" />
+		    	
+		    	<p:overlayPanel id="turmaPanel" for="turmaBtn" dynamic="true" style="width:600px" widgetVar="zoom" 
+		    					hideEffect="explode" dismissable="true" showCloseIcon="true">
+			        <p:dataTable id="tabTurma" var="turma" value="#{avaliacaoMB.listaTurmas}" rows="5" paginator="true" 
+			        		     selectionMode="single" selection="#{avaliacaoMB.selTurma}" rowKey="#{turma.id}">
+			        		     
+			        	<f:facet name="header">Selecione uma Turma</f:facet>
+				        <p:ajax event="rowSelect" listener="#{avaliacaoMB.onRowSelect}" update="form:txtIdTurma" />
+				        <p:column headerText="Código">
+			                <h:outputText value="#{turma.id}" />
+			            </p:column>
+			 
+			            <p:column headerText="Nome">
+			                <h:outputText value="#{turma.nome}" />
+			            </p:column>			 
+			            
+			        </p:dataTable>			        
+			        
+			    </p:overlayPanel>
+		    	
+		    	<br />
+		    	<br />
+				<p:commandButton update="form:pCampos, dtTopicos" value="Salvar" icon="ui-icon-disk" action="#{topicoMB.salvar}"/>
+				<p:commandButton update="form:pCampos, dtTopicos" value="Cancelar" icon="ui-icon-close" disabled="#{topicoMB.topico.id == null}" action="#{topicoMB.atualizaView}"/>
+				<br />
+				<br />
+			</p:panel>
+			<br />
+			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}">
+			    <p:column headerText="Tópicos Cadastrados">
+		        	<h:outputText value="#{t.texto}" />			        
+			    </p:column>
+			    <p:column style="width:32px">
+		        	<p:commandLink update="form:pCampos" value="Editar">
+		        		<f:setPropertyActionListener value="#{t}" target="#{topicoMB.topico}" />	
+		        	</p:commandLink>
+		        </p:column>		
+		        <p:column style="width:32px">
+		        	<p:commandLink update="form:pCampos, dtTopicos" action="#{topicoMB.remover}" value="Excluir">
+		        		<f:setPropertyActionListener value="#{t}" target="#{topicoMB.topico}" />	
+		        	</p:commandLink>    	
+		        </p:column>		        
+			</p:dataTable>
+		</p:panel>  
+	</ui:define>
+</ui:composition>  
