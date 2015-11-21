@@ -15,9 +15,9 @@
 	<mail-resource transport-protocol-class="com.sun.mail.smtp.SMTPSSLTransport" 
 		host="smtp.gmail.com" store-protocol="imaps" store-protocol-class="com.sun.mail.imap.IMAPSSLStore" 
 		jndi-name="java:app/mail/gmail" transport-protocol="smtps" debug="true" 
-		from="mrmello@gmail.com" user="mrmello@gmail.com">
+		from="infnet.avaliacoes@gmail.com" user="infnet.avaliacoes@gmail.com">
 		<property name="mail-smtps-host" value="smtp.gmail.com"></property>
-		<property name="mail-smtps-password" value="mrm485042"></property>
+		<property name="mail-smtps-password" value="infnetavaliacoes"></property>
 		<property name="mail-smtps-socketFactory-class" value="javax.net.ssl.SSLSocketFactory"></property>
 		<property name="mail-smtps-auth" value="true"></property>
 		<property name="mail-smtps-socketFactory-port" value="465"></property>
@@ -25,13 +25,13 @@
 		<property name="mail-smtps-starttls-enable" value="true"></property>
 		<property name="mail.smtps.connectiontimeout" value="60000"></property>
 		<property name="mail.smtps.timeout" value="180000"></property>
-		<property name="mail-smtps-user" value="mrmello@gmail.com"></property>
+		<property name="mail-smtps-user" value="infnet.avaliacoes@gmail.com"></property>
 		<property name="mail-smtps-socketFactory-fallback" value="false"></property>
 		<property name="mail.imaps.host" value="imap.gmail.com"></property>
 		<property name="mail.imaps.port" value="993"></property>
-		<property name="mail-imaps-password" value="mrm485042"></property>
+		<property name="mail-imaps-password" value="infnetavalicoes"></property>
 		<property name="mail.imaps.starttls.enable" value="true"></property>
-		<property name="mail.imaps.user" value="mrmello@gmail.com"></property>
+		<property name="mail.imaps.user" value="infnet.avaliacoes@gmail.com"></property>
 		<property name="mail.imaps.socketFactory.fallback" value="false"></property>
 		<property name="mail.imaps.socketFactory.class" value="javax.net.ssl.SSLSocketFactory"></property>
 		<property name="mail.imaps.connectiontimeout" value="60000"></property>
