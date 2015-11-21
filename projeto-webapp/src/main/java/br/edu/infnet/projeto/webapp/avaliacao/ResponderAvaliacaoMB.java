@@ -7,10 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import br.edu.infnet.projeto.ejb.avaliacao.Alternativa;
-import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
 import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoAluno;
+import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoEJB;
 import br.edu.infnet.projeto.ejb.core.Repositorio;
-import br.edu.infnet.projeto.ejb.infnet.Aluno;
 
 @ManagedBean
 @ViewScoped
@@ -18,16 +17,15 @@ public class ResponderAvaliacaoMB {
 	
 	@EJB
 	Repositorio repositorio;
+	@EJB
+	AvaliacaoEJB avaliacaoEJB;
 	AvaliacaoAluno avaliacaoAluno;
 	List<Alternativa> alternativas;
 	
     @PostConstruct
     public void init() {
-    	String idAvaliacao = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idAvaliacao");
-    	String idAluno = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idAluno");
-    	avaliacaoAluno = new AvaliacaoAluno();
-    	avaliacaoAluno.setAluno(repositorio.obter(Aluno.class, new Long(idAluno)));
-    	avaliacaoAluno.setAvaliacao(repositorio.obter(Avaliacao.class, new Long(idAvaliacao)));
+    	String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+    	avaliacaoAluno = avaliacaoEJB.criarAvaliacaoAluno(id);
     	alternativas = repositorio.listar(Alternativa.class);
     }
     
