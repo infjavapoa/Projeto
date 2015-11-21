@@ -19,7 +19,6 @@ public class AvaliacaoEJB {
 	Email email;
 
 	public void abrirAvaliacoes(){
-		System.out.println("abrir avaliações");
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("dataAtual", new Date());
 		List<Avaliacao> avaliacoes = repositorio.listarWithNamedQuery(Avaliacao.class, "Avaliacao.pesquisarNaoAbertas", param);
