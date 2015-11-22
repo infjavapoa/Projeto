@@ -8,44 +8,74 @@
 	<ui:define name="conteudo">
 		<p:growl id="msgs" showDetail="true"/>
 		
-		<p:panel header="Cadastro de Avaliações" >		
-			<p:panel id="pCampos">
-				<p:outputLabel value="Turma: " for="txtIdTurma" />
-				<p:commandButton id="turmaBtn" icon="ui-icon-search" type="button" />
-		    	<p:inputText id="txtIdTurma" value="#{avaliacaoMB.selTurma.id}" style="width:50px">
-		    		<p:ajax event="change" listener="#{avaliacaoMB.onChange}" update="txtTurma"  />
-		    	</p:inputText>	
-		    	<p:inputText id="txtTurma" value="#{avaliacaoMB.selTurma.nome}" style="width:500px"/>
-		    	<h:outputText value="Turma: " />
-		        
-		        <h:outputText id="nomeTurma" value="#{avaliacaoMB.selTurma.nome}" />
-		    	
-		    	<p:overlayPanel id="turmaPanel" for="turmaBtn" dynamic="true" style="width:600px" widgetVar="zoom" 
-		    					hideEffect="explode" dismissable="true" showCloseIcon="true">
-			        <p:dataTable id="tabTurma" var="turma" value="#{avaliacaoMB.listaTurmas}" rows="5" paginator="true" 
-			        		     selectionMode="single" selection="#{avaliacaoMB.selTurma}" rowKey="#{turma.id}">
-			        		     
-			        	<f:facet name="header">Selecione uma Turma</f:facet>
-				        <p:ajax event="rowSelect" listener="#{avaliacaoMB.onRowSelect}" update="form:txtIdTurma" />
-				        <p:column headerText="Código">
-			                <h:outputText value="#{turma.id}" />
-			            </p:column>
-			 
-			            <p:column headerText="Nome">
-			                <h:outputText value="#{turma.nome}" />
-			            </p:column>			 
-			            
-			        </p:dataTable>			        
-			        
-			    </p:overlayPanel>
-		    	
-		    	<br />
-		    	<br />
-				<p:commandButton update="form:pCampos, dtTopicos" value="Salvar" icon="ui-icon-disk" action="#{topicoMB.salvar}"/>
-				<p:commandButton update="form:pCampos, dtTopicos" value="Cancelar" icon="ui-icon-close" disabled="#{topicoMB.topico.id == null}" action="#{topicoMB.atualizaView}"/>
-				<br />
-				<br />
-			</p:panel>
+		<p:panel header="Cadastro de Avaliações" >
+			<center>		
+			<p:panelGrid id="pCampos" >				 
+				<p:row>
+					<p:column >
+						<p:outputLabel for="turmaBtn" value="Turma:"/>
+						<p:commandButton id="turmaBtn" icon="ui-icon-search" type="button" />
+				    	<p:inputText id="txtTurma" value="#{avaliacaoMB.selTurma.nome}" style="width:400px" disabled="true" />		    			    	
+				    	<p:overlayPanel id="turmaPanel" for="turmaBtn" dynamic="true" style="width:800px" widgetVar="zoomTurma" 
+				    					hideEffect="explode" dismissable="true" showCloseIcon="true">
+					        <p:dataTable id="tabTurma" var="turma" value="#{avaliacaoMB.listaTurmas}" rows="5" paginator="true" 
+					        		     selectionMode="single" selection="#{avaliacaoMB.selTurma}" rowKey="#{turma.id}"
+					        		     emptyMessage="Não existem turmas cadastratas!" filteredValue="#{avaliacaoMB.filtroTurmas}">
+					        		     
+					        	<f:facet name="header">Selecione uma Turma</f:facet>
+						        <p:ajax event="rowSelect" listener="#{avaliacaoMB.onRowTurSelect}" update="form:txtTurma" />
+					 
+					            <p:column headerText="Turma" filterBy="#{turma.nome}" filterMatchMode="contains" sortBy="#{turma.nome}">
+					                <h:outputText value="#{turma.nome}"/>
+					            </p:column>			 
+						        <p:column headerText="Módulo" filterBy="#{turma.modulo.nome}" filterMatchMode="contains" sortBy="#{turma.modulo.nome}">
+					                <h:outputText value="#{turma.modulo.nome}"/>
+					            </p:column>
+					            <p:column headerText="Professor" filterBy="#{turma.professor.nome}" filterMatchMode="contains" sortBy="#{turma.professor.nome}">
+					                <h:outputText value="#{turma.professor.nome}"/>
+					            </p:column>
+					            <p:column headerText="Data de Inicio" sortBy="#{turma.dtInicio}"  title="xx/xx/xxxx">   
+					                <h:outputText value="#{turma.dtInicio}">  
+				                           <f:convertDateTime locale="pt_BR" timeZone="America/Sao_Paulo"/>  
+				                    </h:outputText>               
+					            </p:column>
+					            <p:column headerText="Data de Fim" sortBy="#{turma.dtFim}" title="xx/xx/xxxx">   
+					                <h:outputText value="#{turma.dtFim}">  
+				                           <f:convertDateTime locale="pt_BR" timeZone="America/Sao_Paulo"/>  
+				                    </h:outputText>               
+					            </p:column>			            
+					        </p:dataTable>			        
+					    </p:overlayPanel>
+					</p:column>
+					<p:column >
+						<p:outputLabel for="questionarioBtn" value="Questionario:"/>
+						<p:commandButton id="questionarioBtn" icon="ui-icon-search" type="button" />
+				    	<p:inputText id="txtQuestionario" value="#{avaliacaoMB.selQuestionario.nome}" style="width:400px" disabled="true" />		    			    	
+				    	<p:overlayPanel id="questionarioPanel" for="questionarioBtn" dynamic="true" style="width:400px" widgetVar="zoomQuestionario" 
+				    					hideEffect="explode" dismissable="true" showCloseIcon="true">
+					        <p:dataTable id="tabQuestionario" var="questionario" value="#{avaliacaoMB.listaQuestionarios}" rows="5" paginator="true" 
+					        		     selectionMode="single" selection="#{avaliacaoMB.selQuestionario}" rowKey="#{questionario.id}"
+					        		     emptyMessage="Não existem questionarios cadastratas!" filteredValue="#{avaliacaoMB.filtroQuestionarios}">
+					        		     
+					        	<f:facet name="header">Selecione uma Questionario</f:facet>
+						        <p:ajax event="rowSelect" listener="#{avaliacaoMB.onRowQuestSelect}" update="form:txtQuestionario" />
+					 
+					            <p:column headerText="Questionario" filterBy="#{questionario.nome}" filterMatchMode="contains" sortBy="#{questionario.nome}">
+					                <h:outputText value="#{questionario.nome}"/>
+					            </p:column>			 
+						        			            
+					        </p:dataTable>			        
+					    </p:overlayPanel>
+					</p:column>
+					
+					
+				</p:row>
+				
+				
+							    
+			</p:panelGrid>
+			</center>
+				
 			<br />
 			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}">
 			    <p:column headerText="Tópicos Cadastrados">
