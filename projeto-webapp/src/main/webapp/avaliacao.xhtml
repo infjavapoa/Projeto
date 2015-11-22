@@ -10,7 +10,21 @@
 		
 		<p:panel header="Cadastro de Avaliações" >
 			<center>		
-			<p:panelGrid id="pCampos" >				 
+			<p:panelGrid id="pCampos" >								 
+				<p:row>
+					<p:column >
+						<p:outputLabel for="txtCodigo" value="Código da Avaliação:"/>
+						<p:inputText id="txtCodigo" value="#{avaliacaoMB.aval.codigo}" style="width:120px" disabled="false" />
+					</p:column>
+					<p:column >
+						<h:outputLabel for="dataInicio" value="Período da Avaliação:" />
+                    	<p:calendar id="dataInicio" effect="explode" value="#{avaliacaoMB.aval.dataInicio}" 
+                    				pattern="dd/MM/yyyy" navigator="true"/>		        
+                    	 até 			            
+                    	<p:calendar id="dataTermino" effect="explode" value="#{avaliacaoMB.aval.dataTermino}" 
+                    				pattern="dd/MM/yyyy" navigator="true"/>			
+					</p:column>
+				</p:row>				 
 				<p:row>
 					<p:column >
 						<p:outputLabel for="turmaBtn" value="Turma:"/>
@@ -67,17 +81,31 @@
 					        </p:dataTable>			        
 					    </p:overlayPanel>
 					</p:column>
-					
-					
 				</p:row>
-				
-				
-							    
+				<p:row>
+					<p:column colspan="2">
+						<center>
+						<p:outputLabel for="txtCodigo" value="Informe o objetivo desta Avaliação:"/>
+						<p:inputTextarea rows="3" cols="120" counter="display" maxlength="200" 
+										 counterTemplate="{0} caracteres restantes." autoResize="false" 
+										 value="#{avaliacaoMB.aval.objetivo}" />
+						<br />
+    					<h:outputText id="display"/>
+    					</center>
+					</p:column>					
+				</p:row>		
+				<p:row>
+					<p:column colspan="2">
+						<center>
+							<p:commandButton update="form:pCampos, dtTopicos" value="Salvar" icon="ui-icon-disk" action="#{topicoMB.salvar}"/>
+							<p:commandButton update="form:pCampos, dtTopicos" value="Cancelar" icon="ui-icon-close" disabled="#{topicoMB.topico.id == null}" action="#{topicoMB.atualizaView}"/>
+						</center>
+					</p:column>
+				</p:row>		    
 			</p:panelGrid>
-			</center>
-				
+			</center>				
 			<br />
-			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}">
+			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}" rows="3" paginator="true">
 			    <p:column headerText="Tópicos Cadastrados">
 		        	<h:outputText value="#{t.texto}" />			        
 			    </p:column>
