@@ -23,6 +23,7 @@ public class AvaliacaoMB {
 	
 	private Avaliacao aval;
 	private List<Avaliacao> listaAvals;
+	private List<Avaliacao> filtroAvals;
 	
 	//turma
 	private Turma turma;
@@ -132,7 +133,8 @@ public class AvaliacaoMB {
         //FacesContext.getCurrentInstance().addMessage(null, msg);        
         //this.setListaTurmas(this.getListaTurmas());
     }
-    //FINAL TURMA
+    //FINAL QUESTIONARIO
+       
     
 	public void atualizaView(){
 		aval = new Avaliacao();
@@ -142,18 +144,34 @@ public class AvaliacaoMB {
 		this.selTurmas = this.getListaTurmas();
 		this.filtroTurmas = this.selTurmas;
 		
-		//turma 
+		//questionario 
 		this.selQuestionarios = this.getListaQuestionarios();
 		this.filtroQuestionarios = this.selQuestionarios;
 		
+		this.filtroAvals = this.getListaAvals(); 
+		
 	}
 	
+	public List<Avaliacao> getFiltroAvals() {
+		return filtroAvals;
+	}
+
+	public void setFiltroAvals(List<Avaliacao> filtroAvals) {
+		this.filtroAvals = filtroAvals;
+	}
+
 	//Persistir
 	public void salvar() {
 		if (aval.getId() == null)
 			repositorio.adicionar(aval);
 		else
 			repositorio.atualizar(aval);
+		atualizaView();
+    }
+	
+	
+	public void remover() {
+		repositorio.remover(aval);
 		atualizaView();
     }
 
