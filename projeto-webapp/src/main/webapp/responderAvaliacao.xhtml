@@ -21,6 +21,7 @@
 					<p:graphicImage url="/resources/imagens/logo_infnet.png" width="113px" height="71px" />
 					<p:outputLabel value="|" style="margin-right:20px;margin-left:20px;font-size:20px;font-weight:bold"/>
 		        	<p:outputLabel value="Avaliação - Alunos da Pós-Graduação" style="font-size:20px;font-weight:bold"/>
+		        	<p:commandButton ajax="false" value="Salvar" icon="ui-icon-disk" action="#{responderAvaliacaoMB.salvar}"/>
 		 		</h:panelGrid>     
 		 		<h:panelGrid columns="4">
 		 			<p:outputLabel id="aaa" value="Aluno:" style="font-weight:bold"/> 
@@ -41,20 +42,20 @@
 			</p:panel>
 			<p:sticky target="top" />
 			<br />
-		    <p:dataGrid class="grid" var="qt" value="#{responderAvaliacaoMB.avaliacaoAluno.avaliacao.questionario.questionarioTopicos}" columns="1">
-		 		<p:outputLabel value="#{qt.topico.texto}:" style="font-size:16px;font-weight:bold"/>
-				<p:dataGrid class="grid" var="qtq" value="#{qt.questionarioTopicoQuestoes}" columns="1">
-					<p:layout style="height:30px">
+		    <p:dataGrid class="grid" var="rt" value="#{responderAvaliacaoMB.avaliacaoAluno.respostaTopicos}" columns="1">
+		 		<p:outputLabel value="#{rt.questionarioTopico.topico.texto}:" style="font-size:16px;font-weight:bold"/>
+				<p:dataGrid class="grid" var="rq" value="#{rt.respostaQuestoes}" columns="1">
+					<p:layout style="height:35px">
 					    <p:layoutUnit position="center">
 										<h:panelGrid columns="2">
-											<p:outputLabel value="#{qtq.ordem}." />
-							 				<p:outputLabel value="#{qtq.questao.texto}" />
+											<p:outputLabel value="#{rq.questionarioTopicoQuestao.ordem}." />
+							 				<p:outputLabel value="#{rq.questionarioTopicoQuestao.questao.texto}" />
 							 			</h:panelGrid>
 					    </p:layoutUnit>
 					 
 					    <p:layoutUnit position="east">
-							<p:selectManyCheckbox id="ckReposta" value="1" layout="grid" columns="6">
-							    <f:selectItems value="#{responderAvaliacaoMB.alternativas}" var="alternativa" itemLabel="#{alternativa.texto}" itemValue="#{alternativa}" />
+							<p:selectManyCheckbox id="ckReposta" value="rq.alternativa" layout="grid" columns="6" style="width:30px; margin-right:30px;">
+							    <f:selectItems style="width:30px; margin-right:30px;" value="#{responderAvaliacaoMB.alternativas}" var="alternativa" itemLabel="" itemValue="#{alternativa}" />
 							</p:selectManyCheckbox>						    
 					    </p:layoutUnit>
 					</p:layout>				

@@ -131,18 +131,28 @@ ordem int NOT NULL,
 PRIMARY KEY (id_alternativa)
 ) ENGINE=InnoDB ;
 
-CREATE TABLE resposta (
-id_resposta int NOT NULL auto_increment,
+CREATE TABLE resposta_topico (
+id_resposta_topico int NOT NULL auto_increment,
 id_avaliacao_aluno int NOT NULL,
+id_questionario_topico int NOT NULL,
+PRIMARY KEY (id_resposta_topico),
+FOREIGN KEY (id_avaliacao_aluno) REFERENCES avaliacao_aluno(id_avaliacao_aluno),
+FOREIGN KEY (id_questionario_topico) REFERENCES questionario_topico(id_questionario_topico),
+CONSTRAINT uniq_id_avaliacao_aluno_questao UNIQUE (id_avaliacao_aluno,id_questionario_topico)
+) ENGINE=InnoDB ;
+
+CREATE TABLE resposta_questao (
+id_resposta_questao int NOT NULL auto_increment,
+id_resposta_topico int NOT NULL,
 id_questionario_topico_questao int NOT NULL,
 tipo_resposta char(1) NOT NULL,
 id_alternativa int NULL,
 texto text NULL,
-PRIMARY KEY (id_resposta),
-FOREIGN KEY (id_avaliacao_aluno) REFERENCES avaliacao_aluno(id_avaliacao_aluno),
+PRIMARY KEY (id_resposta_questao),
+FOREIGN KEY (id_resposta_topico) REFERENCES resposta_topico(id_resposta_topico),
 FOREIGN KEY (id_questionario_topico_questao) REFERENCES questionario_topico_questao(id_questionario_topico_questao),
 FOREIGN KEY (id_alternativa) REFERENCES alternativa(id_alternativa),
-CONSTRAINT uniq_id_avaliacao_aluno_questao UNIQUE (id_avaliacao_aluno,id_questionario_topico_questao)
+CONSTRAINT uniq_id_avaliacao_aluno_questao UNIQUE (id_resposta_topico,id_questionario_topico_questao)
 ) ENGINE=InnoDB ;
 
 CREATE TABLE usuario (

@@ -44,4 +44,11 @@ public class ResponderAvaliacaoMB {
 	public void setAlternativas(List<Alternativa> alternativas) {
 		this.alternativas = alternativas;
 	}
+	
+	public void salvar() {
+		if (avaliacaoAluno.getId() == null)
+			repositorio.adicionar(avaliacaoAluno);
+		else
+			repositorio.atualizar(avaliacaoAluno);
+    }
 }
