@@ -5,12 +5,12 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("D")
-public class RespostaDissertativa extends Resposta {
+public class RespostaQuestaoDissertativa extends RespostaQuestao {
 	private static final long serialVersionUID = 6255530996405264370L;
 	
 	private String texto;
 	
-	public RespostaDissertativa() {
+	public RespostaQuestaoDissertativa() {
 		super();
 	}
 	

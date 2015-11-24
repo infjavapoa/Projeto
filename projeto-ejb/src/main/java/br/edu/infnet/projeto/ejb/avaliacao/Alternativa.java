@@ -22,8 +22,8 @@ public class Alternativa extends BaseEntity<Long> {
 	private Long id;
 	private Integer ordem;
 	private String texto;
-	@OneToMany(mappedBy="alternativa", targetEntity=RespostaObjetiva.class)
-	private List<RespostaObjetiva> respostaObjetivas = new ArrayList<RespostaObjetiva>();
+	@OneToMany(mappedBy="alternativa", targetEntity=RespostaQuestaoObjetiva.class)
+	private List<RespostaQuestaoObjetiva> respostaObjetivas = new ArrayList<RespostaQuestaoObjetiva>();
 	
 	public Alternativa() {
 		super();
@@ -47,10 +47,10 @@ public class Alternativa extends BaseEntity<Long> {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	public List<RespostaObjetiva> getRespostaObjetivas() {
+	public List<RespostaQuestaoObjetiva> getRespostaObjetivas() {
 		return respostaObjetivas;
 	}
-	public void setRespostaObjetivas(List<RespostaObjetiva> respostaObjetivas) {
+	public void setRespostaObjetivas(List<RespostaQuestaoObjetiva> respostaObjetivas) {
 		this.respostaObjetivas = respostaObjetivas;
 	}
 }

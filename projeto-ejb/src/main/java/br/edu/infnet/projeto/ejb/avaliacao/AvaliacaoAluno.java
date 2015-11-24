@@ -3,6 +3,8 @@ package br.edu.infnet.projeto.ejb.avaliacao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 import br.edu.infnet.projeto.ejb.infnet.Aluno;
 
 @Entity
+@Table(name="avaliacao_aluno")
 public class AvaliacaoAluno extends BaseEntity<Long> {
 	private static final long serialVersionUID = -6195488479326972221L;
 	
@@ -28,9 +33,10 @@ public class AvaliacaoAluno extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "id_aluno", referencedColumnName = "id_aluno")
 	private Aluno aluno;
+    @Column(name="data_preenchimento")
     private Date dataPreenchimento;
-    @OneToMany(mappedBy="avaliacaoAluno", targetEntity=Resposta.class)
-	private List<Resposta> respostas = new ArrayList<Resposta>();
+    @OneToMany(mappedBy="avaliacaoAluno", cascade=CascadeType.ALL, targetEntity=RespostaTopico.class)
+	private List<RespostaTopico> respostaTopicos = new ArrayList<RespostaTopico>();
 	
 	public AvaliacaoAluno() {
 		super();
@@ -60,10 +66,13 @@ public class AvaliacaoAluno extends BaseEntity<Long> {
 	public void setDataPreenchimento(Date dataPreenchimento) {
 		this.dataPreenchimento = dataPreenchimento;
 	}
-	public List<Resposta> getRespostas() {
-		return respostas;
+	public List<RespostaTopico> getRespostaTopicos() {
+		return respostaTopicos;
 	}
-	public void setRespostas(List<Resposta> respostas) {
-		this.respostas = respostas;
+	public void setRespostaTopicos(List<RespostaTopico> respostaTopicos) {
+		this.respostaTopicos = respostaTopicos;
+	}
+	public void adicionaRespostaTopico(RespostaTopico respostaTopico){
+		this.respostaTopicos.add(respostaTopico);
 	}
 }

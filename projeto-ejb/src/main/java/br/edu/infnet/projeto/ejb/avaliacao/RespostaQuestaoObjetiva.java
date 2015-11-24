@@ -7,14 +7,14 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("O")
-public class RespostaObjetiva extends Resposta {
+public class RespostaQuestaoObjetiva extends RespostaQuestao {
 	private static final long serialVersionUID = -5803254679952076473L;
 	
 	@ManyToOne
     @JoinColumn(name = "id_alternativa", referencedColumnName = "id_alternativa")
 	private Alternativa alternativa;
 
-	public RespostaObjetiva() {
+	public RespostaQuestaoObjetiva() {
 		super();
 	}
 

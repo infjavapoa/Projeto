@@ -15,3 +15,7 @@ input[type=text] {margin-botton: 5px}
 {
     border: none !important;
 }
+
+.ui-state-default .ui-icon-submit {
+    background-image: url(/projeto-webapp/resources/imagens/check_green16x16.png);
+}

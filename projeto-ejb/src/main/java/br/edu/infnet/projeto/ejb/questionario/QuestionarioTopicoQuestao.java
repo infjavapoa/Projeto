@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import br.edu.infnet.projeto.ejb.avaliacao.Resposta;
+import br.edu.infnet.projeto.ejb.avaliacao.RespostaQuestao;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
 @Entity
@@ -30,8 +30,8 @@ public class QuestionarioTopicoQuestao extends BaseEntity<Long> implements Compa
     @JoinColumn(name = "id_questionario_topico", referencedColumnName = "id_questionario_topico")    
 	private QuestionarioTopico questionarioTopico;
     private Integer ordem;
-	@OneToMany(mappedBy="questionarioTopicoQuestao", targetEntity=Resposta.class)
-	private List<Resposta> respostas = new ArrayList<Resposta>();
+	@OneToMany(mappedBy="questionarioTopicoQuestao", targetEntity=RespostaQuestao.class)
+	private List<RespostaQuestao> respostas = new ArrayList<RespostaQuestao>();
 	
 	public Long getId() {
 		return id;
@@ -57,10 +57,10 @@ public class QuestionarioTopicoQuestao extends BaseEntity<Long> implements Compa
 	public void setOrdem(Integer ordem) {
 		this.ordem = ordem;
 	}
-	public List<Resposta> getRespostas() {
+	public List<RespostaQuestao> getRespostas() {
 		return respostas;
 	}
-	public void setRespostas(List<Resposta> respostas) {
+	public void setRespostas(List<RespostaQuestao> respostas) {
 		this.respostas = respostas;
 	}
 	@Override

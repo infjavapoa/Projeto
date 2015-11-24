@@ -9,6 +9,9 @@ import javax.faces.context.FacesContext;
 import br.edu.infnet.projeto.ejb.avaliacao.Alternativa;
 import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoAluno;
 import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoEJB;
+import br.edu.infnet.projeto.ejb.avaliacao.RespostaQuestao;
+import br.edu.infnet.projeto.ejb.avaliacao.RespostaQuestaoDissertativa;
+import br.edu.infnet.projeto.ejb.avaliacao.RespostaQuestaoObjetiva;
 import br.edu.infnet.projeto.ejb.core.Repositorio;
 
 @ManagedBean
@@ -43,5 +46,20 @@ public class ResponderAvaliacaoMB {
 
 	public void setAlternativas(List<Alternativa> alternativas) {
 		this.alternativas = alternativas;
+	}
+	
+	public void salvar() {
+		if (avaliacaoAluno.getId() == null)
+			repositorio.adicionar(avaliacaoAluno);
+		else
+			repositorio.atualizar(avaliacaoAluno);
+    }
+	
+	public boolean instanceOfRespostaQuestaoObjetiva(RespostaQuestao rq){
+		return rq instanceof RespostaQuestaoObjetiva;
+	}
+	
+	public boolean instanceOfRespostaQuestaoDissertativa(RespostaQuestao rq){
+		return rq instanceof RespostaQuestaoDissertativa;
 	}
 }
