@@ -19,10 +19,11 @@
 					<p:column >
 						<h:outputLabel for="dataInicio" value="Período da Avaliação:" />
                     	<p:calendar id="dataInicio" effect="explode" value="#{avaliacaoMB.aval.dataInicio}" 
-                    				pattern="dd/MM/yyyy" navigator="true"/>		        
+                    				pattern="dd/MM/yyyy HH:mm:ss" navigator="true"/>
+                    						        
                     	 até 			            
                     	<p:calendar id="dataTermino" effect="explode" value="#{avaliacaoMB.aval.dataTermino}" 
-                    				pattern="dd/MM/yyyy" navigator="true"/>			
+                    				pattern="dd/MM/yyyy HH:mm:ss" navigator="true"/>			
 					</p:column>
 				</p:row>				 
 				<p:row>
@@ -97,7 +98,7 @@
 				<p:row>
 					<p:column colspan="2">
 						<center>
-							<p:commandButton update="txtCodigo, txtCodigo, dataInicio, dataTermino, txtTurma, dtAvaliacoes" value="Salvar" icon="ui-icon-disk" action="#{avaliacaoMB.salvar}"/>
+							<p:commandButton value="Salvar" icon="ui-icon-disk" action="#{avaliacaoMB.salvar}" ajax="false" />
 							<p:commandButton update="form:pCampos, dtAvaliacoes" value="Cancelar" icon="ui-icon-close" disabled="#{avaliacaoMB.aval.id == null}" action="#{avaliacaoMB.atualizaView}"/>
 						</center>
 					</p:column>
@@ -118,21 +119,21 @@
 			    </p:column>
 			    <p:column headerText="Data de Inicio" sortBy="#{aval.dataInicio}"  title="xx/xx/xxxx">   
 	                <h:outputText value="#{aval.dataInicio}">  
-                           <f:convertDateTime locale="pt_BR" timeZone="America/Sao_Paulo"/>  
+                           <f:convertDateTime locale="pt_BR" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy HH:mm:ss"/>  
                     </h:outputText>               
 	            </p:column>
 	            <p:column headerText="Data de Término" sortBy="#{aval.dataTermino}" title="xx/xx/xxxx">   
 	                <h:outputText value="#{aval.dataTermino}">  
-                           <f:convertDateTime locale="pt_BR" timeZone="America/Sao_Paulo"/>  
+                           <f:convertDateTime locale="pt_BR" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy HH:mm:ss"/>  
                     </h:outputText>               
 	            </p:column>
 			    <p:column style="width:32px">
-		        	<p:commandLink update="form:pCampos" value="Editar">
+		        	<p:commandLink update="form:pCampos" action="#{avaliacaoMB.editar}" value="Editar">
 		        		<f:setPropertyActionListener value="#{aval}" target="#{avaliacaoMB.aval}" />	
 		        	</p:commandLink>
 		        </p:column>		
 		        <p:column style="width:32px">
-		        	<p:commandLink update="form:pCampos, dtAvaliacoes" action="#{avaliacaoMB.remover}" value="Excluir">
+		        	<p:commandLink ajax="false" action="#{avaliacaoMB.remover}" value="Excluir">
 		        		<f:setPropertyActionListener value="#{aval}" target="#{avaliacaoMB.aval}" />	
 		        	</p:commandLink>    	
 		        </p:column>		        

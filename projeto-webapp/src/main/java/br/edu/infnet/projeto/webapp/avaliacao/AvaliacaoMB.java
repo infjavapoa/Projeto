@@ -72,8 +72,13 @@ public class AvaliacaoMB {
         return selTurma;
     }
     public void setSelTurma(Turma selectedTurma) {
-        this.selTurma = selectedTurma;
-        this.aval.setTurma(selectedTurma);
+    	if (selectedTurma != null) { 
+	    	System.out.println("SEL TURMA" + aval);
+			System.out.println("Turma:" + aval.getTurma());
+			System.out.println("TurmaSel:" + this.getSelTurma());
+	        this.selTurma = selectedTurma;
+	        this.aval.setTurma(selectedTurma);
+        }
     }
     public List<Turma> getSelectedTurmas() {
         return selTurmas;
@@ -112,8 +117,10 @@ public class AvaliacaoMB {
         return selQuestionario;
     }
     public void setSelQuestionario(Questionario selectedQuestionario) {
-        this.selQuestionario = selectedQuestionario;
-        this.aval.setQuestionario(selectedQuestionario);
+    	if (selectedQuestionario != null){
+	    	this.selQuestionario = selectedQuestionario;
+	        this.aval.setQuestionario(selectedQuestionario);
+    	}
     }
     public List<Questionario> getSelectedQuestionario() {
         return selQuestionarios;
@@ -149,7 +156,10 @@ public class AvaliacaoMB {
 		this.filtroQuestionarios = this.selQuestionarios;
 		
 		this.filtroAvals = this.getListaAvals(); 
-		
+		this.selTurma = (null);  					//o método não vai gravar se for null
+		this.selQuestionario = (null);				//o método não vai gravar se for null
+		this.aval.setTurma(null);
+		this.aval.setQuestionario(null);
 	}
 	
 	public List<Avaliacao> getFiltroAvals() {
@@ -162,10 +172,16 @@ public class AvaliacaoMB {
 
 	//Persistir
 	public void salvar() {
+		System.out.println("SALVAR" + aval);
+		System.out.println("Turma:" + aval.getTurma());
+		System.out.println("Quest:" + aval.getQuestionario());
+		System.out.println("TurmaSel:" + this.getSelTurma());
+		System.out.println("QuestSel:" + this.getSelQuestionario());
 		if (aval.getId() == null)
 			repositorio.adicionar(aval);
 		else
 			repositorio.atualizar(aval);
+		
 		atualizaView();
     }
 	
@@ -173,6 +189,13 @@ public class AvaliacaoMB {
 	public void remover() {
 		repositorio.remover(aval);
 		atualizaView();
+    }
+	
+	public void editar() {
+		System.out.println("Turma:" + aval.getTurma());
+		System.out.println("Quest:" + aval.getQuestionario());
+		this.setSelTurma(aval.getTurma());
+		this.setSelQuestionario(aval.getQuestionario());
     }
 
 }
