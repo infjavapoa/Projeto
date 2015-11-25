@@ -17,67 +17,61 @@
  		<div class="corpo">
 			<p:growl id="msgs" showDetail="true"/>
 			<p:panel id="top"  class="grid">
-				<p:layout style="height:195px">
-					<p:layoutUnit position="center">
-						<h:panelGrid columns="4">
-							<p:graphicImage url="/resources/imagens/logo_infnet1.png" width="113px" height="71px" />
-							<p:outputLabel value="|" style="margin-right:20px;margin-left:20px;font-size:20px;font-weight:bold"/>
-				        	<p:outputLabel value="Avaliação - Alunos da Pós-Graduação" style="font-size:20px;font-weight:bold"/>
-				 		</h:panelGrid>     
-				 		<h:panelGrid columns="4">
-				 			<p:outputLabel value="Aluno:" style="font-weight:bold"/> 
-				        	<p:outputLabel  id="txtNomeAluno" value="#{responderAvaliacaoMB.avaliacaoAluno.aluno.nome}" />
-				        	<p:outputLabel value="CPF:" style="margin-left:50px;font-weight:bold"/>  
-				        	<p:outputLabel value="#{responderAvaliacaoMB.avaliacaoAluno.aluno.cpf}" /> 
-				       	</h:panelGrid>  
-				        <h:panelGrid columns="2">		        
-				        	<p:outputLabel value="Módulo:" style="font-weight:bold"/>   
-				        	<p:outputLabel value="#{responderAvaliacaoMB.avaliacaoAluno.avaliacao.turma.modulo.nome}" />
-				        </h:panelGrid>
-				        <h:panelGrid columns="2">
-				        	<p:outputLabel value="Objetivo da Avaliação:" style="font-weight:bold"/>   
-				        	<p:outputLabel value="#{responderAvaliacaoMB.avaliacaoAluno.avaliacao.objetivo}" /> 
-				   		</h:panelGrid>
-				   		<h:panelGrid columns="1">
-			    			<h:outputText style="font-size:10px" value="Por favor, preencha essa avaliação com toda atenção. Ela é muito importante para a melhoria contínua de seu curso. É através das avaliações
-							que poderemos construir um curso cada vez melhor, o que é importante para você agora e para o valor de seu diploma no futuro." />
-						</h:panelGrid>						
-				    </p:layoutUnit>
-				    <p:layoutUnit position="east" >
-				    	<p:graphicImage url="/resources/imagens/check_green.png" width="30px" height="30px" />
-				    	<p:commandButton ajax="false" image="ui-icon-submit" style="height:30px;width:250px" value="Submeter Avaliação!" action="#{responderAvaliacaoMB.salvar}"/>
-						<p:dataGrid class="grid" style="width:460px; margin-top:59px" var="a" value="#{responderAvaliacaoMB.alternativas}" columns="6" >
-							<div style="width:68px; text-align:center">
-								<p:outputLabel value="#{a.texto}" style="font-size:12px; font-weight:bold;"/>
-							</div>
-						</p:dataGrid>			    
-				    </p:layoutUnit>
-				</p:layout>	
+				<h:panelGrid columns="5">
+					<p:graphicImage url="/resources/imagens/logo_infnet.png" width="113px" height="71px" />
+					<p:outputLabel value="|" style="margin-right:20px;margin-left:20px;font-size:20px;font-weight:bold"/>
+		        	<p:outputLabel value="Avaliação - Alunos da Pós-Graduação" style="font-size:20px;font-weight:bold"/>
+		 		</h:panelGrid>     
+		 		<h:panelGrid columns="4">
+		 			<p:outputLabel value="Aluno:" style="font-weight:bold;font-size:14px;"/> 
+		        	<p:outputLabel  id="txtNomeAluno" value="#{responderAvaliacaoMB.avaliacaoAluno.aluno.nome}" style="font-size:14px;" />
+		        	<p:outputLabel value="CPF:" style="margin-left:50px;font-weight:bold;font-size:14px;"/>  
+		        	<p:outputLabel value="#{responderAvaliacaoMB.avaliacaoAluno.aluno.cpf}" style="font-size:14px;" /> 
+		       	</h:panelGrid>  
+		        <h:panelGrid columns="2">		        
+		        	<p:outputLabel value="Módulo:" style="font-weight:bold;font-size:14px;"/>   
+		        	<p:outputLabel value="#{responderAvaliacaoMB.avaliacaoAluno.avaliacao.turma.modulo.nome}" style="font-size:14px;" />
+		        </h:panelGrid>
+		        <h:panelGrid columns="2">
+		        	<p:outputLabel value="Objetivo da Avaliação:" style="font-weight:bold;font-size:14px;"/>   
+		        	<p:outputLabel value="#{responderAvaliacaoMB.avaliacaoAluno.avaliacao.objetivo}" style="font-size:14px;" /> 
+		   		</h:panelGrid>
+		   		<h:panelGrid columns="2">
+	    			<h:outputText style="font-size:12px" value="Por favor, preencha essa avaliação com toda atenção. Ela é muito importante para a melhoria contínua de seu curso. É através das avaliações
+					que poderemos construir um curso cada vez melhor, o que é importante para você agora e para o valor de seu diploma no futuro." />
+					<p:dataGrid class="grid" style="width:460px;" var="a" value="#{responderAvaliacaoMB.alternativas}" columns="6" >
+						<div style="width:68px; text-align:center;">
+							<p:outputLabel value="#{a.texto}" style="font-size:12px; font-weight:bold;"/>
+						</div>
+					</p:dataGrid>	
+				</h:panelGrid>
 			</p:panel>
 			<p:sticky target="top" />
 			<br />
 		    <p:dataGrid class="grid" var="rt" value="#{responderAvaliacaoMB.avaliacaoAluno.respostaTopicos}" columns="1">
 		 		<p:outputLabel value="#{rt.questionarioTopico.topico.texto}:" style="font-size:16px;font-weight:bold"/>
 				<p:dataGrid class="grid" var="rq" value="#{rt.respostaQuestoes}" columns="1">
-					<p:layout style="height:30px">
-					    <p:layoutUnit position="center">
-							<h:panelGrid columns="2">
-								<p:outputLabel value="#{rq.questionarioTopicoQuestao.ordem}." />
-				 				<p:outputLabel value="#{rq.questionarioTopicoQuestao.questao.texto}" />
-				 			</h:panelGrid>
-					    </p:layoutUnit>
-					    <p:layoutUnit rendered="#{responderAvaliacaoMB.instanceOfRespostaQuestaoObjetiva(rq)}" position="east">
-							<p:selectOneRadio id="ckReposta" value="#{rq.alternativa}" converter="#{baseEntityConverter}" layout="grid" columns="6" style="width:460px; text-align:center">
-							    <f:selectItems style="width:30px; margin-right:30px;" value="#{responderAvaliacaoMB.alternativas}" var="alternativa" itemLabel="" itemValue="#{alternativa}" />
-							</p:selectOneRadio>						    
-					    </p:layoutUnit>
-					</p:layout>				
+					<div style="float:left;width:50%">
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{rq.questionarioTopicoQuestao.ordem}." style="font-size:14px;" />
+			 				<p:outputLabel value="#{rq.questionarioTopicoQuestao.questao.texto}" style="font-size:14px;" />
+			 			</h:panelGrid>
+					</div>
+	 				<div style="float:right;width:50%">
+						<p:selectOneRadio style="width:465px; float:right; text-align:center" rendered="#{responderAvaliacaoMB.instanceOfRespostaQuestaoObjetiva(rq)}" id="ckReposta" value="#{rq.alternativa}" converter="#{baseEntityConverter}" layout="grid" columns="6" >
+						    <f:selectItems value="#{responderAvaliacaoMB.alternativas}" var="alternativa" itemLabel="" itemValue="#{alternativa}" />
+						</p:selectOneRadio>
+					</div>
 					<p:inputTextarea rendered="#{responderAvaliacaoMB.instanceOfRespostaQuestaoDissertativa(rq)}" value="#{rq.texto}" style="width:100%" rows="5" cols="30" counter="display" maxlength="1000" counterTemplate="{0} caracteres disponíveis." autoResize="true" />
    					<h:outputText id="display" />
-		 			<hr style="border:1px dashed;width:100%" />
+					<div style="display:table; width:100%">
+   						<hr style="border:1px dashed; " />
+   					</div>	
 		    	</p:dataGrid>   
 		    </p:dataGrid>
-			
+			<div style="float:right; height:100px;">
+		        	<p:commandButton ajax="false" image="ui-icon-submit" style="height:50px;width:460px; font-size:14px;" value="Submeter Avaliação!" action="#{responderAvaliacaoMB.salvar}"/>
+		    </div>
  		</div>
   </h:form>
  </h:body>
