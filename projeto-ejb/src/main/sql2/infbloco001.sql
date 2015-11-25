@@ -157,7 +157,7 @@ CONSTRAINT uniq_id_avaliacao_aluno_questao UNIQUE (id_resposta_topico,id_questio
 
 CREATE TABLE usuario (
 email varchar(100) NOT NULL,
-senha varchar(50) NOT NULL,
+senha varchar(255) NOT NULL,
 nome varchar(100) NOT NULL,
 papel varchar(100) NOT NULL,
 PRIMARY KEY (email)
