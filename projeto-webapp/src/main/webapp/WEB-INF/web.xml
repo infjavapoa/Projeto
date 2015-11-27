@@ -24,15 +24,29 @@
 	</login-config>
 	
 	<security-constraint>
-		<display-name>Paginas do Admin</display-name>
+		<display-name>Paginas Restritas</display-name>
+		<description>Páginas restritas a usuarios do grupo administradores.</description>
 	    <web-resource-collection>
-	        <web-resource-name>Protected</web-resource-name>
-	        <url-pattern>/topico.xhtml</url-pattern>  
+	        <web-resource-name>Protegido</web-resource-name>
+	        <url-pattern>/*</url-pattern>  
 	    </web-resource-collection>
 	    <auth-constraint>
 	        <role-name>AdministradorRole</role-name>
 	    </auth-constraint>
-	</security-constraint>	
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Páginas Públicas</web-resource-name>
+			<description>Páginas específicas com acesso público.</description>
+			<url-pattern>/login.xhtml</url-pattern>
+			<url-pattern>/responderAvaliacao.xhtml</url-pattern>
+			<url-pattern>/resources/css/*</url-pattern>  
+			<url-pattern>/resources/imagens/*</url-pattern> 
+			<url-pattern>/javax.faces.resource/*</url-pattern>
+		</web-resource-collection>
+		<!-- sem auth-constraint significa que todos tem acesso -->
+	</security-constraint>
 	
 	<security-role>
 	    <role-name>AdministradorRole</role-name>

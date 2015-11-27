@@ -36,6 +36,19 @@ public class Repositorio {
         return em.find(type, id);
     }
     
+    public <T> T obterWithNamedQuery(Class<T> c, String namedQueryName, Map<String, Object> parameters) {
+    	TypedQuery<T> query = em.createNamedQuery(namedQueryName, c);
+    	
+    	//parâmetros
+		Iterator<Entry<String,Object>> it = parameters.entrySet().iterator();
+		while (it.hasNext()) {
+		    Entry<String,Object> entry = it.next();
+		    query.setParameter(entry.getKey().toString(), entry.getValue());
+		}
+
+        return query.getSingleResult();
+    }
+    
     public <T> List<T> listar(Class<T> c){
     	TypedQuery<T> query = em.createQuery("SELECT t FROM "+c.getName()+" t", c);
         return query.getResultList();
@@ -50,7 +63,7 @@ public class Repositorio {
 		    Entry<String,Object> entry = it.next();
 		    query.setParameter(entry.getKey().toString(), entry.getValue());
 		}
-		
+
         return query.getResultList();
     }
  

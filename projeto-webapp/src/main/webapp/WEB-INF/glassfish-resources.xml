@@ -11,7 +11,7 @@
 	    <property name="Password" value="root"/>
 	    <property name="driverClass" value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
 	</jdbc-connection-pool>
-	<jdbc-resource jndi-name="java:app/jdbc/mysql" pool-name="MysqlPool" enabled="true" />
+	<jdbc-resource jndi-name="jdbc/mysql" pool-name="MysqlPool" enabled="true" />
 	<mail-resource transport-protocol-class="com.sun.mail.smtp.SMTPSSLTransport" 
 		host="smtp.gmail.com" store-protocol="imaps" store-protocol-class="com.sun.mail.imap.IMAPSSLStore" 
 		jndi-name="java:app/mail/gmail" transport-protocol="smtps" debug="true" 

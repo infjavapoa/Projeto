@@ -2,12 +2,13 @@ package br.edu.infnet.projeto.ejb.usuario;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table
+@NamedQuery(name="Usuario.pesquisarPorEmail" , query="SELECT u FROM Usuario u WHERE u.email = :email")
 public class Usuario  {
-	
 	
 	@Id
 	private String email;
