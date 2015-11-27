@@ -25,6 +25,9 @@ public class AvaliacaoEJB {
 	Email email;
 
 	public void abrirAvaliacoes(){
+		
+		System.out.println("abrir avaliações");
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("dataAtual", new Date());
 		List<Avaliacao> avaliacoes = repositorio.listarWithNamedQuery(Avaliacao.class, "Avaliacao.pesquisarNaoAbertas", param);
@@ -47,7 +50,7 @@ public class AvaliacaoEJB {
 		id = Seguranca.decriptar(id);
     	String idAluno = id.split(":")[0];
     	String idAvaliacao = id.split(":")[1];
-    	
+    	System.out.println("criar avaliacao");
     	AvaliacaoAluno avaliacaoAluno = new AvaliacaoAluno();
     	avaliacaoAluno.setAluno(repositorio.obter(Aluno.class, new Long(idAluno)));
     	avaliacaoAluno.setAvaliacao(repositorio.obter(Avaliacao.class, new Long(idAvaliacao)));
@@ -75,6 +78,35 @@ public class AvaliacaoEJB {
 	}
 	
 	public void processarAvaliacoes(){
-		System.out.println("processar avaliações");
+		System.out.println("XXXXXXXXXXXXXX processar avaliações");
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("false", false);
+		List<AvaliacaoAluno> avaliadas = repositorio.listarWithNamedQuery(AvaliacaoAluno.class, "AvaliacaoAluno.pesquisarNaoProcessadas", param);
+		System.out.println("O que temos???" + avaliadas.size());
+		for (AvaliacaoAluno avaliacao : avaliadas) {
+			
+			System.out.println("Ta de boa..." + avaliadas);
+			
+			if (!avaliacao.getEmailEnviado()){
+				System.out.println("manda o email para o viado" + avaliacao.getAluno().getNome());
+				Aluno aluno = avaliacao.getAluno();
+				email.enviarMsgConfirmaRecebAval(aluno);				
+				avaliacao.setEmailEnviado(true);				
+			}
+			
+			if (!avaliacao.getArquivoGerado()){
+				
+			}
+			
+			//Manda e-mail para cada aluno que pertence à turma avaliada
+			//for (Aluno aluno : alunos) {				
+				//email.enviarMsgAbertura(aluno, avaliacao);
+			//}
+			
+			//Seta o status da avaliação para "Aberta"
+			//avaliacao.setSituacao("A");
+			repositorio.atualizar(avaliacao);
+		}
+		System.out.println("XXXXXXXXXXXXXX TERMONOU processar avaliações");
 	}
 }

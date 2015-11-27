@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,6 +21,8 @@ import br.edu.infnet.projeto.ejb.infnet.Aluno;
 
 @Entity
 @Table(name="avaliacao_aluno")
+@NamedQuery(name="AvaliacaoAluno.pesquisarNaoProcessadas" , 
+			query="SELECT anp FROM AvaliacaoAluno anp WHERE anp.emailEnviado = :false or anp.arquivoGerado = :false")
 public class AvaliacaoAluno extends BaseEntity<Long> {
 	private static final long serialVersionUID = -6195488479326972221L;
 	
@@ -35,6 +38,11 @@ public class AvaliacaoAluno extends BaseEntity<Long> {
 	private Aluno aluno;
     @Column(name="data_preenchimento")
     private Date dataPreenchimento;
+    @Column (name="ind_email_enviado")
+    private Boolean emailEnviado;
+    @Column (name="ind_arq_gerado")
+    private Boolean arquivoGerado;
+    
     @OneToMany(mappedBy="avaliacaoAluno", cascade=CascadeType.ALL, targetEntity=RespostaTopico.class)
 	private List<RespostaTopico> respostaTopicos = new ArrayList<RespostaTopico>();
 	
@@ -65,6 +73,18 @@ public class AvaliacaoAluno extends BaseEntity<Long> {
 	}
 	public void setDataPreenchimento(Date dataPreenchimento) {
 		this.dataPreenchimento = dataPreenchimento;
+	}
+	public Boolean getEmailEnviado() {
+		return emailEnviado;
+	}
+	public void setEmailEnviado(Boolean emailEnviado) {
+		this.emailEnviado = emailEnviado;
+	}
+	public Boolean getArquivoGerado() {
+		return arquivoGerado;
+	}
+	public void setArquivoGerado(Boolean arquivoGerado) {
+		this.arquivoGerado = arquivoGerado;
 	}
 	public List<RespostaTopico> getRespostaTopicos() {
 		return respostaTopicos;

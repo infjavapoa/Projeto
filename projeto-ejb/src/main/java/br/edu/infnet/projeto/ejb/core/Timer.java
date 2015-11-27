@@ -9,16 +9,21 @@ import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoEJB;
 public class Timer {
 	@EJB
 	AvaliacaoEJB avaliacaoEJB;
-	
+		
 	//A cada 30 segundos
-    //@Schedule(second="*/30", minute="*",hour="*", persistent=false)
+    @Schedule(second="*/30", minute="*",hour="*", persistent=false)
 	public void abrirAvaliacoes(){
+    	System.out.println("Ta na Timer abrir");
 	    avaliacaoEJB.abrirAvaliacoes();
 	}
 	
 	//A cada 30 segundos
-	//@Schedule(second="*/30", minute="*",hour="*", persistent=false)
+	@Schedule(second="*/30", minute="*",hour="*", persistent=false)
 	public void processarAvaliacoes(){
+		System.out.println("Ta na Timer processar");
 		avaliacaoEJB.processarAvaliacoes();
 	}
+	
+	
+	
 }
