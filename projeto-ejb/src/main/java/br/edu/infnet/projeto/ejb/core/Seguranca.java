@@ -48,7 +48,7 @@ public class Seguranca {
 		byte messageDigest[] = null;
 
 		try {
-			algorithm = MessageDigest.getInstance("MD5");
+			algorithm = MessageDigest.getInstance("SHA-256");
 		} 
 		catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block

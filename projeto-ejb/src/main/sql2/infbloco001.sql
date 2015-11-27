@@ -264,3 +264,5 @@ Confirmamos o recebimento de sua avaliação e agradeçemos sua participação.
 
 Atenciosamente,
 Instituto INFNET', 'INFNET - Confirmação de Recebimento de Avaliação', '<nome_aluno>', '<link>', '<data_fim>', '<modulo>', 'http://localhost:8080', 'projeto-webapp', 'responderAvaliacao.xhtml', 'c:/');
+
+insert into usuario values('mrmello','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Márcio Roberto de Mello','administrador');
