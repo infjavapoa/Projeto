@@ -25,8 +25,7 @@
 	
 	<security-constraint>
 		<display-name>Paginas Restritas</display-name>
-		<description>Páginas restritas a usuarios do grupo administradores.</description>
-	    <web-resource-collection>
+		<web-resource-collection>
 	        <web-resource-name>Protegido</web-resource-name>
 	        <url-pattern>/*</url-pattern>  
 	    </web-resource-collection>
@@ -50,5 +49,11 @@
 	
 	<security-role>
 	    <role-name>AdministradorRole</role-name>
-	</security-role>	
+	</security-role>
+	
+	<context-param>
+		<param-name>primefaces.THEMES</param-name>
+		<param-name>glass-x</param-name>
+	</context-param>
+		
 </web-app>
