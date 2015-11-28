@@ -39,9 +39,9 @@ public class AvaliacaoAluno extends BaseEntity<Long> {
     @Column(name="data_preenchimento")
     private Date dataPreenchimento;
     @Column (name="ind_email_enviado")
-    private Boolean emailEnviado;
+    private Boolean emailEnviado = false;
     @Column (name="ind_arq_gerado")
-    private Boolean arquivoGerado;
+    private Boolean arquivoGerado = false;
     
     @OneToMany(mappedBy="avaliacaoAluno", cascade=CascadeType.ALL, targetEntity=RespostaTopico.class)
 	private List<RespostaTopico> respostaTopicos = new ArrayList<RespostaTopico>();

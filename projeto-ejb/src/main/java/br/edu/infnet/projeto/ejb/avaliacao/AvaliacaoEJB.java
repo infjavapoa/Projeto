@@ -86,11 +86,10 @@ public class AvaliacaoEJB {
 		for (AvaliacaoAluno avaliacao : avaliadas) {
 			
 			System.out.println("Ta de boa..." + avaliadas);
-			
+			//avaliacao.setEmailEnviado(false);
 			if (!avaliacao.getEmailEnviado()){
 				System.out.println("manda o email para o viado" + avaliacao.getAluno().getNome());
-				Aluno aluno = avaliacao.getAluno();
-				email.enviarMsgConfirmaRecebAval(aluno);				
+				email.enviarMsgConfirmaRecebAval(avaliacao);				
 				avaliacao.setEmailEnviado(true);				
 			}
 			

@@ -17,6 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
+import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoAluno;
 import br.edu.infnet.projeto.ejb.infnet.Aluno;
 import br.edu.infnet.projeto.ejb.parametros.Parametros;
 
@@ -83,12 +84,14 @@ public class Email {
 		}
 	}
 	
-	public void enviarMsgConfirmaRecebAval(Aluno aluno) throws InfnetException{
+	public void enviarMsgConfirmaRecebAval(AvaliacaoAluno avaliacao) throws InfnetException{
 		if (parametros != null) {			
 			String mensagem = parametros.getMsgConfirmacao();
-			mensagem = mensagem.replace(parametros.getTagNomeAluno(), aluno.getNome());
-			mensagem = mensagem.replace(parametros.getTagNomeAluno(), aluno.getNome());
-			enviarMsg(aluno.getEmail(), parametros.getAssuntoMsgConfirmacao(), mensagem);
+			mensagem = mensagem.replace(parametros.getTagNomeAluno(), avaliacao.getAluno().getNome());
+			mensagem = mensagem.replace(parametros.getTagModulo(), avaliacao.getAvaliacao().getTurma().getModulo().getNome());
+			mensagem = mensagem.replace(parametros.getTagDataFim(), avaliacao.getAvaliacao().getDataTermino().toString());
+			mensagem = mensagem.replace(parametros.getTagLink(), gerarLink(avaliacao.getAluno().getId(), avaliacao.getAvaliacao().getId()));
+			enviarMsg(avaliacao.getAluno().getEmail(), parametros.getAssuntoMsgConfirmacao(), mensagem);
 		}
 		else 
 			throw new InfnetException("Sistema não possui parâmetros cadastrados");
