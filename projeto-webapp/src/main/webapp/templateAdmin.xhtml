@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui">
 
  <h:head>
- 	 <title>Aqui pode ser um titulo padrao que retorne como o nome do usuario logado<ui:insert name="nomePagina" /> </title>
+ 	 <title>INFNET - Sistema de Avaliações<ui:insert name="nomePagina" /> </title>
  </h:head>
  
  <h:body>
@@ -28,7 +28,7 @@
 				    <p:toolbarGroup align="left">
 				    	<p:commandButton type="" value="Usuário" />
 				        <p:separator />
-				        <p:commandButton type="" value="#{loginControle.login.nome}" />      
+				        <p:commandButton type="" value="#{loginMB.usuario.nome}" />      
 				    </p:toolbarGroup>  
 				    <p:toolbarGroup align="center">
 					<p:dock position="top">
@@ -38,7 +38,7 @@
 			 			<p:menuitem ajax="false" value="Avaliações" icon="/resources/imagens/avaliacoes.png" url="/avaliacao.xhtml"/>
 			 			<p:menuitem ajax="false" value="Template E-mail" icon="/resources/imagens/email.png" url="/protegido/listarPafi.xhtml"/>
 			 			<p:menuitem ajax="false" value="Configurações" icon="/resources/imagens/config.png" url="/protegido/listarPafi.xhtml"/>
-			 			<p:menuitem ajax="false" value="Sair" icon="/resources/imagens/sair.png" action="#{loginControle.logOut}"/>	 			
+			 			<p:menuitem ajax="false" value="Sair" icon="/resources/imagens/sair.png" action="#{loginMB.logOut}"/>	 			
 		 			</p:dock>    
 				  	</p:toolbarGroup>			  	  
 				</p:toolbar>			
