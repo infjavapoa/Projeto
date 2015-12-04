@@ -57,4 +57,6 @@ public abstract class RespostaQuestao extends BaseEntity<Long> {
 			QuestionarioTopicoQuestao questionarioTopicoQuestao) {
 		this.questionarioTopicoQuestao = questionarioTopicoQuestao;
 	}
+	
 }
+
