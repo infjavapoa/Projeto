@@ -10,6 +10,8 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.SelectEvent;
 
 import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
+import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoInvalidaException;
+import br.edu.infnet.projeto.ejb.avaliacao.ValidaAvaliacao;
 import br.edu.infnet.projeto.ejb.core.Repositorio;
 import br.edu.infnet.projeto.ejb.infnet.Turma;
 import br.edu.infnet.projeto.ejb.questionario.Questionario;
@@ -20,6 +22,8 @@ public class AvaliacaoMB {
 	
 	@EJB
     private Repositorio repositorio;
+	@EJB
+	ValidaAvaliacao validaAval;
 	
 	private Avaliacao aval;
 	private List<Avaliacao> listaAvals;
@@ -177,10 +181,23 @@ public class AvaliacaoMB {
 		System.out.println("Quest:" + aval.getQuestionario());
 		System.out.println("TurmaSel:" + this.getSelTurma());
 		System.out.println("QuestSel:" + this.getSelQuestionario());
-		if (aval.getId() == null)
-			repositorio.adicionar(aval);
-		else
-			repositorio.atualizar(aval);
+				
+		try {
+			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Antes XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			validaAval.setAval(aval);
+			validaAval.valida();
+			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Depos XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			/*
+			if (aval.getId() == null)
+				repositorio.adicionar(aval);
+			else
+				repositorio.atualizar(aval);*/
+		} catch (AvaliacaoInvalidaException exAval){
+			System.out.println("Excdfdd: " + exAval.toString()); 
+			validaAval.validaExceptionAval(exAval);
+		} catch (Exception ex) {
+			validaAval.validaException(ex);
+		}
 		
 		atualizaView();
     }
