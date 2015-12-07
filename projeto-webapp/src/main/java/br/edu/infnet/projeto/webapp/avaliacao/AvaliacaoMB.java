@@ -187,25 +187,35 @@ public class AvaliacaoMB {
 			validaAval.setAval(aval);
 			validaAval.valida();
 			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Depos XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-			/*
+			
 			if (aval.getId() == null)
 				repositorio.adicionar(aval);
 			else
-				repositorio.atualizar(aval);*/
+				repositorio.atualizar(aval);
+				atualizaView();
 		} catch (AvaliacaoInvalidaException exAval){
 			System.out.println("Excdfdd: " + exAval.toString()); 
 			validaAval.validaExceptionAval(exAval);
 		} catch (Exception ex) {
 			validaAval.validaException(ex);
-		}
+		}	
 		
-		atualizaView();
     }
 	
 	
 	public void remover() {
-		repositorio.remover(aval);
-		atualizaView();
+		try{
+			validaAval.setAval(aval);
+			validaAval.valida();
+			repositorio.remover(aval);
+			atualizaView();
+		} catch (AvaliacaoInvalidaException exAval){
+			System.out.println("Excdfdd: " + exAval.toString()); 
+			validaAval.validaExceptionAval(exAval);
+		} catch (Exception ex) {
+			validaAval.validaException(ex);
+		}		
+		
     }
 	
 	public void editar() {

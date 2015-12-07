@@ -12,35 +12,46 @@ public class ValidaAvaliacao {
 	private Boolean valido = true;
 	
 	public Boolean valida() throws AvaliacaoInvalidaException{
-		
-		System.out.println("VAAAAALIIIIIDAAAAAAAAAAAAAAAAA");
-		
+						
 		//Validações
 		validaCodigo();
+		validaTurma();
+		validaQuestionanio();
+		validaObjetivo();
 		
 		//retorno ok
 		return this.getValido();		
 	}	
 	
 	public void validaCodigo() throws AvaliacaoInvalidaException{ 
-		System.out.println("ta no meu cara");
-		if (aval.getCodigo() == null || aval.getCodigo().equals("")){
-			System.out.println("tava nullo");
-			throw new AvaliacaoInvalidaException("Saldo Insuficiente tente um valor menor");
-		}
-		if (aval.getCodigo().equals("Licker")){
-			System.out.println("colocou licker");
-			throw new AvaliacaoInvalidaException("O código não pode ser Licker meu veio");
-		}
+		if (aval.getCodigo() == null || aval.getCodigo().equals("")){			
+			throw new AvaliacaoInvalidaException("Informe um Código de Avaliação válido!");
+		}		
+	}
+	
+	public void validaTurma() throws AvaliacaoInvalidaException{ 
+		if (aval.getTurma() == null){
+			throw new AvaliacaoInvalidaException("Informe uma Turma para a Avaliação!");
+		}		
+	}
+	
+	public void validaQuestionanio() throws AvaliacaoInvalidaException{ 
+		if (aval.getQuestionario() == null){
+			throw new AvaliacaoInvalidaException("Informe um Questionário para a Avaliação!");
+		}		
+	}
+	
+	public void validaObjetivo() throws AvaliacaoInvalidaException{ 
+		if (aval.getObjetivo() == null || aval.getObjetivo().equals("")){
+			throw new AvaliacaoInvalidaException("Informe um Objetivo para a Avaliação!");
+		}		
 	}
 	
 	public void validaException(Exception ex){		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um erro desconhecido: " + ex.getCause().toString()));		
 	}
 	
-public void validaExceptionAval(Exception ex){
-		
-		//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um erro desconhecido: " + ex.getCause().toString()));
+	public void validaExceptionAval(Exception ex){		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage() ));
 	}
 
