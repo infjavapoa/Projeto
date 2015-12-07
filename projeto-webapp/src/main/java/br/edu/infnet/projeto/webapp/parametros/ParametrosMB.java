@@ -46,9 +46,6 @@ public class ParametrosMB {
 	
 	}
 	
-//	public void remover() {
-//		repositorio.remover(parametros);
-//		atualizaView();
-//    }
+
 	
 }
