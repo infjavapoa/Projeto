@@ -1,20 +1,51 @@
 package br.edu.infnet.projeto.ejb.avaliacao;
 
+import java.util.Date;
+
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import br.edu.infnet.projeto.ejb.core.Repositorio;
+
 @Stateless
 public class ValidaAvaliacao {
 	
-	//Quando retornar verdadeiro é porque foi VÁLIDO	
+	//Quando retornar verdadeiro é porque foi VÁLIDO
+	@EJB
+	private Repositorio repositorio;
 	private Avaliacao aval;
+	private Avaliacao old = null;
 	private Boolean valido = true;
+	private Boolean aberta = false;
+	Date dataAtual = new Date();
 	
-	public Boolean valida() throws AvaliacaoInvalidaException{
-						
+	public Boolean valida(Boolean nova) throws AvaliacaoInvalidaException{
+		
+		System.out.println("********************************************************************");
+		
+		if (!nova){ 
+			System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa");
+			this.setOld(repositorio.obter(Avaliacao.class, aval.getId()));
+			System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBbb");
+			if (old != null && old.getDataInicio() != null )
+				this.setAberta(aberta = old.getDataInicio().before(dataAtual));
+				System.out.println("old: " + old.getDataInicio() + "Atual: " + dataAtual);
+				System.out.println("old: " + old.getDataInicio() + "Atual: " + dataAtual);
+			    if (this.getAberta() &&!(aval.getCodigo().equals(old.getCodigo()) && 
+			    	  aval.getObjetivo().equals(old.getObjetivo()) &&
+			    	  aval.getQuestionario().equals(old.getQuestionario()) &&
+			    	  aval.getTurma().equals(old.getTurma()))){
+				throw new AvaliacaoInvalidaException("Não é permitida a alteração de Avaliações Abertas!");
+			}
+		}
+		
+		System.out.println("CHECAF dsfisdjfaso ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZz");
+		
 		//Validações
-		validaCodigo();
+		validaCodigo();		
+		System.out.println("CHECAF COFIGO  ZZZZZZZZZZZZZZZZZZZZZz");		
 		validaTurma();
 		validaQuestionanio();
 		validaObjetivo();
@@ -23,10 +54,11 @@ public class ValidaAvaliacao {
 		return this.getValido();		
 	}	
 	
+	
 	public void validaCodigo() throws AvaliacaoInvalidaException{ 
-		if (aval.getCodigo() == null || aval.getCodigo().equals("")){			
+		if (old == null && (aval.getCodigo() == null || aval.getCodigo().equals(""))){			
 			throw new AvaliacaoInvalidaException("Informe um Código de Avaliação válido!");
-		}		
+		} 
 	}
 	
 	public void validaTurma() throws AvaliacaoInvalidaException{ 
@@ -66,6 +98,19 @@ public class ValidaAvaliacao {
 	}
 	public void setValido(Boolean valido) {
 		this.valido = valido;
+	}
+	public Avaliacao getOld() {
+		return old;
+	}
+	public void setOld(Avaliacao old) {
+		this.old = old;
+	}
+	public Boolean getAberta() {
+		return aberta;
+	}
+	public void setAberta(Boolean aberta) {
+		this.aberta = aberta;
 	}	
+	
 
 }

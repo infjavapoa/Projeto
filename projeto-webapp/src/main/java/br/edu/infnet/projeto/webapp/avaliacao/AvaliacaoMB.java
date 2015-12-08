@@ -183,18 +183,20 @@ public class AvaliacaoMB {
 		System.out.println("QuestSel:" + this.getSelQuestionario());
 				
 		try {
-			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Antes XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 			validaAval.setAval(aval);
-			validaAval.valida();
-			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Depos XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-			
-			if (aval.getId() == null)
-				repositorio.adicionar(aval);
-			else
-				repositorio.atualizar(aval);
-				atualizaView();
+			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Antes XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");			
+			if (aval.getId() == null) {
+				validaAval.valida(true);
+				repositorio.adicionar(aval);				
+			} else {
+				validaAval.valida(false);
+				repositorio.atualizar(aval);				
+			}
+			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Depois XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			atualizaView();
 		} catch (AvaliacaoInvalidaException exAval){
-			System.out.println("Excdfdd: " + exAval.toString()); 
+			System.out.println("Excdfdd: " + exAval.toString());
+			listaAvals = repositorio.listar(Avaliacao.class);
 			validaAval.validaExceptionAval(exAval);
 		} catch (Exception ex) {
 			validaAval.validaException(ex);
@@ -206,7 +208,7 @@ public class AvaliacaoMB {
 	public void remover() {
 		try{
 			validaAval.setAval(aval);
-			validaAval.valida();
+			validaAval.valida(false);
 			repositorio.remover(aval);
 			atualizaView();
 		} catch (AvaliacaoInvalidaException exAval){
