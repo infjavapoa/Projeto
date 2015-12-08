@@ -11,19 +11,25 @@ public class Timer {
 	AvaliacaoEJB avaliacaoEJB;
 		
 	//A cada 30 segundos
-    @Schedule(second="*/30", minute="*",hour="*", persistent=false)
+    //@Schedule(second="*/30", minute="*",hour="*", persistent=false)
 	public void abrirAvaliacoes(){
-    	System.out.println("Ta na Timer abrir");
-	    avaliacaoEJB.abrirAvaliacoes();
+    	try {
+    		avaliacaoEJB.abrirAvaliacoes();
+    	}
+    	catch (InfnetException e){
+    		e.printStackTrace();
+    	}
 	}
 	
 	//A cada 30 segundos
-	@Schedule(second="*/30", minute="*",hour="*", persistent=false)
+	//@Schedule(second="*/30", minute="*",hour="*", persistent=false)
 	public void processarAvaliacoes(){
 		System.out.println("Ta na Timer processar");
-		avaliacaoEJB.processarAvaliacoes();
+		try {
+			avaliacaoEJB.processarAvaliacoes();
+		}
+		catch (InfnetException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	
-	
 }

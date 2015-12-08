@@ -119,6 +119,8 @@ id_avaliacao_aluno int NOT NULL auto_increment,
 id_avaliacao int NOT NULL,
 id_aluno int NOT NULL, /*vamos criar uma tabela aluno? ou inserir no bra�o?*/
 data_preenchimento datetime NULL,
+ind_email_enviado BINARY NOT NULL,
+ind_arq_gerado BINARY NOT NULL,
 PRIMARY KEY (id_avaliacao_aluno),
 FOREIGN KEY (id_avaliacao) REFERENCES avaliacao(id_avaliacao),
 CONSTRAINT uniq_id_avaliacao_aluno UNIQUE (id_avaliacao,id_aluno)

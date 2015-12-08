@@ -13,9 +13,8 @@
  
  <h:body>
 	<h:outputStylesheet library="css" name="styles.css" />
- 	<h:form id="formAvaliacao" enctype="multipart/form-data">	
+ 	<h:form id="formAvaliacao" enctype="multipart/form-data">
  		<div class="corpo">
-			<p:growl id="msgs" showDetail="true"/>
 			<p:panel id="top"  class="grid">
 				<h:panelGrid columns="5">
 					<p:graphicImage url="/resources/imagens/logo_infnet.png" width="113px" height="71px" />
@@ -73,6 +72,7 @@
 		        	<p:commandButton ajax="false" image="ui-icon-submit" style="height:50px;width:460px; font-size:14px;" value="Submeter Avaliação!" action="#{responderAvaliacaoMB.salvar}"/>
 		    </div>
  		</div>
+ 		<p:growl id="msgs" showDetail="true"/>
   </h:form>
  </h:body>
 </html>

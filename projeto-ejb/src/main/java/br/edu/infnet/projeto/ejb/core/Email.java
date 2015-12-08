@@ -2,10 +2,14 @@ package br.edu.infnet.projeto.ejb.core;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.mail.Address;
@@ -15,7 +19,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
 import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoAluno;
 import br.edu.infnet.projeto.ejb.infnet.Aluno;
@@ -37,7 +40,7 @@ public class Email {
 			this.parametros = parametrosList.get(0);
 	}
 	
-	public void enviarMsgAbertura(Aluno aluno, Avaliacao avaliacao) throws InfnetException{
+	public void enviarMsgAbertura(Aluno aluno, Avaliacao avaliacao) throws InfnetException, MessagingException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException{
 		if (parametros != null) {
 			String mensagem = parametros.getMsgAbertura();
 			mensagem = mensagem.replace(parametros.getTagNomeAluno(), aluno.getNome());
@@ -51,40 +54,30 @@ public class Email {
 			throw new InfnetException("Sistema não possui parâmetros cadastrados");
 	}
 	
-	private String gerarLink(Long idAluno, Long idAvaliacao){
-		try {
-			StringBuilder sb = new StringBuilder();
-			sb.append(parametros.getUrlServidor());
-			sb.append("/");
-			sb.append(parametros.getNomeAplicacao());
-			sb.append("/");
-			sb.append(parametros.getNomeFormularioAvaliacao());
-			sb.append("?id=");
-			String id = Seguranca.encriptar(idAluno.toString() + ":" + idAvaliacao.toString());
-			sb.append(URLEncoder.encode(id, "UTF-8"));
-			
-			return sb.toString();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			throw new InfnetException("Erro ao enviar e-mail: " + e.getMessage());
-		}
+	private String gerarLink(Long idAluno, Long idAvaliacao) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException{
+		StringBuilder sb = new StringBuilder();
+		sb.append(parametros.getUrlServidor());
+		sb.append("/");
+		sb.append(parametros.getNomeAplicacao());
+		sb.append("/");
+		sb.append(parametros.getNomeFormularioAvaliacao());
+		sb.append("?id=");
+		String id = Seguranca.encriptar(idAluno.toString() + ":" + idAvaliacao.toString());
+		sb.append(URLEncoder.encode(id, "UTF-8"));
+		
+		return sb.toString();
 	}
 	
-	private void enviarMsg(String destinatario, String assunto, String corpo){
-		try {
-			Message message = new MimeMessage(mySession);
-			Address toAddress = new InternetAddress(destinatario);
-			message.addRecipient(Message.RecipientType.TO, toAddress);
-			message.setSubject(assunto);
-			message.setContent(corpo, "text/plain");
-			Transport.send(message);
-		} catch (MessagingException e) {
-			e.printStackTrace();
-			throw new InfnetException("Erro ao enviar e-mail: " + e.getMessage());
-		}
+	private void enviarMsg(String destinatario, String assunto, String corpo) throws MessagingException{
+		Message message = new MimeMessage(mySession);
+		Address toAddress = new InternetAddress(destinatario);
+		message.addRecipient(Message.RecipientType.TO, toAddress);
+		message.setSubject(assunto);
+		message.setContent(corpo, "text/plain");
+		Transport.send(message);
 	}
 	
-	public void enviarMsgConfirmaRecebAval(AvaliacaoAluno avaliacao) throws InfnetException{
+	public void enviarMsgConfirmaRecebAval(AvaliacaoAluno avaliacao) throws InfnetException, MessagingException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException{
 		if (parametros != null) {			
 			String mensagem = parametros.getMsgConfirmacao();
 			mensagem = mensagem.replace(parametros.getTagNomeAluno(), avaliacao.getAluno().getNome());

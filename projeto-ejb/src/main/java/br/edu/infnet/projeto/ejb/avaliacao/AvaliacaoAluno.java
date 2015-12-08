@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,8 +22,12 @@ import br.edu.infnet.projeto.ejb.infnet.Aluno;
 
 @Entity
 @Table(name="avaliacao_aluno")
+@NamedQueries({
 @NamedQuery(name="AvaliacaoAluno.pesquisarNaoProcessadas" , 
-			query="SELECT anp FROM AvaliacaoAluno anp WHERE anp.emailEnviado = :false or anp.arquivoGerado = :false")
+			query="SELECT anp FROM AvaliacaoAluno anp WHERE anp.emailEnviado = :false or anp.arquivoGerado = :false"),
+@NamedQuery(name="AvaliacaoAluno.pesquisarPorAvaliacaoEAluno" , 
+			query="SELECT aa FROM AvaliacaoAluno aa WHERE aa.avaliacao = :avaliacao and aa.aluno = :aluno")
+})
 public class AvaliacaoAluno extends BaseEntity<Long> {
 	private static final long serialVersionUID = -6195488479326972221L;
 	
