@@ -1,6 +1,7 @@
 package br.edu.infnet.projeto.ejb.avaliacao;
 
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -144,41 +145,38 @@ public class AvaliacaoEJB {
 		}
 	}
 	
-	public void processarAvaliacoes(){
+	public void processarAvaliacoes() throws InfnetException{
 		
 		System.out.println("XXXXXXXXXXXXXX processar avaliações");
 		
-		Parametros parametros;
-		String nomeArq = "I:/SAI/";
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("false", false);
-		List<AvaliacaoAluno> avaliadas = repositorio.listarWithNamedQuery(AvaliacaoAluno.class, "AvaliacaoAluno.pesquisarNaoProcessadas", param);
-				
-		System.out.println("O que temos???" + avaliadas.size());
-		for (AvaliacaoAluno avaliacaoAluno : avaliadas) {
-			List<String> linhas = new ArrayList<String>();
-			List<Parametros> parametrosList = repositorio.listar(Parametros.class);
-			if (parametrosList != null && parametrosList.size() > 0) {
-				parametros = parametrosList.get(0);
-				if (parametros != null && !parametros.getDiretorioArquivoAvaliacao().isEmpty()){
-					nomeArq = parametros.getDiretorioArquivoAvaliacao() + "/"; 
-				}
-			}
-			linhas.add(new String("Código da Avaliação;Turma;Professor;Curso;Bloco;Módulo;Questionário;"));
-			System.out.println("Ta de boa..." + avaliadas);
-			//avaliacao.setEmailEnviado(false);
-			if (!avaliacaoAluno.getEmailEnviado()){
-				try {
-					System.out.println("manda o email para o viado" + avaliacaoAluno.getAluno().getNome());
-					email.enviarMsgConfirmaRecebAval(avaliacaoAluno);
-				} catch (Exception ex){
+		try {
+			Parametros parametros;
+			String nomeArq = "I:/SAI/";
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("false", false);
+			List<AvaliacaoAluno> avaliadas = repositorio.listarWithNamedQuery(AvaliacaoAluno.class, "AvaliacaoAluno.pesquisarNaoProcessadas", param);
 					
-				}				
-				avaliacaoAluno.setEmailEnviado(true);				
-			}
-			
-			if (!avaliacaoAluno.getArquivoGerado()){
-				try {
+			System.out.println("O que temos???" + avaliadas.size());
+			for (AvaliacaoAluno avaliacaoAluno : avaliadas) {
+				List<String> linhas = new ArrayList<String>();
+				List<Parametros> parametrosList = repositorio.listar(Parametros.class);
+				if (parametrosList != null && parametrosList.size() > 0) {
+					parametros = parametrosList.get(0);
+					if (parametros != null && !parametros.getDiretorioArquivoAvaliacao().isEmpty()){
+						nomeArq = parametros.getDiretorioArquivoAvaliacao() + "/"; 
+					}
+				}
+				linhas.add(new String("Código da Avaliação;Turma;Professor;Curso;Bloco;Módulo;Questionário;"));
+				System.out.println("Ta de boa..." + avaliadas);
+				//avaliacao.setEmailEnviado(false);
+				if (!avaliacaoAluno.getEmailEnviado()){					
+					System.out.println("manda o email para o viado" + avaliacaoAluno.getAluno().getNome());
+					email.enviarMsgConfirmaRecebAval(avaliacaoAluno);									
+					avaliacaoAluno.setEmailEnviado(true);				
+				}
+				
+				if (!avaliacaoAluno.getArquivoGerado()){
+					
 					nomeArq += avaliacaoAluno.getAvaliacao().getCodigo().replace("/", "_");
 					nomeArq = nomeArq.replace("\"", "_");
 					nomeArq = nomeArq.replace(".", "_");
@@ -209,15 +207,17 @@ public class AvaliacaoEJB {
 								}							
 							}						
 						}					
-					}
-				} catch (Exception ex){
-					
-				}
-				avaliacaoAluno.setArquivoGerado(true);
-			}			
-			repositorio.atualizar(avaliacaoAluno);
-			GerarArqCSV arq = new GerarArqCSV();
-			arq.criaCSVFile(nomeArq, linhas);
+					}					
+					avaliacaoAluno.setArquivoGerado(true);
+				}			
+				repositorio.atualizar(avaliacaoAluno);
+				GerarArqCSV arq = new GerarArqCSV();
+				arq.criaCSVFile(nomeArq, linhas);
+			}
+		} catch (InfnetException e){
+			throw e;
+		} catch (Exception e){
+			throw new InfnetException(e.getMessage());
 		}
 		
 		System.out.println("XXXXXXXXXXXXXX TERMINOU processar avaliações");
