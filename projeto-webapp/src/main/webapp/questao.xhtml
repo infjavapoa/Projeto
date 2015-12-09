@@ -6,10 +6,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 	<ui:define name="conteudo">
-		<p:growl id="msgs" showDetail="true"/>
-		
+		<p:growl id="msgs" showDetail="true" autoUpdate="true"/>
 		<p:panel header="Cadastro de Questões" > 
-		
 			<p:panel id="pCampos">
 				<p:outputLabel value="Texto da Questão: " for="txtTexto"/>
 		    	<p:inputText id="txtTexto" value="#{questaoMB.questao.texto}" style="width:700px"/>
@@ -37,9 +35,7 @@
 		        	</p:commandLink>
 		        </p:column>		
 		        <p:column style="width:32px">
-		        	<p:commandLink update="form:pCampos, dtQuestoes" action="#{questaoMB.remover}" value="Excluir">
-		        		<f:setPropertyActionListener value="#{q}" target="#{questaoMB.questao}" />	
-		        	</p:commandLink>    	
+		        	<p:commandLink update="form:pCampos, dtQuestoes" action="#{questaoMB.remover(q)}" value="Excluir" />
 		        </p:column>		        
 			</p:dataTable>
 		</p:panel>  

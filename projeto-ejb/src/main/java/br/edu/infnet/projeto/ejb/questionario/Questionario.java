@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
@@ -17,6 +19,17 @@ import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
 @Entity
+@NamedQueries({
+@NamedQuery(name="Questionario.pesquisarPorTopico" , 
+			query="SELECT q FROM Questionario q, QuestionarioTopico qt "
+				+ "WHERE qt MEMBER OF q.questionarioTopicos "
+				+ "AND qt.topico.id = :id"),
+@NamedQuery(name="Questionario.pesquisarPorQuestao" , 
+			query="SELECT q FROM Questionario q, QuestionarioTopico qt, QuestionarioTopicoQuestao qtq "
+				+ "WHERE qt MEMBER OF q.questionarioTopicos "
+				+ "AND qtq MEMBER OF qt.questionarioTopicoQuestoes "
+				+ "AND qtq.questao.id = :id")				
+})
 public class Questionario extends BaseEntity<Long> {
 	private static final long serialVersionUID = 8291323679754678858L;
 	

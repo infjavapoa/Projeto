@@ -11,7 +11,7 @@ public class Timer {
 	AvaliacaoEJB avaliacaoEJB;
 		
 	//A cada 30 segundos
-    //@Schedule(second="*/30", minute="*",hour="*", persistent=false)
+    @Schedule(second="*/30", minute="*",hour="*", persistent=false)
 	public void abrirAvaliacoes(){
     	try {
     		avaliacaoEJB.abrirAvaliacoes();
@@ -22,7 +22,7 @@ public class Timer {
 	}
 	
 	//A cada 30 segundos
-	//@Schedule(second="*/30", minute="*",hour="*", persistent=false)
+	@Schedule(second="*/30", minute="*",hour="*", persistent=false)
 	public void processarAvaliacoes(){
 		System.out.println("Ta na Timer processar");
 		try {

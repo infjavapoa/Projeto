@@ -144,7 +144,7 @@ public class AvaliacaoEJB {
 		}
 	}
 	
-		public void processarAvaliacoes(){
+	public void processarAvaliacoes(){
 		
 		System.out.println("XXXXXXXXXXXXXX processar avaliações");
 		
