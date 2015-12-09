@@ -21,11 +21,11 @@
 				<br />
 			</p:panel>
 			<br />
-			<p:dataTable var="q" id="dtQuestoes" value="#{questaoMB.listaQuestoes}">
-			    <p:column headerText="Texto da Questão">
+			<p:dataTable var="q" id="dtQuestoes" value="#{questaoMB.listaQuestoes}" rows="8" paginator="true">
+			    <p:column headerText="Texto da Questão" sortBy="#{q.texto}" filterBy="#{q.texto}" filterMatchMode="contains">
 		        	<h:outputText value="#{q.texto}" />
 			    </p:column>
-			    <p:column headerText="Tipo" style="width:120px">
+			    <p:column headerText="Tipo" style="width:120px" sortBy="#{q.tipoQuestao}">
 		        	<h:outputText rendered="#{q.tipoQuestao=='O'}" value="Objetiva" />
 		        	<h:outputText rendered="#{q.tipoQuestao=='D'}" value="Dissertativa" />
 			    </p:column>			    

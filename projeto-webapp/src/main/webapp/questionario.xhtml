@@ -53,8 +53,8 @@
 				<br />
 			</p:panel>
 			<br />
-			<p:dataTable var="q" id="dtQuestionario" value="#{questionarioMB.listaQuestionarios}">
-			    <p:column headerText="Questionários Cadastrados">
+			<p:dataTable var="q" id="dtQuestionario" value="#{questionarioMB.listaQuestionarios}" rows="3" paginator="true">
+			    <p:column headerText="Questionários Cadastrados" sortBy="#{q.nome}" filterBy="#{q.nome}" filterMatchMode="contains">
 		        	<h:outputText value="#{q.nome}" />			        
 			    </p:column>
 			    <p:column style="width:32px">

@@ -19,8 +19,8 @@
 				<br />
 			</p:panel>
 			<br />
-			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}">
-			    <p:column headerText="Tópicos Cadastrados">
+			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}" rows="8" paginator="true">
+			    <p:column headerText="Tópicos Cadastrados" sortBy="#{t.texto}" filterBy="#{t.texto}" filterMatchMode="contains">
 		        	<h:outputText value="#{t.texto}" />			        
 			    </p:column>
 			    <p:column style="width:32px">
