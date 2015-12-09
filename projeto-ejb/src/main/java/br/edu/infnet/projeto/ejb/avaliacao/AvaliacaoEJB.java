@@ -144,17 +144,19 @@ public class AvaliacaoEJB {
 		}
 	}
 	
-	public void processarAvaliacoes() throws InfnetException{
-		try {
-			System.out.println("XXXXXXXXXXXXXX processar avaliações");
-			
-			Parametros parametros;
-			String nomeArq = "I:/SAI/";
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("false", false);
-			List<AvaliacaoAluno> avaliadas = repositorio.listarWithNamedQuery(AvaliacaoAluno.class, "AvaliacaoAluno.pesquisarNaoProcessadas", param);
+		public void processarAvaliacoes(){
+		
+		System.out.println("XXXXXXXXXXXXXX processar avaliações");
+		
+		Parametros parametros;
+		String nomeArq = "I:/SAI/";
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("false", false);
+		List<AvaliacaoAluno> avaliadas = repositorio.listarWithNamedQuery(AvaliacaoAluno.class, "AvaliacaoAluno.pesquisarNaoProcessadas", param);
+				
+		System.out.println("O que temos???" + avaliadas.size());
+		for (AvaliacaoAluno avaliacaoAluno : avaliadas) {
 			List<String> linhas = new ArrayList<String>();
-					
 			List<Parametros> parametrosList = repositorio.listar(Parametros.class);
 			if (parametrosList != null && parametrosList.size() > 0) {
 				parametros = parametrosList.get(0);
@@ -162,68 +164,62 @@ public class AvaliacaoEJB {
 					nomeArq = parametros.getDiretorioArquivoAvaliacao() + "/"; 
 				}
 			}
-			
-			System.out.println("O que temos???" + avaliadas.size());
-			for (AvaliacaoAluno avaliacaoAluno : avaliadas) {
-				linhas.add(new String("Código da Avaliação;Turma;Professor;Curso;Bloco;Módulo;Questionário;"));
-				System.out.println("Ta de boa..." + avaliadas);
-				//avaliacao.setEmailEnviado(false);
-				if (!avaliacaoAluno.getEmailEnviado()){
+			linhas.add(new String("Código da Avaliação;Turma;Professor;Curso;Bloco;Módulo;Questionário;"));
+			System.out.println("Ta de boa..." + avaliadas);
+			//avaliacao.setEmailEnviado(false);
+			if (!avaliacaoAluno.getEmailEnviado()){
+				try {
 					System.out.println("manda o email para o viado" + avaliacaoAluno.getAluno().getNome());
-					email.enviarMsgConfirmaRecebAval(avaliacaoAluno);			
-					avaliacaoAluno.setEmailEnviado(true);				
-				}
-				
-				if (!avaliacaoAluno.getArquivoGerado()){
-					try {
-						nomeArq += avaliacaoAluno.getAvaliacao().getCodigo().replace("/", "_");
-						nomeArq = nomeArq.replace("\"", "_");
-						nomeArq = nomeArq.replace(".", "_");
-						nomeArq = nomeArq.replace(" ", "_");
-						nomeArq += "_" + avaliacaoAluno.getAluno().getMatricula().toString();
-						nomeArq += ".csv";
-						System.out.println("gera o arquivo csv" + nomeArq);
-						String linha = new String();
-						linha = avaliacaoAluno.getAvaliacao().getCodigo() + ";";
-						linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getNome() + ";";
-						linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getProfessor().getNome() + ";";
-						linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getModulo().getBloco().getCurso().getNome() + ";";
-						linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getModulo().getBloco().getNome() + ";";
-						linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getModulo().getNome() + ";";
-						linha = linha + avaliacaoAluno.getAvaliacao().getQuestionario().getNome() + ";";
-						linhas.add(linha);
-						for (QuestionarioTopico qt : avaliacaoAluno.getAvaliacao().getQuestionario().getQuestionarioTopicos()) {
-							linhas.add(new String(qt.getTopico().getTexto()));
-							linhas.add(new String("Ordem;Questão;Resposta"));					
-							for (QuestionarioTopicoQuestao qtq : qt.getQuestionarioTopicoQuestoes()) {
-								for (RespostaQuestao rq : qtq.getRespostas()){
-									if (rq instanceof RespostaQuestaoObjetiva){
-										linhas.add(new String(qtq.getOrdem() + ";" + qtq.getQuestao().getTexto() + ";" + 
-															  ((RespostaQuestaoObjetiva) rq).getAlternativa().getTexto()));														
-									} else {
-										linhas.add(new String(qtq.getOrdem() + ";" + qtq.getQuestao().getTexto() + ";" + 
-															  ((RespostaQuestaoDissertativa) rq).getTexto()));
-									}							
-								}						
-							}					
-						}
-					} catch (Exception ex){
-						
-					}
-					avaliacaoAluno.setArquivoGerado(true);
-				}			
-				repositorio.atualizar(avaliacaoAluno);
-				GerarArqCSV arq = new GerarArqCSV();
-				arq.criaCSVFile(nomeArq, linhas);
+					email.enviarMsgConfirmaRecebAval(avaliacaoAluno);
+				} catch (Exception ex){
+					
+				}				
+				avaliacaoAluno.setEmailEnviado(true);				
 			}
 			
-			System.out.println("XXXXXXXXXXXXXX TERMINOU processar avaliações");
+			if (!avaliacaoAluno.getArquivoGerado()){
+				try {
+					nomeArq += avaliacaoAluno.getAvaliacao().getCodigo().replace("/", "_");
+					nomeArq = nomeArq.replace("\"", "_");
+					nomeArq = nomeArq.replace(".", "_");
+					nomeArq = nomeArq.replace(" ", "_");
+					nomeArq += "_" + avaliacaoAluno.getAluno().getMatricula().toString();
+					nomeArq += ".csv";
+					System.out.println("gera o arquivo csv" + nomeArq);
+					String linha = new String();
+					linha = avaliacaoAluno.getAvaliacao().getCodigo() + ";";
+					linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getNome() + ";";
+					linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getProfessor().getNome() + ";";
+					linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getModulo().getBloco().getCurso().getNome() + ";";
+					linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getModulo().getBloco().getNome() + ";";
+					linha = linha + avaliacaoAluno.getAvaliacao().getTurma().getModulo().getNome() + ";";
+					linha = linha + avaliacaoAluno.getAvaliacao().getQuestionario().getNome() + ";";
+					linhas.add(linha);
+					for (QuestionarioTopico qt : avaliacaoAluno.getAvaliacao().getQuestionario().getQuestionarioTopicos()) {
+						linhas.add(new String(qt.getTopico().getTexto()));
+						linhas.add(new String("Ordem;Questão;Resposta"));					
+						for (QuestionarioTopicoQuestao qtq : qt.getQuestionarioTopicoQuestoes()) {
+							for (RespostaQuestao rq : qtq.getRespostas()){
+								if (rq instanceof RespostaQuestaoObjetiva && rq.getRespostaTopico().getAvaliacaoAluno().getAluno().equals(avaliacaoAluno.getAluno())){
+									linhas.add(new String(qtq.getOrdem() + ";" + qtq.getQuestao().getTexto() + ";" + 
+														  ((RespostaQuestaoObjetiva) rq).getAlternativa().getTexto()));														
+								} else if (rq.getRespostaTopico().getAvaliacaoAluno().getAluno().equals(avaliacaoAluno.getAluno())){
+									linhas.add(new String(qtq.getOrdem() + ";" + qtq.getQuestao().getTexto() + ";" + 
+														  ((RespostaQuestaoDissertativa) rq).getTexto()));
+								}							
+							}						
+						}					
+					}
+				} catch (Exception ex){
+					
+				}
+				avaliacaoAluno.setArquivoGerado(true);
+			}			
+			repositorio.atualizar(avaliacaoAluno);
+			GerarArqCSV arq = new GerarArqCSV();
+			arq.criaCSVFile(nomeArq, linhas);
 		}
-		catch (InfnetException e){
-			throw e;
-		} 
-		catch (Exception e){
-			throw new InfnetException(e.getMessage());
-		}
+		
+		System.out.println("XXXXXXXXXXXXXX TERMINOU processar avaliações");
 	}
 }
