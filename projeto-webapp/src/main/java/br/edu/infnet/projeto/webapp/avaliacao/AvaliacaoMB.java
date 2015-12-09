@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.persistence.PersistenceException;
 
 import org.primefaces.event.SelectEvent;
 
@@ -183,6 +184,7 @@ public class AvaliacaoMB {
 		System.out.println("QuestSel:" + this.getSelQuestionario());
 				
 		try {
+			aval.setSituacao("F");
 			validaAval.setAval(aval);
 			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Antes XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");			
 			if (aval.getId() == null) {
@@ -205,15 +207,17 @@ public class AvaliacaoMB {
     }
 	
 	
-	public void remover() {
+	public void remover() throws AvaliacaoInvalidaException {
 		try{
 			validaAval.setAval(aval);
-			validaAval.valida(false);
+			validaAval.valida();
 			repositorio.remover(aval);
 			atualizaView();
 		} catch (AvaliacaoInvalidaException exAval){
 			System.out.println("Excdfdd: " + exAval.toString()); 
 			validaAval.validaExceptionAval(exAval);
+		} catch (PersistenceException perex){			
+			throw new AvaliacaoInvalidaException("Não é possivel excluir uma avaliação que já possui respostas!");			
 		} catch (Exception ex) {
 			validaAval.validaException(ex);
 		}		

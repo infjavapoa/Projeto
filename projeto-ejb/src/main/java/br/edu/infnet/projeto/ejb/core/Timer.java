@@ -23,13 +23,8 @@ public class Timer {
 	
 	//A cada 30 segundos
 	@Schedule(second="*/30", minute="*",hour="*", persistent=false)
-	public void processarAvaliacoes(){
+	public void processarAvaliacoes() throws InfnetException{
 		System.out.println("Ta na Timer processar");
-		try {
-			avaliacaoEJB.processarAvaliacoes();
-		}
-		catch (InfnetException e) {
-			e.printStackTrace();
-		}
+		avaliacaoEJB.processarAvaliacoes();
 	}
 }

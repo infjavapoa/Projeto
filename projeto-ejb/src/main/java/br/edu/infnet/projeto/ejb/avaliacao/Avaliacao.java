@@ -3,6 +3,7 @@ package br.edu.infnet.projeto.ejb.avaliacao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,14 +11,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 import br.edu.infnet.projeto.ejb.infnet.Turma;
 import br.edu.infnet.projeto.ejb.questionario.Questionario;
 
 @Entity
-@NamedQuery(name="Avaliacao.pesquisarNaoAbertas" , query="SELECT a FROM Avaliacao a WHERE a.situacao = 'F' and a.dataInicio <= :dataAtual")
+@NamedQueries(@NamedQuery(name="Avaliacao.pesquisarNaoAbertas" , query="SELECT a FROM Avaliacao a WHERE a.situacao = 'F' and a.dataInicio <= :dataAtual"))
+@NamedQuery(name="Avaliacao.pesquisarSeExiste" , query="SELECT a FROM Avaliacao a WHERE a.codigo = :codigo")
 public class Avaliacao extends BaseEntity<Long> {
 	private static final long serialVersionUID = -6220351357437865318L;
 	
