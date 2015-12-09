@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition template="#{loginMB.menuPadrao}"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+	<ui:define name="conteudo">
+		<p:growl id="msgs" showDetail="true" autoUpdate="true"/>
+		<p:panel header="Cadastro de Tópicos" > 
+			<p:panel id="pCampos">
+				<p:outputLabel value="Texto do Tópico: " for="txtTexto" />
+		    	<p:inputText id="txtTexto" value="#{topicoMB.topico.texto}" style="width:700px"/>
+		    	<br />
+		    	<br />
+				<p:commandButton update="form:pCampos, dtTopicos" value="Salvar" icon="ui-icon-disk" action="#{topicoMB.salvar}"/>
+				<p:commandButton update="form:pCampos, dtTopicos" value="Cancelar" icon="ui-icon-close" disabled="#{topicoMB.topico.id == null}" action="#{topicoMB.atualizaView}"/>
+				<br />
+				<br />
+			</p:panel>
+			<br />
+			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}" rows="8" paginator="true">
+			    <p:column headerText="Tópicos Cadastrados" sortBy="#{t.texto}" filterBy="#{t.texto}" filterMatchMode="contains">
+		        	<h:outputText value="#{t.texto}" />			        
+			    </p:column>
+			    <p:column style="width:32px">
+		        	<p:commandLink update="form:pCampos" value="Editar">
+		        		<f:setPropertyActionListener value="#{t}" target="#{topicoMB.topico}" />	
+		        	</p:commandLink>
+		        </p:column>		
+		        <p:column style="width:32px">
+		        	<p:commandLink update="form:pCampos, dtTopicos" action="#{topicoMB.remover(t)}" value="Excluir" />  	
+		        </p:column>		        
+			</p:dataTable>
+		</p:panel>  
+	</ui:define>
+</ui:composition>  
