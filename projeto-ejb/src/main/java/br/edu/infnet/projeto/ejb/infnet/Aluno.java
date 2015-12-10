@@ -1,8 +1,8 @@
 package br.edu.infnet.projeto.ejb.infnet;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-
+import javax.swing.text.MaskFormatter;
 import br.edu.infnet.projeto.ejb.avaliacao.AvaliacaoAluno;
 import br.edu.infnet.projeto.ejb.core.BaseEntity;
 
@@ -69,7 +69,15 @@ public class Aluno extends BaseEntity<Long> {
 		this.matricula = matricula;
 	}
 	public String getCpf() {
-		return cpf;
+		try {
+			 MaskFormatter mf = new MaskFormatter("###.###.###-##");  
+			 mf.setValueContainsLiteralCharacters(false);  
+			 return mf.valueToString(this.cpf); 
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return this.cpf;
 	}
 
 	public void setCpf(String cpf) {

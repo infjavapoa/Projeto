@@ -3,15 +3,22 @@ package br.edu.infnet.projeto.webapp.questionario;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
 import org.primefaces.event.ReorderEvent;
+
+import br.edu.infnet.projeto.ejb.core.InfnetException;
 import br.edu.infnet.projeto.ejb.core.Repositorio;
 import br.edu.infnet.projeto.ejb.questionario.Questao;
 import br.edu.infnet.projeto.ejb.questionario.QuestaoObjetiva;
 import br.edu.infnet.projeto.ejb.questionario.Questionario;
+import br.edu.infnet.projeto.ejb.questionario.QuestionarioEJB;
 import br.edu.infnet.projeto.ejb.questionario.QuestionarioTopico;
 import br.edu.infnet.projeto.ejb.questionario.QuestionarioTopicoQuestao;
 import br.edu.infnet.projeto.ejb.questionario.Topico;
@@ -21,6 +28,8 @@ import br.edu.infnet.projeto.ejb.questionario.Topico;
 public class QuestionarioMB {
 	@EJB
     private Repositorio repositorio;
+	@EJB
+    private QuestionarioEJB questionarioEJB;	
     private Questionario questionario;
     private List<Questionario> listaQuestionarios;
     private Topico topico;
@@ -67,16 +76,27 @@ public class QuestionarioMB {
 	}
 
 	public void salvar() {		
-		if (questionario.getId() == null)
-			repositorio.adicionar(questionario);
-		else
-			repositorio.atualizar(questionario);
-		atualizaView();
+    	try {
+    		questionarioEJB.salvarQuestionario(questionario);
+    		atualizaView();
+    	}
+    	catch (InfnetException ex){
+    		ex.printStackTrace();
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", ex.getMessage()));
+    	}
     }
 	
-	public void remover() {
-		repositorio.remover(questionario);
-		atualizaView();
+	public void remover(Questionario q) {
+    	try {
+    		questionarioEJB.removerQuestionario(q);
+    		atualizaView();
+    	}
+    	catch (InfnetException ex){
+    		ex.printStackTrace();
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", ex.getMessage()));
+    	}
     }
 	
 	public List<Topico> listarTopicos(String texto){

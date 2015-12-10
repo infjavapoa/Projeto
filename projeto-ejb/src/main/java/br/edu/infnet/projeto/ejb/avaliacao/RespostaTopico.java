@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class RespostaTopico extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "id_questionario_topico", referencedColumnName = "id_questionario_topico")
 	private QuestionarioTopico questionarioTopico;
-    @OneToMany(mappedBy="respostaTopico", cascade=CascadeType.ALL, targetEntity=RespostaQuestao.class)
+    @OneToMany(mappedBy="respostaTopico", cascade=CascadeType.ALL, fetch=FetchType.EAGER, targetEntity=RespostaQuestao.class)
 	private List<RespostaQuestao> respostaQuestoes = new ArrayList<RespostaQuestao>();
     
 	public RespostaTopico() {

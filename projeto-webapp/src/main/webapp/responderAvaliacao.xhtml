@@ -57,7 +57,7 @@
 			 			</h:panelGrid>
 					</div>
 	 				<div style="float:right;width:50%">
-						<p:selectOneRadio style="width:465px; float:right; text-align:center" rendered="#{responderAvaliacaoMB.instanceOfRespostaQuestaoObjetiva(rq)}" id="ckReposta" value="#{rq.alternativa}" converter="#{baseEntityConverter}" layout="grid" columns="6" >
+						<p:selectOneRadio disabled="#{responderAvaliacaoMB.disabled()}" style="width:465px; float:right; text-align:center" rendered="#{responderAvaliacaoMB.instanceOfRespostaQuestaoObjetiva(rq)}" id="ckReposta" value="#{rq.alternativa}" converter="#{baseEntityConverter}" layout="grid" columns="6" >
 						    <f:selectItems value="#{responderAvaliacaoMB.alternativas}" var="alternativa" itemLabel="" itemValue="#{alternativa}" />
 						</p:selectOneRadio>
 					</div>
@@ -69,7 +69,7 @@
 		    	</p:dataGrid>   
 		    </p:dataGrid>
 			<div style="float:right; height:100px;">
-		        	<p:commandButton ajax="false" image="ui-icon-submit" style="height:50px;width:460px; font-size:14px;" value="Submeter Avaliação!" action="#{responderAvaliacaoMB.salvar}"/>
+		        	<p:commandButton ajax="false" image="ui-icon-submit" disabled="#{responderAvaliacaoMB.disabled()}" style="height:50px;width:460px; font-size:14px;" value="Submeter Avaliação!" action="#{responderAvaliacaoMB.salvar}"/>
 		    </div>
  		</div>
  		<p:growl id="msgs" showDetail="true"/>
