@@ -1,13 +1,15 @@
 package br.edu.infnet.projeto.ejb.avaliacao;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import br.edu.infnet.projeto.ejb.core.Email;
 import br.edu.infnet.projeto.ejb.core.GerarArqCSV;
 import br.edu.infnet.projeto.ejb.core.InfnetException;
@@ -145,7 +147,7 @@ public class AvaliacaoEJB {
 		}
 	}
 	
-	public void processarAvaliacoes() throws InfnetException{
+	public void processarAvaliacoes() throws InfnetException, FileNotFoundException{
 		
 		System.out.println("XXXXXXXXXXXXXX processar avaliações");
 		
@@ -171,8 +173,14 @@ public class AvaliacaoEJB {
 				//avaliacao.setEmailEnviado(false);
 				if (!avaliacaoAluno.getEmailEnviado()){					
 					System.out.println("manda o email para o viado" + avaliacaoAluno.getAluno().getNome());
-					email.enviarMsgConfirmaRecebAval(avaliacaoAluno);									
-					avaliacaoAluno.setEmailEnviado(true);				
+					email.enviarMsgConfirmaRecebAval(avaliacaoAluno);
+					try{
+						avaliacaoAluno.setEmailEnviado(true);
+					}
+					catch (Exception e){
+							throw new InfnetException(e.getMessage());
+					}
+									
 				}
 				
 				if (!avaliacaoAluno.getArquivoGerado()){
@@ -207,16 +215,19 @@ public class AvaliacaoEJB {
 								}							
 							}						
 						}					
-					}					
-					avaliacaoAluno.setArquivoGerado(true);
-				}			
+					}				
+					
+				}
 				repositorio.atualizar(avaliacaoAluno);
 				GerarArqCSV arq = new GerarArqCSV();
-				arq.criaCSVFile(nomeArq, linhas);
+				if (arq.criaCSVFile(nomeArq, linhas)) avaliacaoAluno.setArquivoGerado(true);
+				else System.out.println("O Arquivo não foi criado!");
+				
 			}
 		} catch (InfnetException e){
 			throw e;
 		} catch (Exception e){
+			System.out.println("Exceção causada na tentativa de processar avaliações!");
 			throw new InfnetException(e.getMessage());
 		}
 		

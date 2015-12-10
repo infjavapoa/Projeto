@@ -15,7 +15,7 @@ public class GerarArqCSV {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void criaCSVFile(String nomeArq, List<String> lstObj){
+	public Boolean criaCSVFile(String nomeArq, List<String> lstObj){
 
 		String linha;
 		
@@ -34,10 +34,13 @@ public class GerarArqCSV {
 				}				
 			}	        
 	        StrW.close();
+	        return true;
 	    } catch (FileNotFoundException ex) {
 	        ex.printStackTrace();
+	        return false;
 	    }catch (IOException e) {
-	        e.printStackTrace(); 
+	        e.printStackTrace();
+	        return false;
 	    }
 	}
 
