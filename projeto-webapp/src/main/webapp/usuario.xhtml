@@ -7,29 +7,42 @@
       xmlns:p="http://primefaces.org/ui">
 	<ui:define name="conteudo">
 		<p:growl id="msgs" showDetail="true" autoUpdate="true"/>
-		<p:panel header="Cadastro de Tópicos" > 
+		<p:panel header="Cadastro de Usuários" > 
 			<p:panel id="pCampos">
-				<p:outputLabel value="Texto do Tópico: " for="txtTexto" />
-		    	<p:inputText id="txtTexto" value="#{topicoMB.topico.texto}" style="width:700px"/>
+				<p:outputLabel value="Login: " for="txtLogin" />
+		    	<p:inputText id="txtLogin" value="#{usuarioMB.usuario.login}" style="width:100px"/>
 		    	<br />
+		    	<p:outputLabel value="Nome: " for="txtNome" />
+		    	<p:inputText id="txtNome" value="#{usuarioMB.usuario.nome}" style="width:300px"/>
 		    	<br />
-				<p:commandButton update="form:pCampos, dtTopicos" value="Salvar" icon="ui-icon-disk" action="#{topicoMB.salvar}"/>
-				<p:commandButton update="form:pCampos, dtTopicos" value="Cancelar" icon="ui-icon-close" disabled="#{topicoMB.topico.id == null}" action="#{topicoMB.atualizaView}"/>
+		    	<p:outputLabel value="Senha: " for="txtSenha" />
+		        <p:password id="txtSenha" value="#{usuarioMB.usuario.senha}" feedback="true" />
+		    	<br />
+		    	<p:outputLabel value="Confirmação: " for="txtConf" />
+		        <p:password id="txtConf" value="#{usuarioMB.conf}"  />
+		    	<br />		    	
+		    	<br />
+				<p:commandButton update="form:pCampos, dtUsuarios" value="Salvar" icon="ui-icon-disk" action="#{usuarioMB.salvar}"/>
+				<p:commandButton update="form:pCampos, dtUsuarios" value="Cancelar" icon="ui-icon-close" disabled="#{usuarioMB.usuario.login == null}" action="#{usuarioMB.atualizaView}"/>
 				<br />
 				<br />
 			</p:panel>
 			<br />
-			<p:dataTable var="t" id="dtTopicos" value="#{topicoMB.listaTopicos}" rows="8" paginator="true">
-			    <p:column headerText="Tópicos Cadastrados" sortBy="#{t.texto}" filterBy="#{t.texto}" filterMatchMode="contains">
-		        	<h:outputText value="#{t.texto}" />			        
+			<p:dataTable var="u" id="dtUsuarios" value="#{usuarioMB.listaUsuarios}" rows="8" paginator="true">
+				<f:facet name="header">Usuários Cadastrados</f:facet>
+			    <p:column headerText="Login" sortBy="#{u.login}" filterBy="#{u.login}" filterMatchMode="contains">
+		        	<h:outputText value="#{u.login}" />			        
+			    </p:column>
+			    <p:column headerText="Nome" sortBy="#{u.nome}" filterBy="#{u.nome}" filterMatchMode="contains">
+		        	<h:outputText value="#{u.nome}" />			        
 			    </p:column>
 			    <p:column style="width:32px">
 		        	<p:commandLink update="form:pCampos" value="Editar">
-		        		<f:setPropertyActionListener value="#{t}" target="#{topicoMB.topico}" />	
+		        		<f:setPropertyActionListener value="#{t}" target="#{usuarioMB.usuario}" />	
 		        	</p:commandLink>
 		        </p:column>		
 		        <p:column style="width:32px">
-		        	<p:commandLink update="form:pCampos, dtTopicos" action="#{topicoMB.remover(t)}" value="Excluir" />  	
+		        	<p:commandLink update="form:pCampos, dtUsuarios" action="#{usuarioMB.remover(t)}" value="Excluir" />  	
 		        </p:column>		        
 			</p:dataTable>
 		</p:panel>  

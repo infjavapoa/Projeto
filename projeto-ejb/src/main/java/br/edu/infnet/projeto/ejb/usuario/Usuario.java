@@ -1,5 +1,6 @@
 package br.edu.infnet.projeto.ejb.usuario;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -11,7 +12,9 @@ import javax.persistence.Table;
 public class Usuario  {
 	
 	@Id
+	@Column(name="email")
 	private String email;
+	@Column(name="senha")
 	private String senha;
 	private String nome;
 	private String papel;
