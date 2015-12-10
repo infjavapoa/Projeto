@@ -3,10 +3,9 @@ package br.edu.infnet.projeto.ejb.questionario;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
+import br.edu.infnet.projeto.ejb.avaliacao.Avaliacao;
 import br.edu.infnet.projeto.ejb.core.InfnetException;
 import br.edu.infnet.projeto.ejb.core.Repositorio;
 
@@ -76,5 +75,42 @@ public class QuestionarioEJB {
 			throw new InfnetException("Não é possível excluir esta questão, pois ela já foi adicionada em questionários.");
 		else
 			repositorio.remover(questao);
+	}
+	
+	public void salvarQuestionario(Questionario questionario) throws InfnetException {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("nome", questionario.getNome());
+		List<Questionario> questionarios = repositorio.listarWithNamedQuery(Questionario.class, "Questionario.pesquisarPorNome", param);
+		if (questionario.getNome() == null || questionario.getNome().isEmpty()) 
+			throw new InfnetException("Favor, informar um nome para o questionário.");
+		else {
+			if (questionario.getQuestionarioTopicos() == null || questionario.getQuestionarioTopicos().size() == 0) 
+				throw new InfnetException("Favor, adicionar pelo menos um tópico ao questionário.");
+			else {
+				for (QuestionarioTopico qt : questionario.getQuestionarioTopicos()) {
+					if (qt.getQuestionarioTopicoQuestoes() == null || qt.getQuestionarioTopicoQuestoes().size() == 0) 
+						throw new InfnetException("Favor, adicionar pelo menos uma questão ao tópico \"" + qt.getTopico().getTexto() + "\"");
+				}
+			
+				if (questionarios.size() > 0 && !questionarios.get(0).getId().equals(questionario.getId())) 
+					throw new InfnetException("Já existe questionário cadastrado com mesmo nome.");
+				else {
+					if (questionario.getId() == null) 
+						repositorio.adicionar(questionario);
+					else
+						repositorio.atualizar(questionario);
+				}
+			}
+		}
+	}
+	
+	public void removerQuestionario(Questionario questionario) throws InfnetException {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", questionario.getId());
+		List<Avaliacao> avaliacoes = repositorio.listarWithNamedQuery(Avaliacao.class, "Avaliacao.pesquisarPorQuestionario", param);
+		if (avaliacoes.size() > 0)
+			throw new InfnetException("Não é possível excluir este questionário, pois ele já foi utilizado em avaliações.");
+		else
+			repositorio.remover(questionario);
 	}
 }

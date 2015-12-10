@@ -20,8 +20,11 @@ import br.edu.infnet.projeto.ejb.infnet.Turma;
 import br.edu.infnet.projeto.ejb.questionario.Questionario;
 
 @Entity
-@NamedQueries(@NamedQuery(name="Avaliacao.pesquisarNaoAbertas" , query="SELECT a FROM Avaliacao a WHERE a.situacao = 'F' and a.dataInicio <= :dataAtual"))
-@NamedQuery(name="Avaliacao.pesquisarSeExiste" , query="SELECT a FROM Avaliacao a WHERE a.codigo = :codigo")
+@NamedQueries({
+@NamedQuery(name="Avaliacao.pesquisarNaoAbertas" , query="SELECT a FROM Avaliacao a WHERE a.situacao = 'F' and a.dataInicio <= :dataAtual"),
+@NamedQuery(name="Avaliacao.pesquisarSeExiste" , query="SELECT a FROM Avaliacao a WHERE a.codigo = :codigo"),
+@NamedQuery(name="Avaliacao.pesquisarPorQuestionario" , query="SELECT a FROM Avaliacao a WHERE a.questionario.id = :id")
+})
 public class Avaliacao extends BaseEntity<Long> {
 	private static final long serialVersionUID = -6220351357437865318L;
 	

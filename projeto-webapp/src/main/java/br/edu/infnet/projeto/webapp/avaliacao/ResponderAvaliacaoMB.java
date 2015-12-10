@@ -75,4 +75,8 @@ public class ResponderAvaliacaoMB {
 	public boolean instanceOfRespostaQuestaoDissertativa(RespostaQuestao rq){
 		return rq instanceof RespostaQuestaoDissertativa;
 	}
+	
+	public boolean disabled(){
+		return avaliacaoAluno.getId() != null;
+	}
 }

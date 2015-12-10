@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,7 +49,7 @@ public class AvaliacaoAluno extends BaseEntity<Long> {
     @Column (name="ind_arq_gerado")
     private Boolean arquivoGerado = false;
     
-    @OneToMany(mappedBy="avaliacaoAluno", cascade=CascadeType.ALL, targetEntity=RespostaTopico.class)
+    @OneToMany(mappedBy="avaliacaoAluno", cascade=CascadeType.ALL, fetch=FetchType.EAGER, targetEntity=RespostaTopico.class)
 	private List<RespostaTopico> respostaTopicos = new ArrayList<RespostaTopico>();
 	
 	public AvaliacaoAluno() {

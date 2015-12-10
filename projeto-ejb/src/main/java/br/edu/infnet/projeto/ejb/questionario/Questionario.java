@@ -28,7 +28,8 @@ import br.edu.infnet.projeto.ejb.core.BaseEntity;
 			query="SELECT q FROM Questionario q, QuestionarioTopico qt, QuestionarioTopicoQuestao qtq "
 				+ "WHERE qt MEMBER OF q.questionarioTopicos "
 				+ "AND qtq MEMBER OF qt.questionarioTopicoQuestoes "
-				+ "AND qtq.questao.id = :id")				
+				+ "AND qtq.questao.id = :id"),
+@NamedQuery(name="Questionario.pesquisarPorNome" , query="SELECT q FROM Questionario q WHERE q.nome LIKE :nome")
 })
 public class Questionario extends BaseEntity<Long> {
 	private static final long serialVersionUID = 8291323679754678858L;
