@@ -215,14 +215,12 @@ public class AvaliacaoEJB {
 								}							
 							}						
 						}					
-					}				
-					
+					}
+					GerarArqCSV arq = new GerarArqCSV();
+					if (arq.criaCSVFile(nomeArq, linhas)) avaliacaoAluno.setArquivoGerado(true);
+					else System.out.println("O Arquivo não foi criado!");					
 				}
-				repositorio.atualizar(avaliacaoAluno);
-				GerarArqCSV arq = new GerarArqCSV();
-				if (arq.criaCSVFile(nomeArq, linhas)) avaliacaoAluno.setArquivoGerado(true);
-				else System.out.println("O Arquivo não foi criado!");
-				
+				repositorio.atualizar(avaliacaoAluno);				
 			}
 		} catch (InfnetException e){
 			throw e;
