@@ -147,11 +147,11 @@ public class ValidaAvaliacao {
 	}
 	
 	public void validaException(Exception ex){		
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ocorreu um erro desconhecido: " + ex.getCause().toString()));		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro desconhecido: " + ex.getCause().toString()));		
 	}
 	
 	public void validaExceptionAval(Exception ex){		
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage() ));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", ex.getMessage() ));
 	}
 
 	public Avaliacao getAval() {
