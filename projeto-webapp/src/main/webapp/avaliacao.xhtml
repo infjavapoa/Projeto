@@ -133,9 +133,7 @@
 		        	</p:commandLink>
 		        </p:column>		
 		        <p:column style="width:32px">
-		        	<p:commandLink ajax="false" action="#{avaliacaoMB.remover}" value="Excluir">
-		        		<f:setPropertyActionListener value="#{aval}" target="#{avaliacaoMB.aval}" />	
-		        	</p:commandLink>    	
+		        	<p:commandLink ajax="false" action="#{avaliacaoMB.remover(aval)}" value="Excluir" />
 		        </p:column>		        
 			</p:dataTable>
 		</p:panel>  
