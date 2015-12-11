@@ -11,6 +11,7 @@ import javax.persistence.PersistenceException;
 
 
 
+
 import br.edu.infnet.projeto.ejb.core.InfnetException;
 import br.edu.infnet.projeto.ejb.core.Repositorio;
 
@@ -56,6 +57,27 @@ public class UsuarioEJB {
 				
 			}
 		}
+	}
+	
+	public void alterarSenhaUsuario(Usuario usuario) throws InfnetException {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("email", usuario.getEmail());
+		List<Usuario> usuarios = repositorio.listarWithNamedQuery(Usuario.class, "Usuario.pesquisarPorEmail", param);		
+			
+			if (usuarios.size() > 0 && usuarios.get(0).getEmail().equals(usuario.getEmail())){				
+				try{					
+					repositorio.atualizar(usuario);
+					System.out.println("Gravado:" + usuario.getSenha());
+				} catch (PersistenceException perex){			
+					throw new InfnetException("Erro na atualização da senha!");
+				} catch (Exception ex) {
+					throw new InfnetException(ex.getMessage());			
+				}
+			} else {
+				throw new InfnetException("Não foi possivel identificar o usuário no banco de dados!");
+			}
+			
+		
 	}
 	
 	public void removerUsuario(Usuario usuario) throws InfnetException {		

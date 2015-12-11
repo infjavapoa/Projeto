@@ -117,17 +117,21 @@ public class UsuarioMB {
 			System.out.println(logado.getSenha() + " - " + this.getConf());
 
 			FacesContext context = FacesContext.getCurrentInstance();
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Para usuários cadastrados só é permitido alterar a senha!"));
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Senha e confirmação não se equivalem!"));
+		} else {
+			try {
+				System.out.println("Senhas:" + logado.getSenha() + " - " + this.getConf());
+				usuarioEJB.alterarSenhaUsuario(logado);
+				FacesContext context = FacesContext.getCurrentInstance();
+		        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Senha alterada com sucesso!"));
+			} catch (InfnetException e) {
+				e.printStackTrace();
+	        	FacesContext context = FacesContext.getCurrentInstance();
+	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro", e.getMessage()));
+			}
+	    	
 		}
-		try {
-			usuarioEJB.salvarUsuario(logado);
-		} catch (InfnetException e) {
-			e.printStackTrace();
-        	FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
-		}
-    	FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Senha alterada com sucesso!"));
+		
 
 	}
 
