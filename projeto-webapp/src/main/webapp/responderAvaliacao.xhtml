@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui">
 
  <h:head>
- 	 <title>Aqui pode ser um titulo padrao que retorne como o nome do usuario logado<ui:insert name="nomePagina" /> </title>
+ 	 <title>Tabaval : Sistema de Avaliações do Infnet<ui:insert name="nomePagina" /> </title>
  </h:head>
  
  <h:body>
@@ -69,10 +69,10 @@
 		    	</p:dataGrid>   
 		    </p:dataGrid>
 			<div style="float:right; height:100px;">
-		        	<p:commandButton ajax="false" image="ui-icon-submit" disabled="#{responderAvaliacaoMB.disabled()}" style="height:50px;width:460px; font-size:14px;" value="Submeter Avaliação!" action="#{responderAvaliacaoMB.salvar}"/>
+		        	<p:commandButton image="ui-icon-submit" disabled="#{responderAvaliacaoMB.disabled()}" style="height:50px;width:460px; font-size:14px;" value="Submeter Avaliação!" action="#{responderAvaliacaoMB.salvar}"/>
 		    </div>
  		</div>
- 		<p:growl id="msgs" showDetail="true"/>
+ 		<p:growl id="msgs" showDetail="true" autoUpdate="true"/>
   </h:form>
  </h:body>
 </html>

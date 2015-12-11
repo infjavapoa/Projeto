@@ -60,6 +60,8 @@ public class ResponderAvaliacaoMB {
 	public void salvar() {
     	try {
     		avaliacaoEJB.submeterAvaliacaoAluno(avaliacaoAluno);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", "Avaliação Submetida com Sucesso!"));
     	}
     	catch (InfnetException ex){
     		ex.printStackTrace();
@@ -77,6 +79,6 @@ public class ResponderAvaliacaoMB {
 	}
 	
 	public boolean disabled(){
-		return avaliacaoAluno.getId() != null;
+		return avaliacaoAluno==null || avaliacaoAluno.getId() != null;
 	}
 }

@@ -225,7 +225,7 @@ INSERT INTO `infbloco`.`questao`(`id_questao`,`texto`,`tipo_questao`) VALUES (18
 INSERT INTO `infbloco`.`questionario` (`id_questionario`,`nome`) VALUES (1, 'Questionário INFNET');
 
 INSERT INTO `infbloco`.`questionario_topico`(`id_questionario_topico`,`id_questionario`,`id_topico`,`ordem`) VALUES(1,1,1,1);
-INSERT INTO `infbloco`.`questionario_topico`(`id_questionario_topico`,`id_questionario`,`id_topico`,`ordem`) VALUES(2,1,2,3);
+INSERT INTO `infbloco`.`questionario_topico`(`id_questionario_topico`,`id_questionario`,`id_topico`,`ordem`) VALUES(2,1,2,2);
 INSERT INTO `infbloco`.`questionario_topico`(`id_questionario_topico`,`id_questionario`,`id_topico`,`ordem`) VALUES(3,1,3,3);
 
 INSERT INTO `infbloco`.`questionario_topico_questao`(`id_questionario_topico_questao`,`id_questionario_topico`,`id_questao`,`ordem`) VALUES (1,1,1,1);
@@ -265,7 +265,7 @@ Instituto INFNET', 'INFNET - Abertura de Avaliação de Módulo', 'Prezado aluno
 Confirmamos o recebimento de sua avaliação e agradeçemos sua participação.
 
 Atenciosamente,
-Instituto INFNET', 'INFNET - Confirmação de Recebimento de Avaliação', '<nome_aluno>', '<link>', '<data_fim>', '<modulo>', 'http://localhost:8080', 'projeto-webapp', 'responderAvaliacao.xhtml', 'c:/');
+Instituto INFNET', 'INFNET - Confirmação de Recebimento de Avaliação', '<nome_aluno>', '<link>', '<data_fim>', '<modulo>', 'http://localhost:8080', 'projeto-webapp', 'responderAvaliacao.xhtml', 'C:\Temp\SAI');
 
 insert into usuario values('mrmello','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Márcio Roberto de Mello','administrador');
 insert into usuario values('llicker','02cabebdf467ed6e600137b7605da406f95624908218cb2096b3a217e0ed6313','Leandro Licker','administrador');

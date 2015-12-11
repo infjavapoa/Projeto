@@ -40,7 +40,7 @@ public class Questionario extends BaseEntity<Long> {
 	private Long id;
 	private String nome;
 	@OneToMany(mappedBy="questionario", orphanRemoval=true, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@OrderBy("ordem")  
+	@OrderBy("ordem")
 	private List<QuestionarioTopico> questionarioTopicos = new ArrayList<QuestionarioTopico>();
 	@OneToMany(mappedBy="questionario", targetEntity=Avaliacao.class)
 	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();

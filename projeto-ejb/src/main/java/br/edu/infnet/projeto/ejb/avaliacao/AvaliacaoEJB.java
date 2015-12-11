@@ -142,6 +142,17 @@ public class AvaliacaoEJB {
 		if (avaliacaoAluno.getId() != null) 
 			throw new InfnetException("Avaliação já foi submetida.");
 		else {
+			//Testa se todas as questões foram respondidas
+			for (RespostaTopico rt : avaliacaoAluno.getRespostaTopicos()) {
+				for (RespostaQuestao rq : rt.getRespostaQuestoes()) {
+					if (rq instanceof RespostaQuestaoObjetiva && ((RespostaQuestaoObjetiva) rq).getAlternativa() == null)
+						throw new InfnetException("Há itens não respondidos neste questionário. Por favor responda todos os itens antes de submeter a avaliação.");
+					if (rq instanceof RespostaQuestaoDissertativa && (((RespostaQuestaoDissertativa) rq).getTexto() == null || ((RespostaQuestaoDissertativa) rq).getTexto().isEmpty()))
+						throw new InfnetException("Há itens não respondidos neste questionário. Por favor responda todos os itens antes de submeter a avaliação.");
+				}
+			}
+			
+			//Ok
 			avaliacaoAluno.setDataPreenchimento(new Date());
 			repositorio.adicionar(avaliacaoAluno);
 		}
