@@ -8,24 +8,25 @@
       
     
 	<ui:define name="conteudo">
-		<p:growl id="msgs" showDetail="true"/>	
+			
 		
 		<p:panel header="Parâmetros do Sistema"> 
+		      
 			<p:panel id="pCampos1">   
-			   
+			 <!-- <p:messages id="msgs" showDetail="true"  autoUpdate="true"/>    -->
+			 <p:growl id="msgs" showDetail="true" sticky="true"  autoUpdate="true"/> 
 			<div class="ui-grid"  >
     			<div class="ui-grid-row">
-        			<div class="ui-grid-col-1"   style="width:600px" > 
+        			<div class="ui-grid-col-1"   style="width:600px"    > 
         			    <center>       			
 			    		<p:outputLabel  value="Assunto mensagem de abertura: " for="txtassunto_abert"   style="width:500px; text-align: left;"/>
-		    			<p:inputText  id="txtassunto_abert"   value="#{parametrosMB.parametros.assuntoMsgAbertura}" style="width:500px"/>
+		    			<p:inputText  id="txtassunto_abert"    value="#{parametrosMB.parametros.assuntoMsgAbertura}" style="width:500px"/>
+		    			
 			    		<br />
 			    		<br />
- 						<br />
 			    	 	<p:outputLabel value="Menssagem de abertura: " for="txtmsg_abertura"  style="width:500px; text-align: left;" />
-						<p:inputTextarea id="txtmsg_abertura"  rows="4" cols="100" value="#{parametrosMB.parametros.msgAbertura}" queryDelay="750" minQueryLength="4" style="width:500px" />
+						<p:inputTextarea id="txtmsg_abertura"  rows="8" cols="100" value="#{parametrosMB.parametros.msgAbertura}" queryDelay="750" minQueryLength="4" style="width:500px" />
  						<br />  
- 						<br />
  						<br />  
  						</center> 						
  						
@@ -33,37 +34,43 @@
         			<div class="ui-grid-col-2"  style="width:600px" >
         			    <center>
         				<p:outputLabel value="Assunto mensagem de confirmacao:" for="txtassunto_conf"  style="width:500px; text-align: left;"/>
-		    			 <p:inputText id="txtassunto_conf" value="#{parametrosMB.parametros.assuntoMsgConfirmacao}"  style="width:500px"/>
+		    			 <p:inputText id="txtassunto_conf" value="#{parametrosMB.parametros.assuntoMsgConfirmacao}"  style="width:500px" onselect= "false"/>
 		    			<br />
 		    			<br />
- 						<br />
 		    			<p:outputLabel value="Menssagem de confirmação: " for="txtmsg_confirmacao"  style="width:500px; text-align: left;"/>
-						<p:inputTextarea id="txtmsg_confirmacao"  rows="4" cols="100" value="#{parametrosMB.parametros.msgConfirmacao}" queryDelay="750" minQueryLength="4" style="width:500px" />
+						<p:inputTextarea id="txtmsg_confirmacao"  rows="8" cols="100" value="#{parametrosMB.parametros.msgConfirmacao}" queryDelay="750" minQueryLength="4" style="width:500px" />
  						<br />	 	
-						<br />
- 						<br />  
+						<br />  
  						</center>					    				
 		    			
         			</div>
     			</div>
     			<div class="ui-grid-row">
-        			<div class="ui-grid-col-1"   style="width:1200px"  >
-        			    <center>
-        			    <h:panelGrid columns="4" cellpadding="5">
-        			    <p:commandButton value="Tag Aluno"   action="#{buttonView.buttonAction}" style="width:110px" /> 						
+    			  <center>
+        			<div class="ui-grid-col-1"   style="width:1200px ;"  >
+        			   <center> 
+        			     <h:panelGrid columns="4"  layout="grid" > 
+        			  	
+        			    <p:outputLabel  value="#{parametrosMB.parametros.tagNomeAluno}" styleClass="labeltags" />			
+						
+ 						<p:outputLabel  value="#{parametrosMB.parametros.tagLink}"      styleClass="labeltags" /> 						 
+ 						 						 
+ 						<p:outputLabel  value="#{parametrosMB.parametros.tagDataFim}"   styleClass="labeltags" />
  						
- 						<p:commandButton value="Tag Link"   action="#{buttonView.buttonAction}" style="width:110px" /> 						
+ 						<p:outputLabel  value="#{parametrosMB.parametros.tagModulo}"    styleClass="labeltags" />
  						
- 						<p:commandButton value="Tag Data Fim"   action="#{buttonView.buttonAction}" style="width:110px" /> 						
+ 						</h:panelGrid> 
+ 						<p:outputPanel id="inftags">	
+ 							<p:outputLabel  value="Selecione a Tag, arraste e solte no local onde deseja incluir, nos campos Menssagem de abertura ou Menssagem de confirmação."    style="width:500px;height:20px; text-align: Center; "/>
+ 							
+ 						</p:outputPanel>
  						
- 						<p:commandButton value="Tag Módulo"   action="#{buttonView.buttonAction}" style="width:110px"/> 
- 						</h:panelGrid>
+ 						
  						<br />		
-						<br />
- 						<br />  
- 						
-        				</center>
+						<br /> 						 						
+        			  </center> 
         			</div>
+        		  </center> 
     			</div>
     			<div class="ui-grid-row">
         			<div class="ui-grid-col-1"   style="width:600px" >        			
@@ -73,7 +80,6 @@
 		    			<p:inputText id="txturl_servidor" value="#{parametrosMB.parametros.urlServidor}" style="width:500px"/>
 			    		<br /> 
 			    		<br />
- 						<br />
 			    		<p:outputLabel value="Nome da aplicação: " for="txtaplicacao"  style="width:500px; text-align: left;"/>
 						<p:inputText id="txtaplicacao" value="#{parametrosMB.parametros.nomeAplicacao}" style="width:500px"/>
  						<br /> 
@@ -86,8 +92,7 @@
 		    			<p:outputLabel value="Nome formulário de avaliação: " for="txtnome_form_aval"  style="width:500px; text-align: left;"/>
 		    			<p:inputText id="txtnome_form_aval" value="#{parametrosMB.parametros.nomeFormularioAvaliacao}"  style="width:500px"/>
 		    			<br /> 
-		    			<br />
- 						<br /> 
+		    			<br /> 
 		    			<p:outputLabel value="Diretório arquivo avaliação: " for="txtdir_arqaval"  style="width:500px; text-align: left;" />
 						<p:inputText id="txtdir_arqaval" value="#{parametrosMB.parametros.diretorioArquivoAvaliacao}"  style="width:500px"/>
  						<br /> 	 	    	
@@ -95,12 +100,11 @@
 		    			</center>
         			</div>
     			</div>
-		    </div>  
-			 
+		    </div>  			 
 			 </p:panel>  
 			 <br /> 
-        	 <p:commandButton  value="Salvar"  update="form:pCampos1" icon="ui-icon-disk"  action="#{parametrosMB.salvar}"/>	 
-		     <p:commandButton  value="Cancelar"  icon="ui-icon-close" action="#{parametrosMB.atualizaView}"/>
+        	 <p:commandButton  value="Salvar"  update="form:pCampos1" icon="ui-icon-disk"  action="#{parametrosMB.salvar}" ajax="true"/>	 
+		     
         
 			
 		</p:panel>   

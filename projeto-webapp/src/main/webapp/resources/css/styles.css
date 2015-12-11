@@ -19,3 +19,14 @@ input[type=text] {margin-botton: 5px}
 .ui-state-default .ui-icon-submit {
     background-image: url(/projeto-webapp/resources/imagens/check_green16x16.png);
 }
+
+.labeltags
+{
+	width:150px;
+	height:20px; 
+	text-align: Center; 
+	color: #026890;
+	font-weight:bold; 
+	border: 2px solid #a6c9e2; 
+	border-radius: 5px;
+}
