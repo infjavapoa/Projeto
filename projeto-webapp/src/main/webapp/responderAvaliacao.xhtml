@@ -47,7 +47,7 @@
 			</p:panel>
 			<p:sticky target="top" />
 			<br />
-		    <p:dataGrid class="grid" var="rt" value="#{responderAvaliacaoMB.avaliacaoAluno.respostaTopicos}" columns="1">
+		    <p:dataGrid id="grid" class="grid" var="rt" value="#{responderAvaliacaoMB.avaliacaoAluno.respostaTopicos}" columns="1">
 		 		<p:outputLabel value="#{rt.questionarioTopico.topico.texto}:" style="font-size:16px;font-weight:bold"/>
 				<p:dataGrid class="grid" var="rq" value="#{rt.respostaQuestoes}" columns="1">
 					<div style="float:left;width:50%">
@@ -61,7 +61,7 @@
 						    <f:selectItems value="#{responderAvaliacaoMB.alternativas}" var="alternativa" itemLabel="" itemValue="#{alternativa}" />
 						</p:selectOneRadio>
 					</div>
-					<p:inputTextarea rendered="#{responderAvaliacaoMB.instanceOfRespostaQuestaoDissertativa(rq)}" value="#{rq.texto}" style="width:100%" rows="5" cols="30" counter="display" maxlength="1000" counterTemplate="{0} caracteres disponíveis." autoResize="true" />
+					<p:inputTextarea disabled="#{responderAvaliacaoMB.disabled()}" rendered="#{responderAvaliacaoMB.instanceOfRespostaQuestaoDissertativa(rq)}" value="#{rq.texto}" style="width:100%" rows="5" cols="30" counter="display" maxlength="1000" counterTemplate="{0} caracteres disponíveis." autoResize="true" />
    					<h:outputText id="display" />
 					<div style="display:table; width:100%">
    						<hr style="border:1px dashed; " />
@@ -69,7 +69,7 @@
 		    	</p:dataGrid>   
 		    </p:dataGrid>
 			<div style="float:right; height:100px;">
-		        	<p:commandButton image="ui-icon-submit" disabled="#{responderAvaliacaoMB.disabled()}" style="height:50px;width:460px; font-size:14px;" value="Submeter Avaliação!" action="#{responderAvaliacaoMB.salvar}"/>
+		        <p:commandButton update="formAvaliacao:grid, btn" id="btn" image="ui-icon-submit" disabled="#{responderAvaliacaoMB.disabled()}" style="height:50px;width:460px; font-size:14px;" value="Submeter Avaliação!" action="#{responderAvaliacaoMB.salvar}"/>
 		    </div>
  		</div>
  		<p:growl id="msgs" showDetail="true" autoUpdate="true"/>
