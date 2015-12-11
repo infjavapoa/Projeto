@@ -10,39 +10,33 @@
 		<p:panel header="Cadastro de Usuários" > 
 			<p:panel id="pCampos">
 				<p:outputLabel value="Login: " for="txtLogin" />
-		    	<p:inputText id="txtLogin" value="#{usuarioMB.usuario.login}" style="width:100px"/>
+		    	<p:inputText id="txtLogin" value="#{usuarioMB.usuario.email}" style="width:100px"/>
 		    	<br />
 		    	<p:outputLabel value="Nome: " for="txtNome" />
 		    	<p:inputText id="txtNome" value="#{usuarioMB.usuario.nome}" style="width:300px"/>
-		    	<br />
-		    	<p:outputLabel value="Senha: " for="txtSenha" />
-		        <p:password id="txtSenha" value="#{usuarioMB.usuario.senha}" feedback="true" />
-		    	<br />
-		    	<p:outputLabel value="Confirmação: " for="txtConf" />
-		        <p:password id="txtConf" value="#{usuarioMB.conf}"  />
 		    	<br />		    	
 		    	<br />
 				<p:commandButton update="form:pCampos, dtUsuarios" value="Salvar" icon="ui-icon-disk" action="#{usuarioMB.salvar}"/>
-				<p:commandButton update="form:pCampos, dtUsuarios" value="Cancelar" icon="ui-icon-close" disabled="#{usuarioMB.usuario.login == null}" action="#{usuarioMB.atualizaView}"/>
+				<p:commandButton update="form:pCampos, dtUsuarios" value="Cancelar" icon="ui-icon-close" disabled="#{usuarioMB.usuario.email == null}" action="#{usuarioMB.atualizaView}"/>
 				<br />
 				<br />
 			</p:panel>
 			<br />
-			<p:dataTable var="u" id="dtUsuarios" value="#{usuarioMB.listaUsuarios}" rows="8" paginator="true">
+			<p:dataTable var="u" id="dtUsuarios" value="#{usuarioMB.listaUsuarios}" rows="4" paginator="true">
 				<f:facet name="header">Usuários Cadastrados</f:facet>
-			    <p:column headerText="Login" sortBy="#{u.login}" filterBy="#{u.login}" filterMatchMode="contains">
-		        	<h:outputText value="#{u.login}" />			        
+			    <p:column headerText="Login" sortBy="#{u.email}" filterBy="#{u.email}" filterMatchMode="contains">
+		        	<h:outputText value="#{u.email}" />			        
 			    </p:column>
 			    <p:column headerText="Nome" sortBy="#{u.nome}" filterBy="#{u.nome}" filterMatchMode="contains">
 		        	<h:outputText value="#{u.nome}" />			        
 			    </p:column>
 			    <p:column style="width:32px">
 		        	<p:commandLink update="form:pCampos" value="Editar">
-		        		<f:setPropertyActionListener value="#{t}" target="#{usuarioMB.usuario}" />	
+		        		<f:setPropertyActionListener value="#{u}" target="#{usuarioMB.usuario}"/>	
 		        	</p:commandLink>
 		        </p:column>		
 		        <p:column style="width:32px">
-		        	<p:commandLink update="form:pCampos, dtUsuarios" action="#{usuarioMB.remover(t)}" value="Excluir" />  	
+		        	<p:commandLink update="form:pCampos, dtUsuarios" action="#{usuarioMB.remover(u)}" value="Excluir" />  	
 		        </p:column>		        
 			</p:dataTable>
 		</p:panel>  

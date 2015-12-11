@@ -135,6 +135,7 @@ public class ValidaAvaliacao {
 				throw new AvaliacaoInvalidaException("Você não pode informar uma Data de Término menor que a Data de Início!");
 			}
 		}
+		/*
 		if (old != null){
 			if (old.getDataTermino() != null && aval.getDataTermino() != null){
 				if (old != null && old.getDataTermino().before(dataAtual) && !old.getDataTermino().equals(aval.getDataTermino())){
@@ -143,7 +144,7 @@ public class ValidaAvaliacao {
 			} else if (old.getDataTermino() != null) {
 				throw new AvaliacaoInvalidaException("Você não pode alterar a Data de Término pois ela já passou e a avaliação esta fechada pelo período!");
 			}
-		}
+		}*/
 	}
 	
 	public void validaException(Exception ex){		

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition template="#{loginMB.menuPadrao}"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+	<ui:define name="conteudo">
+		<p:growl id="msgs" showDetail="true" autoUpdate="true"/>
+		<p:panel header="Troca de Senha (Usuário Logado)" > 
+			<p:panel id="pCampos">
+				<p:outputLabel value="Login: " for="txtLogin" />
+		    	<p:inputText id="txtLogin" value="#{usuarioMB.logado.email}" style="width:100px" disabled="true" />
+		    	<br />
+		    	<p:outputLabel value="Nome: " for="txtNome" />
+		    	<p:inputText id="txtNome" value="#{usuarioMB.logado.nome}" style="width:300px" disabled="true" /> 
+		    	<br />
+		    	<p:outputLabel value="Senha: " for="txtSenha" />
+		        <p:password id="txtSenha" value="#{usuarioMB.logado.senha}" feedback="true" />
+		    	<br />
+		    	<p:outputLabel value="Confirmação: " for="txtConf" />
+		        <p:password id="txtConf" value="#{usuarioMB.conf}"  />
+		    	<br />		    	
+		    	<br />
+				<p:commandButton update="form:pCampos" value="Salvar" icon="ui-icon-disk" action="#{usuarioMB.alterar}"/>				
+				<br />
+				<br />
+			</p:panel>
+			<br />			
+		</p:panel>  
+	</ui:define>
+</ui:composition>  
