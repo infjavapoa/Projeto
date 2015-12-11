@@ -2,6 +2,8 @@ package br.edu.infnet.projeto.webapp.login;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +49,7 @@ public class UsuarioMB {
 	}
 	
 	public void atualizaView(){
+		usuario = new Usuario();
 		listaUsuarios = repositorio.listar(Usuario.class);
 		if (FacesContext.getCurrentInstance().getExternalContext().getRemoteUser() != null) {
 	    	Map<String, Object> param = new HashMap<String, Object>();
@@ -60,7 +63,11 @@ public class UsuarioMB {
 	}
 
 	public void salvar() {
-    	try {    		
+    	try {
+    		SimpleDateFormat ano = new SimpleDateFormat("yyyy");
+    		Date data = new Date();
+    		System.out.println("Infnet" + ano.format(data));
+			usuario.setSenha(Seguranca.gerarHash("Infnet" + ano.format(data)));
     		usuarioEJB.salvarUsuario(usuario);
     		atualizaView();
     	}
@@ -100,7 +107,6 @@ public class UsuarioMB {
 	public void setConf(String conf) throws UnsupportedEncodingException, NoSuchAlgorithmException {		
 		this.conf = Seguranca.gerarHash(conf);
 	}
-//Essa gambi é porque se colocar o hash na usuario ele vai fazer o hash duas vezes
 	public String getSenha() {
 		return senha;
 	}

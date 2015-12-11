@@ -16,9 +16,8 @@
 		    	<p:inputText id="txtNome" value="#{usuarioMB.usuario.nome}" style="width:300px"/>
 		    	<br />		    	
 		    	<br />
-				<p:commandButton update="form:pCampos, dtUsuarios" value="Salvar" icon="ui-icon-disk" action="#{usuarioMB.salvar}"/>
-				<p:commandButton update="form:pCampos, dtUsuarios" value="Cancelar" icon="ui-icon-close" disabled="#{usuarioMB.usuario.email == null}" action="#{usuarioMB.atualizaView}"/>
-				<br />
+				<p:commandButton update="form:pCampos, dtUsuarios" value="Salvar" icon="ui-icon-disk" action="#{usuarioMB.salvar}"/>			
+				
 				<br />
 			</p:panel>
 			<br />
@@ -30,11 +29,7 @@
 			    <p:column headerText="Nome" sortBy="#{u.nome}" filterBy="#{u.nome}" filterMatchMode="contains">
 		        	<h:outputText value="#{u.nome}" />			        
 			    </p:column>
-			    <p:column style="width:32px">
-		        	<p:commandLink update="form:pCampos" value="Editar">
-		        		<f:setPropertyActionListener value="#{u}" target="#{usuarioMB.usuario}"/>	
-		        	</p:commandLink>
-		        </p:column>		
+			    		
 		        <p:column style="width:32px">
 		        	<p:commandLink update="form:pCampos, dtUsuarios" action="#{usuarioMB.remover(u)}" value="Excluir" />  	
 		        </p:column>		        
